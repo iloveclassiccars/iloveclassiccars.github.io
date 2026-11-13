@@ -81,6 +81,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .bar div{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;line-height:1.25}
 .bar small{color:var(--band-mute);font-size:12px}
 .bar strong{font-family:var(--mono);font-size:21px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .ol{background:none;color:var(--band-fg);border:1px solid var(--band-mute);padding:10px 12px;font-weight:500}
 .bar button{flex:0 0 auto;background:var(--band-fg);color:var(--band);border:0;border-radius:8px;padding:11px 16px;font-weight:700;font-size:15px}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:82vh;overflow:auto;background:var(--panel);border-top:2px solid var(--ink);border-radius:14px 14px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.25);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px}
 .sh{display:flex;justify-content:space-between;align-items:center;font-size:17px}
@@ -121,7 +122,7 @@ a{color:var(--accent);text-underline-offset:3px}
 <div class="cnt" id="cnt"></div>
 </div>
 <main class="list g" id="list"></main>
-<div class="bar g"><div><small id="bn">담은 부품 0가지</small><strong id="sum">0원</strong></div><button type="button" id="open">장바구니</button></div>
+<div class="bar g"><div><small id="bn">담은 부품 0가지</small><strong id="sum">0원</strong></div><button type="button" id="clr" class="ol" hidden>비우기</button><button type="button" id="open">장바구니</button></div>
 <div class="sheet g" id="cart" hidden>
 <div class="sh"><b>장바구니</b><button type="button" id="close">닫기</button></div>
 <div id="items"></div>
@@ -176,7 +177,7 @@ for(const r of v){if(!ST.cat&&r.s!==last){h+=`<h2 class="sec">${esc(name[r.s])}<
 $('list').innerHTML=(h||'<p class="empty">맞는 부품이 없습니다. 차종이나 묶음을 바꿔 보십시오.</p>')+MORE;total()}
 function total(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0,miss=0;
 for(const id of ids){const r=D.rows.find(x=>x.id===id);if(!r)continue;if(r.ref)s+=r.ref*ST.usd*ST.cart[id];else miss++}
-$('open').textContent=ids.length?'장바구니 '+ids.length:'장바구니';$('bn').textContent='담은 부품 '+ids.length+'가지'+(miss?' (가격 없는 것 '+miss+'가지 제외)':'');$('sum').textContent=won(s);
+$('open').textContent=ids.length?'장바구니 '+ids.length:'장바구니';$('clr').hidden=!ids.length;$('bn').textContent='담은 부품 '+ids.length+'가지'+(miss?' (가격 없는 것 '+miss+'가지 제외)':'');$('sum').textContent=won(s);
 $('items').innerHTML=ids.length?ids.map(id=>{const r=D.rows.find(x=>x.id===id);if(!r)return'';return `<div class="ci"><b>${esc(r.ko)}</b><span class="t">${r.ref?won(r.ref*ST.usd*ST.cart[id]):'가격 없음'}</span><small>${esc(r.pn)}</small><span class="qy"><button type="button" data-q="-1" data-id="${id}" aria-label="하나 빼기">-</button><span>${ST.cart[id]}</span><button type="button" data-q="1" data-id="${id}" aria-label="하나 더">+</button></span></div>`}).join(''):'<p class="note">담은 부품이 없습니다.</p>'}
 function listText(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0;const L=ids.map(id=>{const r=D.rows.find(x=>x.id===id);const t=r.ref?r.ref*ST.usd*ST.cart[id]:0;s+=t;return r.ko+' / '+r.pn+' / '+ST.cart[id]+'개'+(r.ref?' / '+won(t):'')});
 return ['[W140 부품 목록]'].concat(L,['합계 어림: '+won(s)+' (1달러 '+ST.usd+'원, 배송비와 관부가세 제외)']).join('\n')}
@@ -213,11 +214,12 @@ $('pick').addEventListener('click',()=>{$('cart').hidden=true;$('pk').hidden=fal
 $('pkx').addEventListener('click',()=>{$('pk').hidden=true});
 $('pkw').addEventListener('click',()=>{$('pk').hidden=true});
 $('close').addEventListener('click',()=>{$('cart').hidden=true});
-$('clear').addEventListener('click',()=>{ST.cart={};save();render();toast('장바구니를 비웠습니다')});
+const wipe=()=>{ST.cart={};save();render();$('cart').hidden=true;toast('장바구니를 비웠습니다')};
+$('clear').addEventListener('click',wipe);$('clr').addEventListener('click',wipe);
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/netlify\.app$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1794573599;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1794573669;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 </script>
