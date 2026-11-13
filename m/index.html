@@ -45,7 +45,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .frow select{flex:1 1 auto;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:8px 10px;font-size:15px;font-weight:700}
 .frow #ph{flex:0 1 42%}
 .cnt{font-size:13px;color:var(--mute);line-height:1.45}
-.list{display:flex;flex-direction:column;gap:8px;padding-block:10px calc(96px + env(safe-area-inset-bottom,0px))}
+.list{display:flex;flex-direction:column;gap:8px;padding-block:10px calc(96px + env(safe-area-inset-bottom,0px) + var(--nb,0px))}
 .sec{margin:10px 0 0;font-size:13px;font-weight:700;color:var(--mute)}
 .c{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
 .c.on{border-color:var(--accent);background:var(--accent-bg)}
@@ -77,7 +77,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .more .x{color:var(--ink);font-weight:700}
 .more .lk{margin:0 0 12px}
 .empty{padding:28px 0;text-align:center;color:var(--mute)}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--band);color:var(--band-fg);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--band);color:var(--band-fg);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;align-items:center;gap:12px}
 .bar div{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;line-height:1.25}
 .bar small{color:var(--band-mute);font-size:12px}
 .bar strong{font-family:var(--mono);font-size:21px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -85,7 +85,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .bar .ol[data-sure]{border-color:#ffd84d!important;color:#ffd84d!important}
 .bar .ol{background:none;color:var(--band-fg);border:1px solid var(--band-mute);padding:10px 12px;font-weight:500}
 .bar button{flex:0 0 auto;background:var(--band-fg);color:var(--band);border:0;border-radius:8px;padding:11px 16px;font-weight:700;font-size:15px}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:82vh;overflow:auto;background:var(--panel);border-top:2px solid var(--ink);border-radius:14px 14px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.25);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:82vh;overflow:auto;background:var(--panel);border-top:2px solid var(--ink);border-radius:14px 14px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.25);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;flex-direction:column;gap:10px}
 .sh{display:flex;justify-content:space-between;align-items:center;font-size:17px}
 .sh button,.sb button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 12px;font-size:14px}
 .ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 0;border-bottom:1px solid var(--line)}
@@ -108,7 +108,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .pl small{font-size:12px;color:var(--mute)}
 .pl .now{border:2px solid var(--accent);font-weight:700;font-family:var(--mono)}
 .pl .now small{font-family:var(--sans);font-weight:400}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:8;background:var(--ink);color:var(--panel);font-weight:700;padding:10px 16px;border-radius:8px;max-width:calc(100% - 28px);text-align:center}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px) + var(--nb,0px));z-index:8;background:var(--ink);color:var(--panel);font-weight:700;padding:10px 16px;border-radius:8px;max-width:calc(100% - 28px);text-align:center}
 #newv{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:9;background:#ffd84d;color:#2a2300;border:0;border-radius:8px;padding:10px 16px;font-weight:700;max-width:calc(100% - 28px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -222,9 +222,14 @@ $('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventLi
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/netlify\.app$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1794573728;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1824574002;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+/* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
+;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
+const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
+const n=top<h?Math.min(h-top+8,160):0;document.documentElement.style.setProperty('--nb',n+'px')};
+[300,1000,2500,5000,9000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);addEventListener('orientationchange',f);if(window.MutationObserver)new MutationObserver(()=>setTimeout(f,400)).observe(document.body,{childList:true})})();
 </script>
 </body>
 </html>

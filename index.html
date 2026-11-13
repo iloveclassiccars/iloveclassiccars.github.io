@@ -170,7 +170,7 @@ select option{background:var(--panel);color:var(--ink)}
 .crumb .xls{border:1px solid var(--accent);border-radius:4px;padding:2px 4px 2px 10px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .crumb .xls b{background:var(--accent);color:var(--panel);border-radius:3px;padding:0 8px}
 .crumb button{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--band);color:var(--band-fg);padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--band);color:var(--band-fg);padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px) + var(--nb,0px));z-index:6}
 .bar .in{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:baseline}
 .bar strong{font-family:var(--mono);font-size:24px;font-variant-numeric:tabular-nums}
 .bar small{color:var(--band-mute)}
@@ -571,7 +571,12 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794573728;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1824574002;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+/* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
+;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
+const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
+const n=top<h?Math.min(h-top+8,160):0;document.documentElement.style.setProperty('--nb',n+'px')};
+[300,1000,2500,5000,9000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);addEventListener('orientationchange',f);if(window.MutationObserver)new MutationObserver(()=>setTimeout(f,400)).observe(document.body,{childList:true})})();
 </script>
 
 </body>
