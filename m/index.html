@@ -148,7 +148,7 @@ a{color:var(--accent);text-underline-offset:3px}
 <b>다른 제조사</b><span>Porsche <small>준비 중</small></span><span>BMW <small>준비 중</small></span><span>Land Rover - Jaguar <small>준비 중</small></span><span>Ferrari, Lamborghini <small>준비 중</small></span><span>Japan, USA, Korea <small>준비 중</small></span></div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="../data.js?v=1794582249"></script>
+<script src="../data.js?v=1794583249"></script>
 <script>
 const D=window.W140DATA;
 const $=id=>document.getElementById(id);
@@ -175,7 +175,7 @@ return `<article class="c${on?' on':''}"><div class="n">${esc(r.ko)}${r.chk?`<em
 <span class="w${r.ref?'':' no'}">${r.ref?won(r.ref*ST.usd):'가격 없음'}</span>
 <div class="f">${esc((ph?ph+', ':'')+r.fit)}</div>
 <div class="a"><button type="button" class="add" data-add="${r.id}">${on?'담았습니다':'담기'}</button><details><summary>파는 곳</summary><div class="lk">${r.links.map(l=>`<a href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join('')}<a href="${TROLL}" target="_blank" rel="noopener">트롤파츠에 물어보고 사기</a></div></details></div></article>`}
-const JOBS=[["미션 오일 교환 (5단)", ["140 277 00 95", "140 271 00 80", "203 540 02 53", "001 990 11 17", "MB 236.10 / 236.14"]], ["미션 오일 교환 (4단)", ["129 277 01 95", "126 271 11 80", "000 997 65 32", "140 271 00 60", "001 990 11 17", "MB 236.6 / 236.7"]], ["엔진 오일 교환", ["119 180 00 09", "120 180 00 09", "MB 229.1"]], ["벨트 라인", ["011 997 45 92", "011 997 64 92", "011 997 06 92", "010 997 88 92", "103 200 08 70", "011 997 67 92", "119 200 11 70", "104 200 15 28", "104 200 08 70", "120 200 05 70", "119 200 14 70", "104 200 05 70", "120 200 03 70", "601 200 10 70"]], ["냉각 계통", ["119 200 21 01", "104 200 32 01", "120 200 11 01", "119 200 00 15", "110 200 05 15", "120 200 00 15", "140 500 08 75", "140 500 01 75", "140 500 07 75", "140 501 33 82", "140 500 08 49", "124 500 04 06"]], ["하체 부싱 올갈이", ["140 330 82 07", "140 330 00 18", "140 323 10 85", "140 352 86 65", "204 352 00 27", "140 326 17 81", "140 330 29 42", "140 330 39 42", "140 350 87 08", "140 350 30 41", "140 350 49 41", "140 240 22 17", "140 240 21 17", "140 240 08 18"]]];
+const JOBS=[["미션 오일 교환 (5단)", ["140 277 00 95", "140 271 00 80", "203 540 02 53", "001 990 11 17", "MB 236.10 / 236.14"]], ["미션 오일 교환 (4단)", ["129 277 01 95", "126 271 11 80", "000 997 65 32", "140 271 00 60", "001 990 11 17", "MB 236.6 / 236.7"]], ["엔진 오일 교환", ["119 180 00 09", "120 180 00 09", "MB 229.1"]], ["벨트 라인", ["011 997 45 92", "011 997 64 92", "011 997 06 92", "010 997 88 92", "103 200 08 70", "011 997 67 92", "119 200 11 70", "104 200 15 28", "104 200 08 70", "120 200 05 70", "119 200 14 70", "104 200 05 70", "120 200 03 70", "601 200 10 70"]], ["냉각 계통", ["119 200 21 01", "104 200 32 01", "120 200 11 01", "119 200 00 15", "110 200 05 15", "120 200 00 15", "140 500 08 75", "140 500 01 75", "140 500 07 75", "140 501 33 82", "140 500 08 49", "124 500 04 06"]], ["ADS 쇼바 교환", ["140 320 15 30", "140 320 13 30", "140 320 99 13", "140 320 94 13", "000 989 91 03 09"]], ["하체 부싱 올갈이", ["140 330 82 07", "140 330 00 18", "140 323 10 85", "140 352 86 65", "204 352 00 27", "140 326 17 81", "140 330 29 42", "140 330 39 42", "140 350 87 08", "140 350 30 41", "140 350 49 41", "140 240 22 17", "140 240 21 17", "140 240 08 18"]]];
 const MORE=`<details class="more"><summary>작업별 한번에 담기</summary><p>고른 차종과 연식에 맞는 부품만 담습니다.</p><div class="jb">${JOBS.map((j,i)=>`<button type="button" data-job="${i}">${esc(j[0])}</button>`).join('')}</div></details>
 <details class="more"><summary>검색 사이트와 안내</summary>
 <p class="x">부품번호 반드시 크로스 체킹 하세요.</p>
@@ -241,7 +241,7 @@ $('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventLi
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1794582249;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1794583249;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
