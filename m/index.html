@@ -64,7 +64,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .a .w{flex:0 0 auto;min-width:92px;text-align:left;align-self:center}
 .n small{font-size:13px;font-weight:400;color:var(--mute);margin-left:6px}
 .n em{font-style:normal;font-size:12px;color:var(--warn);margin-left:6px;white-space:nowrap}
-.pn{justify-self:start;background:none;border:0;border-bottom:1px dashed var(--mute);padding:0;font-family:var(--mono);font-weight:700;font-size:18px;letter-spacing:.01em;white-space:nowrap}
+.pn{justify-self:start;background:none;border:0;border-bottom:1px dashed var(--mute);padding:0;font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:0;white-space:nowrap}
 .w{font-family:var(--mono);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
 .w.no{font-family:var(--sans);font-weight:400;font-size:13px;color:var(--mute)}
 .f{grid-column:1 / -1;font-size:13px;color:var(--mute);min-width:0}
@@ -153,7 +153,7 @@ a{color:var(--accent);text-underline-offset:3px}
 <b>다른 제조사</b><span>Porsche <small>준비 중</small></span><span>BMW <small>준비 중</small></span><span>Land Rover - Jaguar <small>준비 중</small></span><span>Ferrari, Lamborghini <small>준비 중</small></span><span>Japan, USA, Korea <small>준비 중</small></span></div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="../data.js?v=1794588249"></script>
+<script src="../data.js?v=1794589249"></script>
 <script>
 const D=window.W140DATA;
 const $=id=>document.getElementById(id);
@@ -245,7 +245,7 @@ $('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventLi
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1794588249;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1794589249;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
