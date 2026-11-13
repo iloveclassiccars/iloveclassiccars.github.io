@@ -13,10 +13,10 @@
 <style>
 b,strong,h1,h2,h3,h4,th,dt{font-weight:570}
 /* 배치: 위에 검은 띠(제조사 탭) - 차대번호 검색 줄 - 왼쪽 부품 분류, 오른쪽 부품 표 - 아래 붙어 다니는 합계 띠 */
-:root{--bg:#f4f6f5;--panel:#ffffff;--ink:#17201b;--mute:#5d6b63;--line:#d5dcd8;--accent:#1c6424;--accent-bg:#e6f1e7;--warn:#a51e1e;--band:#12241a;--band-fg:#f2f7f3;--band-mute:#a3b5a9;
+:root{--bg:#f4f6f5;--panel:#ffffff;--ink:#343e38;--mute:#5d6b63;--line:#d5dcd8;--accent:#1c6424;--accent-bg:#e6f1e7;--warn:#a51e1e;--band:#12241a;--band-fg:#d5dcd6;--band-mute:#a3b5a9;
 --sans:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#e8efe9;--mute:#9aaba1;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#eef5ef;--band-mute:#8fa397;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#101613;--panel:#18211c;--ink:#e8efe9;--mute:#9aaba1;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#eef5ef;--band-mute:#8fa397;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#c9d0ca;--mute:#9aaba1;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#d0d7d1;--band-mute:#8fa397;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101613;--panel:#18211c;--ink:#c9d0ca;--mute:#9aaba1;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#d0d7d1;--band-mute:#8fa397;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55}
@@ -472,7 +472,7 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <div class="repb"><a id="repgo" href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">제보 내용 복사하고 트롤파츠 열기</a><small>복사된 내용을 트롤파츠 문의에 붙여 넣어 주십시오. 확인한 뒤 계산기에 반영합니다.</small></div></div></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="bar"><div class="in"><button id="home2" type="button" title="첫 화면으로"><b>HOME</b></button><button id="open" type="button">장바구니 보기</button><button id="clear2" type="button">비우기</button><label for="tax" class="txl" title="미국에서 오는 200달러 이하 주문은 관부가세가 없습니다"><input id="tax" type="checkbox"> 관세 + 부가세</label><span>담은 부품 <b id="cnt">0</b>가지</span><strong id="sum">0원</strong><small id="miss"></small><div class="fwg"><details class="fwd"><summary>배송대행 서비스</summary><div class="fm"><small>해외에서 구매하시는 분들은 배송대행 서비스를 이용하시기 바랍니다. 한국 직배송이 안 되는 가게는 배대지 주소로 받습니다.</small><a href="https://post.malltail.com/" target="_blank" rel="noopener">몰테일</a><a href="https://www.hoottown.com/" target="_blank" rel="noopener">훗타운 (한진)</a><a href="https://www.iporter.com/" target="_blank" rel="noopener">아이포터</a><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">오마이집</a></div></details></div></div></div>
-<script src="data.js?v=1794598249"></script>
+<script src="data.js?v=1794599249"></script>
 <script>
 const D=window.W140DATA;
 const OFF=[['트롤파츠 (국내)','https://smartstore.naver.com/trollparts/qna?cp=1'],['독일 클래식 벤츠 부품상 니묄러','https://www.niemoeller.de/en/search'],['벤츠 미국 클래식 센터 (공식)','https://classicparts.mbusa.com/about']];
@@ -597,7 +597,7 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794598249;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1794599249;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
 ;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
 const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
