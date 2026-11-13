@@ -32,7 +32,9 @@ a{color:var(--accent);text-underline-offset:3px}
 .crumb b{font-family:var(--mono)}
 .crumb span{margin-left:auto;font-size:12px;color:var(--band-mute)}
 .tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding-block:10px 8px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
-#q{width:100%;border:2px solid var(--accent);border-radius:8px;background:var(--panel);padding:11px 12px;font-size:16px}
+.sr{display:flex;border:2px solid var(--accent);border-radius:8px;overflow:hidden;background:var(--panel)}
+#q{flex:1 1 auto;min-width:0;border:0;background:none;padding:11px 12px;font-size:16px}
+#go{flex:0 0 auto;border:0;background:var(--accent);color:var(--panel);font-weight:700;font-size:16px;padding:0 20px}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chips button{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:700;white-space:nowrap}
@@ -110,7 +112,7 @@ a{color:var(--accent);text-underline-offset:3px}
 <header class="top g"><h1>클래식카 부품 계산기</h1><a href="../?pc=1">PC 화면</a></header>
 <div class="crumb g"><button type="button" id="pick" aria-haspopup="dialog">Mercedes-Benz <i>&gt;</i> <b>W140</b> <span>바꾸기</span></button></div>
 <div class="tools g">
-<input id="q" type="search" placeholder="차대번호 17자리 또는 부품 이름" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="차대번호 또는 부품 찾기">
+<div class="sr"><input id="q" type="search" placeholder="차대번호 17자리 또는 부품 이름" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="차대번호 또는 부품 찾기"><button type="button" id="go">찾기</button></div>
 <div class="chips" id="mods" aria-label="차종"></div>
 <div class="frow"><select id="cat" aria-label="부품 묶음"></select><select id="ph" aria-label="연식"><option value="">연식 전체</option><option value="e">전기형 (1991~1994.2)</option><option value="m">중기형 (1994.3~1996.5)</option><option value="l">후기형 (1996.6~1998)</option></select></div>
 <div class="cnt" id="cnt"></div>
@@ -144,6 +146,7 @@ let VMSG='';
 try{const v=JSON.parse(localStorage.getItem('w140m')||'null');if(v&&typeof v==='object')ST=Object.assign(ST,v)}catch(e){}
 const save=()=>{try{localStorage.setItem('w140m',JSON.stringify(ST))}catch(e){}};
 let Q='';
+try{sessionStorage.removeItem('w140pc')}catch(e){}
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 function fits(r){if(ST.ph&&r.ph&&!r.ph.includes(ST.ph))return false;if(!ST.my)return true;const f=r.fit+' '+r.ko;if(f.includes(ST.my))return true;if(ST.my==='S420'&&f.includes('S500'))return true;return /기준/.test(r.fit)}
 function shown(){const q=Q.trim().toLowerCase().replace(/\s+/g,'');return D.rows.filter(r=>fits(r)&&(!ST.cat||r.s===ST.cat)&&(!q||(r.ko+r.en+r.pn).toLowerCase().replace(/\s+/g,'').includes(q)))}
@@ -185,6 +188,8 @@ else if(/^W[A-Z0-9]{16}$/.test(v)){Q='';ST.vin='';VMSG='W140 차대번호(WDB140
 else{Q=raw;if(ST.vin){ST.vin=''}VMSG=''}
 save();render()}
 $('q').addEventListener('input',e=>smart(e.target.value));
+const go=()=>{const v=$('q').value.trim();if(!v){toast('차대번호 17자리나 부품 이름을 넣어 주십시오');$('q').focus();return}smart(v);$('q').blur();scrollTo(0,0)};
+$('go').addEventListener('click',go);$('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}});
 $('usd').addEventListener('input',e=>{const n=Number(e.target.value);if(n>0){ST.usd=n;save();render()}});
 $('mods').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ST.my=b.dataset.m;if(ST.vin){ST.vin='';$('q').value=''}VMSG='';save();render()});
 $('list').addEventListener('click',e=>{const p=e.target.closest('.pn');if(p){copy(p.dataset.pn.replace(/\s+/g,''),()=>toast('부품번호 '+p.dataset.pn+' 복사했습니다'));return}
@@ -201,7 +206,7 @@ $('clear').addEventListener('click',()=>{ST.cart={};save();render();toast('장�
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/netlify\.app$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1794572993;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1794573309;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 </script>

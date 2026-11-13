@@ -311,9 +311,10 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 .bar .fwg{margin-left:auto}
 }
 /* 휴대폰 전용 화면 끝 */
+.tom{font-size:13px;font-weight:700;color:var(--band-fg);text-decoration:none;border:1px solid var(--band-fg);border-radius:4px;padding:2px 10px;white-space:nowrap}
 </style>
 <header class="top"><div class="in"><h1><button type="button" id="home" title="첫 화면으로"><small>HOME</small> 클래식카 부품 계산기</button></h1>
-<div class="makes" id="makes" aria-label="제조사"></div><a class="qna" href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">Q&amp;A 묻고 답하기</a></div></header>
+<div class="makes" id="makes" aria-label="제조사"></div><a class="qna" href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">Q&amp;A 묻고 답하기</a><a class="tom" href="m/">휴대폰 화면</a></div></header>
 <div class="codes"><div class="in" id="codes"></div></div>
 <div class="r129n" id="r129n" hidden><div class="in"><div class="rh"><b>R129 특별 안내</b><button type="button" id="r129x">닫기</button></div><ul><li>R129 (SL320, SL500, SL600) 부품은 준비 중입니다.</li><li>R129는 W140과 차체가 다릅니다. 하체, 브레이크, 조향, 부싱에 W140 부품 번호를 쓰면 안 됩니다.</li><li>엔진은 W140과 같은 계열입니다. SL320 - M104, SL500 - M119, SL600 - M120.</li><li>지금은 R129 SL600 버튼에서 S600과 같은 M120 엔진 쪽 부품만 보입니다. 주문 전에 내 차대번호로 번호를 꼭 확인하십시오.</li><li>소프트탑과 유압 실린더는 R129 전용 묶음으로 따로 올립니다.</li><li>자세한 부품 문의는 <a href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">트롤파츠 안강민 선생님께 문의</a>하십시오.</li></ul></div></div>
 <div class="soonp" id="soon" hidden><div class="in"><h2 id="soont"></h2><p id="soonv" hidden></p><p id="soonp">이 제조사는 아직 준비 중입니다. 지금은 Mercedes-Benz W140만 열려 있습니다. 위 코드명은 앞으로 올릴 차입니다.</p><ul id="roadl" hidden></ul><button type="button" id="back">Mercedes-Benz W140으로 가기</button></div></div>
@@ -570,7 +571,7 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794572993;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1794573309;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 </script>
 
 </body>
