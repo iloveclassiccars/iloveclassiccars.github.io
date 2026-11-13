@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12241a">
+<meta name="apple-mobile-web-app-title" content="W140 Parts">
+<meta name="description" content="Free parts calculator for the Mercedes-Benz W140 S-Class: part numbers, US dealer prices, discontinued parts, by VIN.">
+<title>Classic Car Parts Calculator - Mercedes-Benz W140</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap">
+<style>
+b,strong,h1,h2,h3,h4,th,dt{font-weight:570}
+:root{--bg:#f4f6f5;--panel:#ffffff;--ink:#5a635e;--mute:#6d7a73;--line:#d5dcd8;--accent:#1c6424;--accent-bg:#e6f1e7;--warn:#a51e1e;--band:#12241a;--band-fg:#adb4ae;--band-mute:#869589;
+--sans:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+button,input,select{font:inherit;color:var(--ink)}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.g{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+.top{background:var(--band);color:var(--band-fg);padding-block:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.top h1{margin:0;font-size:16px;font-weight:570}
+.top .tl{display:flex;gap:6px;flex:0 0 auto}
+.top h1 small{font-size:12px;font-weight:500;color:var(--band-mute);margin-left:6px}
+.top a{color:var(--band-mute);font-size:12px;text-decoration:none;border:1px solid var(--band-mute);border-radius:4px;padding:2px 8px;white-space:nowrap}
+.crumb{background:var(--band);padding-bottom:10px}
+.crumb button{width:100%;display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--band-mute);border-radius:8px;padding:8px 12px;color:var(--band-fg);font-size:15px;text-align:left}
+.crumb i{font-style:normal;color:var(--band-mute)}
+.crumb b{font-family:var(--mono)}
+.crumb span{margin-left:auto;font-size:12px;color:var(--band-mute)}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding-block:10px 8px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.sr{display:flex;border:2px solid var(--accent);border-radius:8px;overflow:hidden;background:var(--panel)}
+#q{flex:1 1 auto;min-width:0;border:0;background:none;padding:11px 12px;font-size:16px}
+#go{flex:0 0 auto;border:0;background:var(--accent);color:var(--panel);font-weight:570;font-size:16px;padding:0 20px}
+.lv{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--accent);border-radius:8px;padding:9px 12px;font-size:14px;font-weight:570;text-decoration:none;background:var(--panel)}
+.lv small{font-weight:400;font-size:12px;color:var(--mute);white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:570;white-space:nowrap}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.frow{display:flex;gap:8px;align-items:center}
+.frow select{flex:1 1 auto;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:8px 10px;font-size:15px;font-weight:570}
+.frow #ph{flex:0 1 42%}
+.dc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.dc b{display:block;font-size:13px;color:var(--mute);font-weight:570;margin-bottom:6px}
+.dc dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px}
+.dc dt{color:var(--mute)}
+.dc dd{margin:0;font-weight:570}
+.dc p{margin:8px 0 0;font-size:12px;color:var(--mute);line-height:1.45}
+.cnt{font-size:13px;color:var(--mute);line-height:1.45}
+.list{display:flex;flex-direction:column;gap:8px;padding-block:10px calc(96px + env(safe-area-inset-bottom,0px) + var(--nb,0px))}
+.sec{margin:10px 0 0;font-size:13px;font-weight:570;color:var(--mute);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sall{flex:0 0 auto;border:1px solid var(--accent);border-radius:8px;background:var(--panel);color:var(--accent);padding:6px 12px;font-size:13px;font-weight:570}
+.c{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+.c.on{border-color:var(--accent);background:var(--accent-bg)}
+.n{grid-column:1 / -1;font-weight:570;font-size:16px;min-width:0}
+.pf{grid-column:1 / -1;display:flex;align-items:baseline;gap:10px;min-width:0}
+.pf .pn{flex:0 0 auto}
+.pf .f{grid-column:auto;flex:1 1 0;min-width:0;line-height:1.3}
+.a .w{flex:0 0 auto;min-width:92px;text-align:left;align-self:center}
+.n small{font-size:13px;font-weight:400;color:var(--mute);margin-left:6px}
+.n em{font-style:normal;font-size:12px;color:var(--warn);margin-left:6px;white-space:nowrap}
+.pn{justify-self:start;background:none;border:0;border-bottom:1px dashed var(--mute);padding:0;font-family:var(--mono);font-weight:570;font-size:15px;letter-spacing:0;white-space:nowrap}
+.w{font-family:var(--mono);font-weight:570;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.w.no{font-family:var(--sans);font-weight:400;font-size:13px;color:var(--mute)}
+.f{grid-column:1 / -1;font-size:13px;color:var(--mute);min-width:0}
+.a{grid-column:1 / -1;display:flex;gap:8px;margin-top:4px}
+.a button,.a summary{border:1px solid var(--accent);border-radius:8px;padding:8px 0;font-size:14px;font-weight:570;text-align:center;background:var(--panel);color:var(--accent)}
+.a .add{flex:1 1 0}
+.c.on .add{background:var(--accent);color:var(--panel)}
+.a details{flex:1 1 0}
+.a summary{list-style:none;cursor:pointer}
+.a summary::-webkit-details-marker{display:none}
+.a details[open]{flex:1 1 100%}
+.lk{display:flex;flex-direction:column;margin-top:6px;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.lk a{padding:11px 12px;text-decoration:none;font-size:14px;border-bottom:1px solid var(--line)}
+.lk a:last-child{border-bottom:0}
+.lk .rp{color:var(--mute)}
+.jb{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
+.jb button{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:11px 12px;text-align:left;font-size:14px;font-weight:570}
+.jb button::before{content:"+ ";color:var(--accent)}
+.a:has(details[open]){flex-wrap:wrap}
+.more{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0 12px}
+.more summary{padding:12px 0;font-weight:570;cursor:pointer}
+.more p{margin:0 0 8px;font-size:13px;color:var(--mute)}
+.more .x{color:var(--ink);font-weight:570}
+.more .lk{margin:0 0 12px}
+.empty{padding:28px 0;text-align:center;color:var(--mute)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--band);color:var(--band-fg);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;align-items:center;gap:12px}
+.bar div{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.bar small{color:var(--band-mute);font-size:12px}
+.bar strong{font-family:var(--mono);font-size:21px;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-sure]{border-color:var(--warn)!important;color:var(--warn)!important}
+.bar .ol[data-sure]{border-color:#ffd84d!important;color:#ffd84d!important}
+.bar .ol{background:none;color:var(--band-fg);border:1px solid var(--band-mute);padding:10px 12px;font-weight:500}
+.bar button{flex:0 0 auto;background:var(--band-fg);color:var(--band);border:0;border-radius:8px;padding:11px 16px;font-weight:570;font-size:15px}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:82vh;overflow:auto;background:var(--panel);border-top:2px solid var(--ink);border-radius:14px 14px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.25);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;flex-direction:column;gap:10px}
+.sh{display:flex;justify-content:space-between;align-items:center;font-size:17px}
+.sh button,.sb button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 12px;font-size:14px}
+.ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.ci b{min-width:0}
+.ci small{font-family:var(--mono);color:var(--mute)}
+.ci .t{font-family:var(--mono);font-weight:570;white-space:nowrap;text-align:right}
+.qy{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.qy button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:18px;line-height:1}
+.qy span{min-width:22px;text-align:center;font-family:var(--mono)}
+.rate{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute)}
+.lim{margin:0 0 12px;padding-left:18px;font-size:13px;color:var(--mute);line-height:1.5}
+.bar .tx{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--band-fg);white-space:nowrap}
+.bar .tx input{width:22px;height:22px;margin:0}
+.rate input{width:92px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:8px 10px;font-family:var(--mono);font-size:16px}
+.sb{display:flex;gap:8px}
+.sb button{flex:1 1 0;padding:11px 0;font-weight:570}
+.sb .pri{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.note{margin:0;font-size:13px;color:var(--mute)}
+.pl{display:flex;flex-direction:column;gap:6px}
+.pl>b{margin-top:8px;font-size:13px;color:var(--mute)}
+.pl>span,.pl>button{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:15px;background:var(--panel);text-align:left}
+.pl>span{color:var(--mute)}
+.pl small{font-size:12px;color:var(--mute)}
+.pl .now{border:2px solid var(--accent);font-weight:570;font-family:var(--mono)}
+.pl .now small{font-family:var(--sans);font-weight:400}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px) + var(--nb,0px));z-index:8;background:var(--ink);color:var(--panel);font-weight:570;padding:10px 16px;border-radius:8px;max-width:calc(100% - 28px);text-align:center}
+#newv{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:9;background:#ffd84d;color:#2a2300;border:0;border-radius:8px;padding:10px 16px;font-weight:570;max-width:calc(100% - 28px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top g"><h1>Classic Car Parts Calculator</h1><span class="tl"><a href="https://www.lastvin.com/" target="_blank" rel="noopener">LastVIN</a><a href="../m/">한국어</a></span></header>
+<div class="crumb g"><button type="button" id="pick" aria-haspopup="dialog">Mercedes-Benz <i>&gt;</i> <b>W140</b> <span>Change</span></button></div>
+<div class="tools g">
+<div class="sr"><input id="q" type="search" placeholder="17-digit VIN or part name" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Search by VIN or part"><button type="button" id="go">Find</button></div>
+<div class="dc" id="dc" hidden></div>
+<a class="lv" id="lv" href="https://www.lastvin.com/" target="_blank" rel="noopener" hidden>Check build date and options on LastVIN <small>your VIN is copied</small></a>
+<div class="chips" id="mods" aria-label="Model"></div>
+<div class="frow"><select id="cat" aria-label="Part group"></select><select id="ph" aria-label="Production phase"><option value="">All years</option><option value="e">Early (1991 - 2/1994)</option><option value="m">Mid (3/1994 - 5/1996)</option><option value="l">Late (6/1996 - 1998)</option></select></div>
+<div class="cnt" id="cnt"></div>
+</div>
+<main class="list g" id="list"></main>
+<div class="bar g"><div><small id="bn">0 parts in cart</small><strong id="sum">$0.00</strong></div><button type="button" id="clr" class="ol" hidden>Clear</button><label class="tx" for="tax" hidden><input id="tax" type="checkbox">tax</label><button type="button" id="open">Cart</button></div>
+<div class="sheet g" id="cart" hidden>
+<div class="sh"><b>Cart</b><button type="button" id="close">Close</button></div>
+<div id="items"></div>
+<label class="rate" for="usd" hidden><input id="usd" type="number" value="1"></label>
+<p class="note">Prices are US dealer list prices in dollars, refreshed on the 30th of each month. Shipping and import taxes are not included. You pay at each shop, not here.</p>
+<div class="sb"><button type="button" class="pri" id="copy">Copy list</button><button type="button" id="clear">Clear</button></div>
+</div>
+<div class="sheet g" id="pk" hidden>
+<div class="sh"><b>Choose a car</b><button type="button" id="pkx">Close</button></div>
+<p class="note">Only the Mercedes-Benz W140 is open for now. The others will follow.</p>
+<div class="pl"><b>Mercedes-Benz</b><button type="button" class="now" id="pkw">W140 <small>S320, S420, S500, S600, CL600</small></button><span>R129 (SL320, SL500, SL600) <small>coming</small></span><span>W126 <small>coming</small></span><span>W124 <small>coming</small></span><span>W201 (190E) <small>coming</small></span><span>R107 <small>coming</small></span><span>W123 <small>coming</small></span><span>W460, W463 (G-Class) <small>coming</small></span>
+<b>Other makes</b><span>Porsche <small>coming</small></span><span>BMW <small>coming</small></span><span>Land Rover - Jaguar <small>coming</small></span><span>Ferrari, Lamborghini <small>coming</small></span><span>Japan, USA, Korea <small>coming</small></span></div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+function main(){
+const D=window.W140DATA;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PH={e:'Early',m:'Mid',l:'Late'};const SECN={c:'Engine',d:'Steering',e:'Brakes',f:'Front suspension',g:'Rear suspension',h:'Bushings and mounts',i:'Cooling',j:'Ignition and intake',k:'Transmission',l:'Filters and consumables',m:'Fluids'};
+const TRW=[['S320은 92~93만','S320: 1992-93 only'],['1대분 1세트','one set per car'],['프론트와 같은 번호','same number as front'],['기통 수만큼','one per cylinder'],['좌우 2개','two per car'],['전기 중기형','Early-mid'],['전기형','early'],['중기형','mid'],['후기형','late'],['레벨링','self-leveling'],['없음','without'],['있음','with'],['좌','L'],['우','R'],['4단 계열','4-speed family'],['1995년식','1995'],['새 번호','new no.'],['옛 번호','old no.'],['옛 표기','old listing'],['필요량','need'],['한 통','bottle'],['전용',' only'],['공용',' shared'],['기준',' reference'],['확인',' verified'],['목록',' listing'],['5단','5-speed'],['4단','4-speed'],['세단','sedan'],['교환','change'],['보쉬','Bosch'],['~','-']];
+const tr=t=>{let o=String(t||'');for(const [a,b] of TRW)o=o.split(a).join(b);return o.replace(/\s+,/g,',').replace(/\s{2,}/g,' ').trim()};
+const nm=r=>{const e=r.en||r.ko;const m=/\(([^)]*)\)\s*$/.exec(r.ko);if(!m||/\(/.test(e))return e;const x=tr(m[1]);return /[가-힣]/.test(x)||!/\d|^(early|mid|late|early-mid)$/i.test(x)?e:e+' ('+x+')'};
+const JOBN=['Transmission service (5-speed)','Transmission service (4-speed)','Engine oil change','Belt drive','Cooling system','ADS shocks','Suspension bushing refresh'];
+const MODS=[['','All'],['S320','S320'],['S420','S420'],['S500','S500'],['S600','S600'],['CL600','CL600']];
+const SHEET='https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing',TROLL='https://smartstore.naver.com/trollparts/qna?cp=1';
+let ST={my:'',cat:'',ph:'',vin:'',ads:'',sls:'',cart:{},usd:1,tax:false};
+const MODEL={'140032':['S320','S320 (140.032)'],'140033':['S320','S320 long (140.033)'],'140042':['S420','S420 (140.042)'],'140043':['S420','S420 long (140.043)'],'140050':['S500','S500 (140.050)'],'140051':['S500','S500 long (140.051)'],'140056':['S600','S600 (140.056)'],'140057':['S600','S600 long (140.057)'],'140076':['CL600','CL600 (140.076)']};
+let VMSG='';
+try{const v=JSON.parse(localStorage.getItem('w140en')||'null');if(v&&typeof v==='object')ST=Object.assign(ST,v)}catch(e){}
+ST.usd=1;ST.tax=false;
+const save=()=>{try{localStorage.setItem('w140en',JSON.stringify(ST))}catch(e){}};
+let Q='';
+try{sessionStorage.removeItem('w140pc')}catch(e){}
+const won=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+function optOk(r){const o=r.opt;if(!o)return true;if(o.hyd)return !(ST.ads==='0'&&ST.sls==='0');if(o.ads!=null&&ST.ads!==''&&String(o.ads)!==ST.ads)return false;const sls=ST.sls!==''?ST.sls:(ST.ads==='1'?'1':'');if(o.sls!=null&&sls!==''&&String(o.sls)!==sls)return false;return true}
+function fits(r){if(!optOk(r))return false;if(ST.ph&&r.ph&&!r.ph.includes(ST.ph))return false;if(!ST.my)return true;const my=ST.my==='CL600'?'S600':ST.my;const f=r.fit+' '+r.ko;if(f.includes(my))return true;if(ST.my==='S420'&&f.includes('S500'))return true;return /기준/.test(r.fit)}
+function shown(){const q=Q.trim().toLowerCase().replace(/\s+/g,'');return D.rows.filter(r=>fits(r)&&(!ST.cat||(ST.cat==='_d'?!r.ref&&!r.spec:r.s===ST.cat))&&(!q||(r.ko+r.en+r.pn).toLowerCase().replace(/\s+/g,'').includes(q)))}
+function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{el.hidden=true},3000)}
+function card(r){const on=ST.cart[r.id]>0;const ph=(r.ph||'').split('').map(c=>PH[c]).join(' - ');
+return `<article class="c${on?' on':''}"><div class="n">${esc(nm(r))}${r.chk?`<em>${esc(tr(r.chk))}</em>`:''}</div>
+<div class="pf"><button type="button" class="pn" data-pn="${esc(r.pn)}" title="Tap to copy the number">${esc(r.pn)}</button><span class="f">${esc((ph?ph+', ':'')+tr(r.fit))}</span></div>
+<div class="a"><span class="w${r.ref?'':' no'}">${r.ref?won(r.ref*ST.usd):'No price'}</span><button type="button" class="add" data-add="${r.id}">${on?'Added':'Add'}</button><details><summary>Where to buy</summary><div class="lk">${[['MBPartsGiant (US dealer price)','https://www.mbpartsgiant.com/genuine/mercedes-benz~x~'+r.pn.replace(/ /g,'')],['Google Shopping','https://www.google.com/search?tbm=shop&q=Mercedes%20'+r.pn.replace(/ /g,'')],['eBay, lowest first','https://www.ebay.com/sch/i.html?_nkw='+r.pn.replace(/ /g,'')+'&_sop=15']].filter(()=>!r.spec).map(l=>`<a href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join('')}</div></details></div></article>`}
+const JOBS=[["미션 오일 교환 (5단)", ["140 277 00 95", "140 271 00 80", "203 540 02 53", "001 990 11 17", "MB 236.10 / 236.14"]], ["미션 오일 교환 (4단)", ["129 277 01 95", "126 271 11 80", "000 997 65 32", "140 271 00 60", "001 990 11 17", "MB 236.6 / 236.7"]], ["엔진 오일 교환", ["119 180 00 09", "120 180 00 09", "MB 229.1"]], ["벨트 라인", ["011 997 45 92", "011 997 64 92", "011 997 06 92", "010 997 88 92", "103 200 08 70", "011 997 67 92", "119 200 11 70", "104 200 15 28", "104 200 08 70", "120 200 05 70", "119 200 14 70", "104 200 05 70", "120 200 03 70", "601 200 10 70"]], ["냉각 계통", ["119 200 21 01", "104 200 32 01", "120 200 11 01", "119 200 00 15", "110 200 05 15", "120 200 00 15", "140 500 08 75", "140 500 01 75", "140 500 07 75", "140 501 33 82", "140 500 08 49", "124 500 04 06"]], ["ADS 쇼바 교환", ["140 320 15 30", "140 320 13 30", "140 320 99 13", "140 320 94 13", "000 989 91 03 09"]], ["하체 부싱 전체 교환", ["140 330 82 07", "140 330 00 18", "140 323 10 85", "140 352 86 65", "204 352 00 27", "140 326 17 81", "140 330 29 42", "140 330 39 42", "140 350 87 08", "140 350 30 41", "140 350 49 41", "140 240 22 17", "140 240 21 17", "140 240 08 18"]]];
+const MORE=`<details class="more"><summary>Add parts by job</summary><p>Only parts that match the chosen model and years are added.</p><div class="jb">${JOBS.map((j,i)=>`<button type="button" data-job="${i}">${esc(JOBN[i]||j[0])}</button>`).join('')}</div></details>
+<details class="more"><summary>Limits of this calculator</summary><ul class="lim"><li>Prices are US dealer list prices, refreshed on the 30th of each month. They do not follow the market in between and are not the lowest price.</li><li>Shipping and import taxes are not included.</li><li>The production phase (early, mid, late) is estimated from the last six digits of the VIN. It is not official data.</li><li>Options such as ADS and self-leveling cannot be read from the VIN. Choose them yourself or check the data card.</li><li>Part numbers were checked against one overseas catalog. Always cross-check before you order.</li><li>Discontinued parts have no price and are left out of the total.</li><li>W140 only for now, with few body, interior or electrical parts. More will be added step by step.</li></ul></details>
+<details class="more"><summary>Lookup sites</summary>
+<p class="x">Always cross-check part numbers.</p>
+<div class="lk"><a href="https://www.lastvin.com/" target="_blank" rel="noopener">LastVIN (data card)</a><a href="https://mb.vin/" target="_blank" rel="noopener">mb.vin (data card)</a><a href="https://7zap.com/en/catalog/cars/mercedes/" target="_blank" rel="noopener">7zap parts catalog (EPC)</a><a href="https://teilesuche.mercedes-benz-classic.com/" target="_blank" rel="noopener">Mercedes-Benz Classic parts search</a><a href="${SHEET}" target="_blank" rel="noopener">Full parts list spreadsheet (Korean)</a></div>
+<p>This is the English edition of a Korean site made by a W140 owner. The Korean edition adds won prices, Korean import tax and a desktop layout.</p>
+<div class="lk"><a href="../m/">Korean mobile edition</a><a href="../?pc=1">Korean desktop edition</a></div></details>`;
+function render(){const so=D.sec.map(x=>x[0]);const v=shown().map((r,i)=>[r,i]).sort((a,b)=>so.indexOf(a[0].s)-so.indexOf(b[0].s)||a[1]-b[1]).map(x=>x[0]);$('lv').hidden=!(ST.vin&&ST.vin.length===17);dcard();$('cnt').textContent=(VMSG?VMSG+' - ':(ST.my?'W140 '+ST.my+' - ':'All W140 - '))+v.length+' parts'+(()=>{const n=v.filter(r=>!r.spec),d=n.filter(r=>!r.ref).length;return ST.cat==='_d'?' (discontinued)':n.length?', '+(d/n.length*100).toFixed(1)+'% discontinued':''})()+(ST.my==='CL600'&&!VMSG?'. Engine parts match the S600, body parts differ':'')+(ST.my&&!ST.ph&&!VMSG?'. Choose the years to narrow it down':'');
+$('mods').innerHTML=MODS.map(m=>`<button type="button" data-m="${m[0]}" aria-pressed="${ST.my===m[0]}">${m[1]}</button>`).join('');
+let h='',last='';const name=Object.fromEntries(D.sec.map(s=>[s[0],s[1]]));
+const osel=(k,t)=>`<select data-o="${k}" aria-label="${t} option">${[['',t+': not sure'],['1','With '+t],['0','Without '+t]].map(o=>`<option value="${o[0]}"${ST[k]===o[0]?' selected':''}>${o[1]}</option>`).join('')}</select>`;
+for(const r of v){if(r.s!==last){last=r.s;const rs=v.filter(x=>x.s===last);h+=`<h2 class="sec"><span>${esc(SECN[last]||name[last])}</span><button type="button" class="sall" data-sall="${last}">${rs.every(x=>ST.cart[x.id]>0)?'Remove all':'Add all'}</button></h2>`;if(last==='f')h+=`<div class="frow">${osel('ads','ADS')}</div>`;if(last==='g')h+=`<div class="frow">${osel('ads','ADS')}${osel('sls','self-leveling')}</div>`}h+=card(r)}
+$('list').innerHTML=(h||'<p class="empty">No matching parts. Try another model or group.</p>')+MORE;total()}
+function total(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0,miss=0;
+for(const id of ids){const r=D.rows.find(x=>x.id===id);if(!r)continue;if(r.ref)s+=r.ref*ST.usd*ST.cart[id];else miss++}
+const pure=s,free=!ST.usd||s/ST.usd<=200;if(ST.tax&&!free)s=s*1.188;$('open').textContent=ids.length?'Cart '+ids.length:'Cart';$('clr').hidden=!ids.length;$('bn').textContent=ids.length+' parts in cart'+(miss?', '+miss+' without price':'');$('sum').textContent=won(s);
+$('items').innerHTML=ids.length?ids.map(id=>{const r=D.rows.find(x=>x.id===id);if(!r)return'';return `<div class="ci"><b>${esc(nm(r))}</b><span class="t">${r.ref?won(r.ref*ST.usd*ST.cart[id]):'No price'}</span><small>${esc(r.pn)}</small><span class="qy"><button type="button" data-q="-1" data-id="${id}" aria-label="One less">-</button><span>${ST.cart[id]}</span><button type="button" data-q="1" data-id="${id}" aria-label="One more">+</button></span></div>`}).join(''):'<p class="note">Your cart is empty.</p>'}
+function listText(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0;const L=ids.map(id=>{const r=D.rows.find(x=>x.id===id);const t=r.ref?r.ref*ST.usd*ST.cart[id]:0;s+=t;return nm(r)+' / '+r.pn+' / x'+ST.cart[id]+(r.ref?' / '+won(t):'')});
+const H=['[W140 parts list]'+(ST.my?' '+ST.my:'')+(ST.ph?' '+PH[ST.ph]:'')];if(ST.vin)H.push('VIN: '+ST.vin);if(ST.ads||ST.sls)H.push('Options: '+[ST.ads?'ADS '+(ST.ads==='1'?'yes':'no'):'',ST.sls?'rear self-leveling '+(ST.sls==='1'?'yes':'no'):''].filter(Boolean).join(', '));
+return H.concat(L,['Estimated total: '+won(s)+' (US dealer list prices, shipping and taxes not included)','https://iloveclassiccars.github.io/en/']).join('\n')}
+function copy(t,ok){try{navigator.clipboard.writeText(t).then(ok,()=>toast('Could not copy. Press and hold to copy it yourself.'))}catch(e){toast('Could not copy. Press and hold to copy it yourself.')}}
+$('cat').innerHTML='<option value="">All parts</option><option value="_d">Discontinued</option>'+D.sec.filter(s=>D.rows.some(r=>r.s===s[0])).map(s=>`<option value="${s[0]}">${esc(SECN[s[0]]||s[1])}</option>`).join('');
+$('cat').value=ST.cat;$('ph').value=ST.ph;$('usd').value=ST.usd;
+$('ph').addEventListener('change',e=>{ST.ph=e.target.value;save();render()});
+$('list').addEventListener('change',e=>{const o=e.target.closest('select[data-o]');if(!o)return;ST[o.dataset.o]=o.value;save();render()});
+$('cat').addEventListener('change',e=>{ST.cat=e.target.value;save();render();scrollTo(0,0)});
+const PHN={e:'early',m:'mid',l:'late'};
+function phaseOf(n){if(n<197000)return'e';if(n<227000)return'';if(n<314000)return'm';if(n<344000)return'';return'l'}
+const BODY={'140032':'Sedan','140033':'Sedan, long','140042':'Sedan','140043':'Sedan, long','140050':'Sedan','140051':'Sedan, long','140056':'Sedan','140057':'Sedan, long','140076':'Coupe'},ENG={S320:'M104 inline six 3.2',S420:'M119 V8 4.2',S500:'M119 V8 5.0',S600:'M120 V12 6.0',CL600:'M120 V12 6.0'};
+function dcard(){const el=$('dc'),m=/^WDB(\d{6})([12])([A-Z])(\d{6})$/.exec(ST.vin||''),h=m&&MODEL[m[1]];if(!h){el.hidden=true;el.innerHTML='';return}
+const ph=phaseOf(Number(m[4]));const rows=[['Model',h[1]],['Body',BODY[m[1]]],['Engine',ENG[h[0]]],['Steering',m[2]==='1'?'Left-hand drive':'Right-hand drive'],['Plant','ABCDE'.includes(m[3])?'Sindelfingen':''],['Serial',m[4]+(ph?' - '+PHN[ph]+' (estimate)':' - on a phase boundary')]].filter(r=>r[1]);
+el.innerHTML='<b>Your car, read from the VIN</b><dl>'+rows.map(r=>'<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>').join('')+'</dl><p>Build date, colour and options (ADS, self-leveling) cannot be read from the VIN alone. Check them on LastVIN below. Option code 214 (217 on early cars) is ADS with rear self-leveling, 480 is rear self-leveling. Then set the ADS and self-leveling boxes in the suspension groups.</p>';el.hidden=false}
+function smart(raw){const v=raw.toUpperCase().replace(/[^A-Z0-9]/g,'');
+const eu=/^WDB(\d{6})(?:[12][A-Z](\d{6}))?/.exec(v),us=/^WDBG[AB](\d\d)(?:[A-Z][0-9X][A-Z][A-Z](\d{6}))?/.exec(v);
+const hit=eu?MODEL[eu[1]]:us?MODEL['1400'+us[1]]:null,ser=eu?eu[2]:us?us[1+1]:null;
+if(eu||us){Q='';if(hit){ST.my=hit[0];ST.vin=v;VMSG='Model from VIN: '+hit[1]+((eu?eu[1]:'1400'+us[1])==='140076'?' (engine parts match the S600, body parts differ)':'');
+if(ser){const ph=phaseOf(Number(ser));if(ph){ST.ph=ph;VMSG+=', phase: '+PHN[ph]+' (estimated from the serial)'}else{ST.ph='';VMSG+='. This car sits on a phase boundary, so choose the years yourself'}$('ph').value=ST.ph}}
+else{ST.vin='';VMSG='Could not read the model from this VIN. Choose the model below'}}
+else if(/^W[A-Z0-9]{16}$/.test(v)){Q='';ST.vin='';VMSG='This is not a W140 VIN. Choose the model below'}
+else{Q=raw;if(ST.vin){ST.vin=''}VMSG=''}
+save();render()}
+$('q').addEventListener('input',e=>smart(e.target.value));
+const go=()=>{const v=$('q').value.trim();if(!v){toast('Enter a 17-digit VIN or a part name');$('q').focus();return}smart(v);$('q').blur();scrollTo(0,0)};
+$('lv').addEventListener('click',()=>{if(ST.vin)copy(ST.vin,()=>toast('VIN copied. Paste it into the LastVIN box.'))});
+$('go').addEventListener('click',go);$('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}});
+$('tax').checked=!!ST.tax;$('tax').addEventListener('change',e=>{ST.tax=e.target.checked;save();total()});
+$('usd').addEventListener('input',e=>{const n=Number(e.target.value);if(n>0){ST.usd=n;save();render()}});
+$('mods').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ST.my=b.dataset.m;if(ST.vin){ST.vin='';$('q').value=''}VMSG='';save();render()});
+$('list').addEventListener('click',e=>{const p=e.target.closest('.pn');if(p){copy(p.dataset.pn.replace(/\s+/g,''),()=>toast('Part number '+p.dataset.pn+' copied'));return}
+const sa=e.target.closest('[data-sall]');if(sa){const rs=shown().filter(r=>r.s===sa.dataset.sall);const allOn=rs.every(r=>ST.cart[r.id]>0);rs.forEach(r=>{if(allOn)delete ST.cart[r.id];else if(!ST.cart[r.id])ST.cart[r.id]=r.q||1});save();render();toast(allOn?'Group removed':rs.length+' parts added');return}
+const jb=e.target.closest('[data-job]');if(jb){const j=JOBS[Number(jb.dataset.job)];const m=D.rows.filter(r=>j[1].includes(r.pn)&&fits(r));if(!m.length){toast('No parts match the chosen model and years');return}m.forEach(r=>{if(!ST.cart[r.id])ST.cart[r.id]=r.q||1});save();render();toast((JOBN[Number(jb.dataset.job)]||j[0])+': '+m.length+' parts added');return}
+const a=e.target.closest('[data-add]');if(a){const id=a.dataset.add;if(ST.cart[id]>0)delete ST.cart[id];else{const r0=D.rows.find(x=>x.id===id);ST.cart[id]=(r0&&r0.q)||1}save();const c=a.closest('.c');const on=ST.cart[id]>0;c.classList.toggle('on',on);a.textContent=on?'Added':'Add';total()}});
+$('items').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;const id=b.dataset.id;const n=(ST.cart[id]||0)+Number(b.dataset.q);if(n>0)ST.cart[id]=n;else delete ST.cart[id];save();render()});
+$('open').addEventListener('click',()=>{$('pk').hidden=true;$('cart').hidden=!$('cart').hidden});
+$('pick').addEventListener('click',()=>{$('cart').hidden=true;$('pk').hidden=false});
+$('pkx').addEventListener('click',()=>{$('pk').hidden=true});
+$('pkw').addEventListener('click',()=>{$('pk').hidden=true});
+$('close').addEventListener('click',()=>{$('cart').hidden=true});
+const wipe=()=>{ST.cart={};save();render();$('cart').hidden=true;toast('Cart cleared')};
+const ask=b=>{if(b.dataset.sure){clearTimeout(ask.t);delete b.dataset.sure;b.textContent='Clear';wipe();return}b.dataset.sure='1';b.textContent='Really clear?';clearTimeout(ask.t);ask.t=setTimeout(()=>{delete b.dataset.sure;b.textContent='Clear'},3000)};
+$('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventListener('click',e=>ask(e.currentTarget));
+$('copy').addEventListener('click',()=>copy(listText(),()=>toast('List copied. Paste it to your parts supplier.')));
+if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
+(function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
+;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
+const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
+const n=top<h?Math.min(h-top+8,160):0;document.documentElement.style.setProperty('--nb',n+'px')};
+[300,1000,2500,5000,9000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);addEventListener('orientationchange',f);if(window.MutationObserver)new MutationObserver(()=>setTimeout(f,400)).observe(document.body,{childList:true})})();
+}
+fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).catch(()=>({build:0})).then(j=>{const d=document.createElement('script');d.src='../data.js?v='+(j&&j.build||0);d.onload=main;document.head.appendChild(d)});
+</script>
+</body>
+</html>
