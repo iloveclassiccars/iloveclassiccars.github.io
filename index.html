@@ -6,7 +6,7 @@
 <meta name="description" content="클래식카 부품 계산기. 지금은 벤츠 W140 편입니다.">
 </head>
 <body style="margin:0">
-<script>(function(){try{if(/[?&]pc=1/.test(location.search))sessionStorage.setItem('w140pc','1');if(sessionStorage.getItem('w140pc')==='1')return;if(/(netlify\.app|github\.io)$/.test(location.hostname)&&matchMedia('(max-width:640px)').matches)location.replace('m/')}catch(e){}})();</script>
+<script>(function(){try{if(/[?&]pc=1/.test(location.search))sessionStorage.setItem('w140pc','1');if(sessionStorage.getItem('w140pc')==='1')return;if(/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname)&&matchMedia('(max-width:640px)').matches)location.replace('m/')}catch(e){}})();</script>
 <title>클래식카 부품 계산기</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -539,7 +539,7 @@ $('side').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)
 $('crumb').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;CAT='home';Q='';$('find').value='';render()});
 $('makes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.road){ROAD=true}else{ROAD=false;MAKE=+b.dataset.i}$('soonv').hidden=true;makes();scrollTo(0,0)});
 /* 방문자 통계: 공개 사이트에서만 GoatCounter로 셉니다. 숫자는 만든 사람의 통계 화면에서만 보입니다. */
-(function(){try{if(!/(netlify\.app|github\.io)$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
+(function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
 $('back').addEventListener('click',()=>{ROAD=false;MAKE=0;makes()});
 function goHome(){JSEL='';ROAD=false;$('r129n').hidden=true;MAKE=0;PICK='';CAT='all';Q='';$('find').value='';$('ph').value='';$('cart').hidden=true;$('soonv').hidden=true;makes();vin();render();scrollTo(0,0)}
 $('home').addEventListener('click',goHome);$('home2').addEventListener('click',goHome);
@@ -571,7 +571,7 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794576019;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1794575528;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
 ;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
 const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
