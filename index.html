@@ -203,7 +203,7 @@ select option{background:var(--panel);color:var(--ink)}
 @media(max-width:640px){.side .g2{display:none}}
 .vlk{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:12px}
 .vlk b{color:var(--mute);margin-right:4px}
-.vlk .xc{color:var(--warn);font-weight:700}
+.vlk .xc{color:var(--ink);font-weight:700}
 .bar #home2{display:none}
 #newv{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:9;background:#ffd84d;color:#2a2300;border:0;border-radius:6px;padding:10px 16px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 .bar .fwg{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:0;flex:0 1 auto}
@@ -254,6 +254,62 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 @media (max-width:1120px){.cols{grid-template-columns:200px minmax(0,1fr);gap:16px}.row{grid-template-columns:22px minmax(0,1fr) auto}.pnc,.qty,.price,.sub{grid-column:2}.price{flex-wrap:wrap}.sub{text-align:left}.buy{grid-column:3;grid-row:1}.tiles{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}}
 @media (max-width:640px){.cols{grid-template-columns:minmax(0,1fr)}.side{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px}.side b{display:none}.side button{flex:0 0 auto;border:1px solid var(--line);border-radius:4px;background:var(--panel)}.side button .sn small{display:none}.side button[aria-current="true"]{border-color:var(--accent)}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* 휴대폰 전용 화면 시작 */
+@media(max-width:640px){
+.codes,.qna,.srcs,.sech small,.vlk b{display:none}
+.top .in{padding-block:8px;gap:4px 12px}
+.top h1{font-size:15px}
+.model .in{padding-block:10px;gap:8px}
+.mrow{gap:8px}
+.mrow .vin,.mrow .vin.fbar{flex:1 1 100%}
+.vbar label{padding:0 8px;font-size:12px}
+.vin.vbar #vin,.vin.vbar #find{font-size:15px;padding:8px}
+.vin.vbar #vingo,#findgo{padding:0 14px}
+.vlk{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:2px}
+.vlk>*{flex:0 0 auto;white-space:nowrap}
+.vlk .xc{order:-1}
+.cols{padding-block:10px 130px;gap:10px}
+.main{gap:10px}
+.mrow2{flex-wrap:nowrap;align-items:center;gap:8px}
+.mrow2 .mods{flex-wrap:nowrap;overflow-x:auto;gap:6px}
+.mrow2 .mods>*{flex:0 0 auto;white-space:nowrap}
+.mods button{padding:5px 8px;font-size:13px}
+.mrow2 .phl span{display:none}
+.jobs{flex-wrap:nowrap;overflow-x:auto;gap:6px}
+.jobs #jobl,.jobs button{flex:0 0 auto;white-space:nowrap}
+.jobs button{padding:4px 8px;font-size:13px}
+.crumb{font-size:12px}
+.sech{padding:8px 12px;align-items:center}
+.sech h3{flex:1 1 auto}
+.row{grid-template-columns:22px auto minmax(0,1fr) auto;gap:3px 8px;padding:9px 12px;align-items:center}
+.row>input[type=checkbox]{grid-column:1;grid-row:1 / span 2;align-self:start;margin-top:2px}
+.row .nm{grid-column:2 / -1;grid-row:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .nm .en{display:none}
+.row .nm .tl{font-size:0}
+.row .nm .tl em{font-size:12px;margin-left:6px}
+.row .pnc{display:contents}
+.row .pn{grid-column:2;grid-row:2;justify-self:start;font-size:15px}
+.row .sub{grid-column:3;grid-row:2;text-align:right;font-size:13px}
+.row .buy{grid-column:4;grid-row:2}
+.row .buy summary{padding:3px 7px;font-size:12px}
+.row .tags{grid-column:2 / span 2;grid-row:3}
+.row .tg{font-size:11px;padding:0 4px}
+.row .rp{grid-column:4;grid-row:3;justify-self:end;font-size:0;margin-left:0}
+.row .rp::after{content:"\C81C\BCF4";font-size:11px}
+.row .qty,.row .price{display:none}
+.row.on .qty{display:flex;grid-column:2;grid-row:4;font-size:12px}
+.row.on .price{display:flex;grid-column:3 / span 2;grid-row:4;flex-wrap:nowrap;justify-content:flex-end}
+.row .q{width:42px;padding:4px 6px}
+.row .p{width:80px;padding:4px 6px;flex:0 1 auto;min-width:56px}
+.row .seg{flex:0 0 auto}
+.row .seg button{padding:4px 6px;white-space:nowrap}
+.row .c{padding:4px 0}
+.bar .in{flex-wrap:nowrap;align-items:center;gap:8px}
+.bar .in>span,.bar #miss{display:none}
+.bar strong{font-size:18px;white-space:nowrap}
+.bar .fwg{margin-left:auto}
+}
+/* 휴대폰 전용 화면 끝 */
 </style>
 <header class="top"><div class="in"><h1><button type="button" id="home" title="첫 화면으로"><small>HOME</small> 클래식카 부품 계산기</button></h1>
 <div class="makes" id="makes" aria-label="제조사"></div><a class="qna" href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">Q&amp;A 묻고 답하기</a></div></header>
@@ -513,7 +569,7 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794571835;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1794572527;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 </script>
 
 </body>
