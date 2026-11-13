@@ -144,17 +144,17 @@ const D={"sec": [["c", "엔진 부품", "점화 코일, 센서, 인젝터, 체�
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const PH={e:'전기형',m:'중기형',l:'후기형'};
-const MODS=[['','전체'],['S320','S320'],['S420','S420'],['S500','S500'],['S600','S600']];
+const MODS=[['','전체'],['S320','S320'],['S420','S420'],['S500','S500'],['S600','S600'],['CL600','CL600']];
 const SHEET='https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing',TROLL='https://smartstore.naver.com/trollparts/category/ALL?cp=1';
 let ST={my:'',cat:'',ph:'',vin:'',cart:{},usd:1400};
-const MODEL={'140032':['S320','S320 (140.032)'],'140033':['S320','S320 롱 (140.033)'],'140042':['S420','S420 (140.042)'],'140043':['S420','S420 롱 (140.043)'],'140050':['S500','S500 (140.050)'],'140051':['S500','S500 롱 (140.051)'],'140056':['S600','S600 (140.056)'],'140057':['S600','S600 롱 (140.057)'],'140076':['S600','CL600 (140.076)']};
+const MODEL={'140032':['S320','S320 (140.032)'],'140033':['S320','S320 롱 (140.033)'],'140042':['S420','S420 (140.042)'],'140043':['S420','S420 롱 (140.043)'],'140050':['S500','S500 (140.050)'],'140051':['S500','S500 롱 (140.051)'],'140056':['S600','S600 (140.056)'],'140057':['S600','S600 롱 (140.057)'],'140076':['CL600','CL600 (140.076)']};
 let VMSG='';
 try{const v=JSON.parse(localStorage.getItem('w140m')||'null');if(v&&typeof v==='object')ST=Object.assign(ST,v)}catch(e){}
 const save=()=>{try{localStorage.setItem('w140m',JSON.stringify(ST))}catch(e){}};
 let Q='';
 try{sessionStorage.removeItem('w140pc')}catch(e){}
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
-function fits(r){if(ST.ph&&r.ph&&!r.ph.includes(ST.ph))return false;if(!ST.my)return true;const f=r.fit+' '+r.ko;if(f.includes(ST.my))return true;if(ST.my==='S420'&&f.includes('S500'))return true;return /기준/.test(r.fit)}
+function fits(r){if(ST.ph&&r.ph&&!r.ph.includes(ST.ph))return false;if(!ST.my)return true;const my=ST.my==='CL600'?'S600':ST.my;const f=r.fit+' '+r.ko;if(f.includes(my))return true;if(ST.my==='S420'&&f.includes('S500'))return true;return /기준/.test(r.fit)}
 function shown(){const q=Q.trim().toLowerCase().replace(/\s+/g,'');return D.rows.filter(r=>fits(r)&&(!ST.cat||r.s===ST.cat)&&(!q||(r.ko+r.en+r.pn).toLowerCase().replace(/\s+/g,'').includes(q)))}
 function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{el.hidden=true},3000)}
 function card(r){const on=ST.cart[r.id]>0;const ph=(r.ph||'').split('').map(c=>PH[c]).join(' - ');
@@ -172,7 +172,7 @@ const MORE=`<details class="more"><summary>작업별 한번에 담기</summary><
 <div class="lk"><a href="https://post.malltail.com/" target="_blank" rel="noopener">몰테일</a><a href="https://www.hoottown.com/" target="_blank" rel="noopener">훗타운 (한진)</a><a href="https://www.iporter.com/" target="_blank" rel="noopener">아이포터</a><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">오마이집</a></div>
 <p>가격은 2026년 11월 13일 미국 딜러 기준가(달러)를 원화로 바꾼 어림값입니다. 틀린 번호를 보시면 트롤파츠로 알려 주십시오.</p>
 <div class="lk"><a href="${TROLL}" target="_blank" rel="noopener">틀린 곳 제보 - 트롤파츠</a><a href="../?pc=1">PC 화면으로 보기 (수량, 애프터 가격, 작업별 담기)</a></div></details>`;
-function render(){const v=shown();$('lv').hidden=!(ST.vin&&ST.vin.length===17);$('cnt').textContent=(VMSG?VMSG+' - ':(ST.my?'W140 '+ST.my+' - ':'W140 전체 - '))+'부품 '+v.length+'가지'+(ST.my&&!ST.ph&&!VMSG?'. 연식을 고르면 더 좁혀집니다':'');
+function render(){const v=shown();$('lv').hidden=!(ST.vin&&ST.vin.length===17);$('cnt').textContent=(VMSG?VMSG+' - ':(ST.my?'W140 '+ST.my+' - ':'W140 전체 - '))+'부품 '+v.length+'가지'+(ST.my==='CL600'&&!VMSG?'. 엔진 계열 부품은 S600과 같고 차체 부품은 다릅니다':'')+(ST.my&&!ST.ph&&!VMSG?'. 연식을 고르면 더 좁혀집니다':'');
 $('mods').innerHTML=MODS.map(m=>`<button type="button" data-m="${m[0]}" aria-pressed="${ST.my===m[0]}">${m[1]}</button>`).join('');
 let h='',last='';const name=Object.fromEntries(D.sec.map(s=>[s[0],s[1]]));
 for(const r of v){if(!ST.cat&&r.s!==last){h+=`<h2 class="sec">${esc(name[r.s])}</h2>`;last=r.s}h+=card(r)}
@@ -222,7 +222,7 @@ $('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventLi
 $('copy').addEventListener('click',()=>copy(listText(),()=>toast('목록을 복사했습니다. 부품상에 붙여 보내십시오.')));
 if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
 (function(){try{if(!/netlify\.app$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
-;(()=>{const BUILD=1824574002;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+;(()=>{const BUILD=1824575002;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='새 판이 나왔습니다. 눌러서 새로 고침';n.onclick=()=>location.reload();document.body.appendChild(n)}};
 const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
 chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
