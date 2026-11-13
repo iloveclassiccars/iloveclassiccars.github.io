@@ -421,12 +421,8 @@ function openHelp(n){if($('pc').hidden){ROAD=false;MAKE=0;makes()}const d=[...do
 $('side').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.h){openHelp(b.dataset.h);return}CAT=b.dataset.cat;Q='';$('find').value='';render();$('crumb').scrollIntoView({block:'start'})});
 $('crumb').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;CAT='home';Q='';$('find').value='';render()});
 $('makes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.road){ROAD=true}else{ROAD=false;MAKE=+b.dataset.i}$('soonv').hidden=true;makes();scrollTo(0,0)});
-/* 방문자 수: 공개 사이트에서만 조용히 셉니다. 숫자는 주소 끝에 #stats 를 붙였을 때만 보입니다. */
-(function(){try{if(!/netlify\.app$/.test(location.hostname))return;const A='https://abacus.jasoncameron.dev',NS='classiccar-parts',K='v-k7q2m9x4',d=new Date(Date.now()+9*36e5).toISOString().slice(0,10).replace(/-/g,''),DK='d'+d+'-k7q2m9x4';
-let seen='';try{seen=localStorage.getItem('cc_seen')||''}catch(e){}
-if(seen!==d){try{localStorage.setItem('cc_seen',d)}catch(e){}fetch(A+'/hit/'+NS+'/'+K).catch(()=>{});fetch(A+'/hit/'+NS+'/'+DK).catch(()=>{})}
-if(location.hash==='#stats'){const g=k=>fetch(A+'/get/'+NS+'/'+k).then(r=>r.ok?r.json():{value:0}).then(j=>j.value||0).catch(()=>'?');setTimeout(()=>Promise.all([g(DK),g(K)]).then(v=>{const b=document.createElement('div');b.style.cssText='position:fixed;right:12px;top:12px;z-index:99;background:#ffd84d;color:#2a2300;font:700 14px sans-serif;padding:8px 12px;border-radius:6px';b.textContent='방문자 - 오늘 '+v[0]+'명, 전체 '+v[1]+'명';document.body.appendChild(b)}),1200)}
-}catch(e){}})();
+/* 방문자 통계: 공개 사이트에서만 GoatCounter로 셉니다. 숫자는 만든 사람의 통계 화면에서만 보입니다. */
+(function(){try{if(!/netlify\.app$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
 $('back').addEventListener('click',()=>{ROAD=false;MAKE=0;makes()});
 function goHome(){JSEL='';ROAD=false;$('r129n').hidden=true;MAKE=0;PICK='';CAT='home';Q='';$('find').value='';$('ph').value='';$('cart').hidden=true;$('soonv').hidden=true;makes();vin();render();scrollTo(0,0)}
 $('home').addEventListener('click',goHome);$('home2').addEventListener('click',goHome);
