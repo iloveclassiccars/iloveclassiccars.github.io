@@ -24,5 +24,11 @@
    "type": "image/png",
    "purpose": "maskable"
   }
+ ],
+ "description": "클래식카 부품 계산기. 벤츠 W124 E클래스(300E, E320, 500E, 300TE)와 W140 S클래스(S320, S500, S600) 순정 부품 번호, 기준 가격, 리퍼비시 부품을 한 번에 찾고 원화로 계산합니다.",
+ "categories": [
+  "shopping",
+  "utilities",
+  "lifestyle"
  ]
 }
