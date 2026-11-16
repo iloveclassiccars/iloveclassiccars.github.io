@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12241a">
+<meta name="apple-mobile-web-app-title" content="Parts Calculator">
+<link rel="manifest" href="../../en/manifest.json">
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../../icons/icon-192.png">
+<meta name="description" content="Classic car parts calculator, phone edition. Mercedes-Benz W140 for now.">
+<title>Classic Car Parts Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300..700&family=JetBrains+Mono:wght@300..700&display=swap">
+<style>
+b,strong,h1,h2,h3,h4,th,dt{font-weight:570}
+/* 휴대폰 전용: 검색 - 차종 - 묶음 - 부품 카드 - 아래 합계 띠. 한 손으로 쓰는 화면 */
+:root{--bg:#f4f6f5;--panel:#ffffff;--ink:#5a635e;--mute:#6d7a73;--line:#d5dcd8;--accent:#1c6424;--accent-bg:#e6f1e7;--warn:#a51e1e;--band:#12241a;--band-fg:#adb4ae;--band-mute:#869589;
+--sans:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media all{:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+button,input,select{font:inherit;color:var(--ink)}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.g{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+.top{background:var(--band);color:var(--band-fg);padding-block:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.top h1{margin:0;font-size:16px;font-weight:570}
+.top .tl{display:flex;gap:6px;flex:0 0 auto}
+.top h1 small{font-size:12px;font-weight:500;color:var(--band-mute);margin-left:6px}
+.top a{color:var(--band-mute);font-size:12px;text-decoration:none;border:1px solid var(--band-mute);border-radius:4px;padding:2px 8px;white-space:nowrap}
+.crumb{background:var(--band);padding-bottom:10px}
+.crumb button{width:100%;display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--band-mute);border-radius:8px;padding:8px 12px;color:var(--band-fg);font-size:15px;text-align:left}
+.crumb i{font-style:normal;color:var(--band-mute)}
+.crumb b{font-family:var(--mono)}
+.crumb span{margin-left:auto;font-size:12px;color:var(--band-mute)}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding-block:10px 8px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.sr{display:flex;border:2px solid var(--accent);border-radius:8px;overflow:hidden;background:var(--panel)}
+#q{flex:1 1 auto;min-width:0;border:0;background:none;padding:11px 12px;font-size:16px}
+#go{flex:0 0 auto;border:0;background:var(--accent);color:var(--panel);font-weight:570;font-size:16px;padding:0 20px}
+.lv{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--accent);border-radius:8px;padding:9px 12px;font-size:14px;font-weight:570;text-decoration:none;background:var(--panel)}
+.lv small{font-weight:400;font-size:12px;color:var(--mute);white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:570;white-space:nowrap}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.frow{display:flex;gap:8px;align-items:center}
+.frow select{flex:1 1 auto;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:8px 10px;font-size:15px;font-weight:570}
+.frow #ph{flex:0 1 42%}
+.dc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.dc b{display:block;font-size:13px;color:var(--mute);font-weight:570;margin-bottom:6px}
+.dc dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px}
+.dc dt{color:var(--mute)}
+.dc dd{margin:0;font-weight:570}
+.dc p{margin:8px 0 0;font-size:12px;color:var(--mute);line-height:1.45}
+.cnt{font-size:13px;color:var(--mute);line-height:1.45}
+.list{display:flex;flex-direction:column;gap:8px;padding-block:10px calc(96px + env(safe-area-inset-bottom,0px) + var(--nb,0px))}
+.sec{margin:10px 0 0;font-size:13px;font-weight:570;color:var(--mute);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sall{flex:0 0 auto;border:1px solid var(--accent);border-radius:8px;background:var(--panel);color:var(--accent);padding:6px 12px;font-size:13px;font-weight:570}
+.c{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+.c.on{border-color:var(--accent);background:var(--accent-bg)}
+.n{grid-column:1 / -1;font-weight:570;font-size:16px;min-width:0}
+.pf{grid-column:1 / -1;display:flex;align-items:baseline;gap:10px;min-width:0}
+.pf .pn{flex:0 0 auto}
+.pf .f{grid-column:auto;flex:1 1 0;min-width:0;line-height:1.3}
+.a .w{flex:0 0 auto;min-width:92px;text-align:left;align-self:center}
+.n small{font-size:13px;font-weight:400;color:var(--mute);margin-left:6px}
+.n em{font-style:normal;font-size:12px;color:var(--warn);margin-left:6px;white-space:nowrap}
+.pn{justify-self:start;background:none;border:0;border-bottom:1px dashed var(--mute);padding:0;font-family:var(--mono);font-weight:570;font-size:15px;letter-spacing:0;white-space:nowrap}
+.w{font-family:var(--mono);font-weight:570;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.w.no{font-family:var(--sans);font-weight:400;font-size:13px;color:var(--mute)}
+.f{grid-column:1 / -1;font-size:13px;color:var(--mute);min-width:0}
+.a{grid-column:1 / -1;display:flex;gap:8px;margin-top:4px}
+.a button,.a summary{border:1px solid var(--accent);border-radius:8px;padding:8px 0;font-size:14px;font-weight:570;text-align:center;background:var(--panel);color:var(--accent)}
+.a .add{flex:1 1 0}
+.c.on .add{background:var(--accent);color:var(--panel)}
+.a details{flex:1 1 0}
+.a summary{list-style:none;cursor:pointer}
+.a summary::-webkit-details-marker{display:none}
+.a details[open]{flex:1 1 100%}
+.lk{display:flex;flex-direction:column;margin-top:6px;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.lk a{padding:11px 12px;text-decoration:none;font-size:14px;border-bottom:1px solid var(--line)}
+.lk a:last-child{border-bottom:0}
+.lk .rp{color:var(--mute)}
+.jb{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
+.jb button{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:11px 12px;text-align:left;font-size:14px;font-weight:570}
+.jb button::before{content:"+ ";color:var(--accent)}
+.a:has(details[open]){flex-wrap:wrap}
+.more{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0 12px}
+.more summary{padding:12px 0;font-weight:570;cursor:pointer}
+.more p{margin:0 0 8px;font-size:13px;color:var(--mute)}
+.more .x{color:var(--ink);font-weight:570}
+.more .lk{margin:0 0 12px}
+.empty{padding:28px 0;text-align:center;color:var(--mute)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--band);color:var(--band-fg);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;align-items:center;gap:12px}
+.bar div{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.bar small{color:var(--band-mute);font-size:12px}
+.bar strong{font-family:var(--mono);font-size:21px;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-sure]{border-color:var(--warn)!important;color:var(--warn)!important}
+.bar .ol[data-sure]{border-color:#ffd84d!important;color:#ffd84d!important}
+.bar .ol{background:none;color:var(--band-fg);border:1px solid var(--band-mute);padding:10px 12px;font-weight:500}
+.bar button{flex:0 0 auto;background:var(--band-fg);color:var(--band);border:0;border-radius:8px;padding:11px 16px;font-weight:570;font-size:15px}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:82vh;overflow:auto;background:var(--panel);border-top:2px solid var(--ink);border-radius:14px 14px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.25);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px) + var(--nb,0px));display:flex;flex-direction:column;gap:10px}
+.sh{display:flex;justify-content:space-between;align-items:center;font-size:17px}
+.sh button,.sb button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 12px;font-size:14px}
+.ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.ci b{min-width:0}
+.ci small{font-family:var(--mono);color:var(--mute)}
+.ci .t{font-family:var(--mono);font-weight:570;white-space:nowrap;text-align:right}
+.qy{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.qy button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:18px;line-height:1}
+.qy span{min-width:22px;text-align:center;font-family:var(--mono)}
+.rate{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute)}
+.lim{margin:0 0 12px;padding-left:18px;font-size:13px;color:var(--mute);line-height:1.5}
+.bar .tx{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--band-fg);white-space:nowrap}
+.bar .tx input{width:22px;height:22px;margin:0}
+.rate input{width:92px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:8px 10px;font-family:var(--mono);font-size:16px}
+.sb{display:flex;gap:8px}
+.sb button{flex:1 1 0;padding:11px 0;font-weight:570}
+.sb .pri{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.note{margin:0;font-size:13px;color:var(--mute)}
+.pl{display:flex;flex-direction:column;gap:6px}
+.pl>b{margin-top:8px;font-size:13px;color:var(--mute)}
+.pl>span,.pl>button{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:15px;background:var(--panel);text-align:left}
+.pl>span{color:var(--mute)}
+.pl small{font-size:12px;color:var(--mute)}
+.pl .now{border:2px solid var(--accent);font-weight:570;font-family:var(--mono)}
+.pl .now small{font-family:var(--sans);font-weight:400}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px) + var(--nb,0px));z-index:8;background:var(--ink);color:var(--panel);font-weight:570;padding:10px 16px;border-radius:8px;max-width:calc(100% - 28px);text-align:center}
+#newv{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:9;background:#ffd84d;color:#2a2300;border:0;border-radius:8px;padding:10px 16px;font-weight:570;max-width:calc(100% - 28px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style id="lngfix">.top{position:relative;z-index:30}.lngm{z-index:1000!important;background:#1c1e1d!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}</style><style id="jobgcss">.jb .jgrow{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;width:100%}.jb .jgrow span{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.jb .jgrow button{flex:0 0 auto}</style><style id="pkcss">#pkw .nw{font-style:normal;white-space:nowrap}.pl>b{display:block;margin-top:14px}</style></head>
+<body>
+<script>(function(){try{if(/[?&]lang=en/.test(location.search))localStorage.setItem('lang','en')}catch(e){}})();</script>
+
+<header class="top g"><h1><svg class="carc" viewBox="0 0 64 30" width="46" height="22" role="img" aria-label="Classic sedan"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M5.2 14.2l35.8 1.3 19-1.6"/><path d="M5.2 14.2c-1.2.2-1.9 1-1.9 2.2v4.4c0 .8.6 1.4 1.4 1.4h3.8M17.4 22.6l15.4.9M41.6 24.2l4.6-.1"/><path d="M41 15.5v8.7M60 13.9v8.2c0 .4-.3.8-.7.8L46 24"/><path d="M9.6 13.9l3.6-5.3c.3-.4.8-.7 1.3-.7h15.6c.5 0 1 .2 1.3.6l5.4 4.1"/><path d="M36.8 12.6l15.4-.9 7.8 2.2"/><path d="M41.2 24.9l19.2-1.6"/><path d="M52.2 11.7v-1.6"/></g><path d="M12.6 13.7l2.6-4h6.4v4.2zM23.4 9.7h6.5c.3 0 .6.1.8.3l4.3 3.9l-11.6-.2z" fill="currentColor" opacity=".32"/><circle cx="52.2" cy="9.8" r=".7" fill="currentColor"/><path d="M48.8 15.2l6.4-.5v6.6l-6.4.5z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M49 16.8l6-.45M49 18.2l6-.45M49 19.6l6-.45M49 21l6-.45" stroke="currentColor" stroke-width=".8"/><path d="M42.4 16.2l5.6-.35v2.7l-5.6.35zM56.2 15l3.4-.3v2.5l-3.4.3z" fill="currentColor" opacity=".55"/><path d="M8 18.6l32.4 1.3" stroke="currentColor" stroke-width=".9" opacity=".5"/><path d="M22.6 13.9v8.9" stroke="currentColor" stroke-width=".9" opacity=".5"/><circle cx="13.2" cy="22.8" r="4.1" fill="var(--bg,#101613)" stroke="currentColor" stroke-width="1.5"/><circle cx="13.2" cy="22.8" r="1.5" fill="currentColor"/><circle cx="37.2" cy="23.8" r="4.3" fill="var(--bg,#101613)" stroke="currentColor" stroke-width="1.5"/><circle cx="37.2" cy="23.8" r="1.6" fill="currentColor"/></svg>Parts Calculator</h1><span class="tl"><a href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">Q&amp;A</a><a href="../?pc=1">PC</a><details class="lng"><summary>LANGUAGE</summary><div class="lngm"><a href="../../m/?lang=ko">한국어</a><a href="../../en/m/?lang=en">English</a><a href="../../ja/m/?lang=ja">日本語</a><a href="../../zh/m/?lang=zh">简体中文</a><a href="../../de/m/?lang=de">Deutsch</a><a href="../../fr/m/?lang=fr">Français</a><a href="../../es/m/?lang=es">Español</a><a href="../../ru/m/?lang=ru">Русский</a></div></details><button type="button" class="appb" id="appb" aria-haspopup="dialog">App</button></span></header>
+<div class="crumb g"><button type="button" id="pick" aria-haspopup="dialog">Mercedes-Benz <i>&gt;</i> <b>W140</b> <span class="mdl">S-Class</span> <span class="chv" aria-hidden="true">▾</span></button></div>
+<div class="tools g">
+<div class="sr"><input id="q" type="search" placeholder="VIN 17-digit · part number · part name" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Find by VIN or part"><button type="button" id="go">Find</button></div>
+<div class="dc" id="dc" hidden></div>
+<a class="lv" id="lv" href="https://www.lastvin.com/" target="_blank" rel="noopener" hidden>LastVIN: check build date and options <small>your VIN is copied</small></a>
+<div class="chips" id="mods" aria-label="Model"></div>
+<div class="frow"><select id="cat" aria-label="Part group"></select><select id="ph" aria-label="Year"><option value="">All years</option><option value="e">Early (1991 - 2/1994)</option><option value="m">Mid (3/1994 - 5/1996)</option><option value="l">Late (6/1996 - 1998)</option></select><details class="ctab mct"><summary>Color code</summary><div class="ctm"><b>Mercedes-Benz W140 paint codes</b><table><tr><td><i style="background:#14161a"></i></td><td class="cc">197</td><td>Obsidian Black Metallic<small>Obsidian Black Metallic</small></td></tr><tr><td><i style="background:#0b0b0b"></i></td><td class="cc">040</td><td>Black<small>Black (Tiefschwarz)</small></td></tr><tr><td><i style="background:#f2f1ec"></i></td><td class="cc">149</td><td>Polar White<small>Polar White</small></td></tr><tr><td><i style="background:#1b2230"></i></td><td class="cc">189</td><td>Black Opal Metallic<small>Black Opal Metallic</small></td></tr><tr><td><i style="background:#171b26"></i></td><td class="cc">199</td><td>Black Pearl Metallic<small>Black Pearl Metallic</small></td></tr><tr><td><i style="background:#1f4a3a"></i></td><td class="cc">269</td><td>Brilliant Emerald Metallic<small>Brilliant Emerald Metallic</small></td></tr><tr><td><i style="background:#2c5a55"></i></td><td class="cc">279</td><td>Calypso Green Metallic<small>Calypso Green Metallic</small></td></tr><tr><td><i style="background:#3b3550"></i></td><td class="cc">339</td><td>Violan Metallic<small>Violan Metallic</small></td></tr><tr><td><i style="background:#3d6a86"></i></td><td class="cc">341</td><td>Aquamarine Blue Metallic<small>Aquamarinblau Metallic</small></td></tr><tr><td><i style="background:#5a1a22"></i></td><td class="cc">512</td><td>Almandine Red Metallic<small>Almandinrot Metallic</small></td></tr><tr><td><i style="background:#6b1424"></i></td><td class="cc">572</td><td>Ruby Pearl<small>Ruby Pearl</small></td></tr><tr><td><i style="background:#9e1b22"></i></td><td class="cc">582</td><td>Imperial Red<small>Imperial Red</small></td></tr><tr><td><i style="background:#e2a33a"></i></td><td class="cc">601</td><td>Apricot Yellow<small>Aprikosengelb</small></td></tr><tr><td><i style="background:#9a9ea0"></i></td><td class="cc">702</td><td>Smoke Silver Metallic<small>Smoke Silver Metallic</small></td></tr><tr><td><i style="background:#7f8486"></i></td><td class="cc">721</td><td>Moonstone Grey Metallic<small>Moonstone Gray Metallic</small></td></tr><tr><td><i style="background:#b9bcbd"></i></td><td class="cc">735</td><td>Astral Silver Metallic<small>Astralsilber Metallic</small></td></tr><tr><td><i style="background:#c4c7c8"></i></td><td class="cc">744</td><td>Brilliant Silver Metallic<small>Brilliant Silver Metallic</small></td></tr><tr><td><i style="background:#2f4a44"></i></td><td class="cc">891</td><td>Alexandrite Green Metallic<small>Alexandritgrün Metallic</small></td></tr><tr><td><i style="background:#1a2238"></i></td><td class="cc">904</td><td>Midnight Blue<small>Midnight Blue</small></td></tr><tr><td><i style="background:#3e4f7a"></i></td><td class="cc">928</td><td>Iris Blue<small>Irisblau</small></td></tr><tr><td><i style="background:#5c6062"></i></td><td class="cc">181</td><td>Atlas Grey Metallic (matte, bumpers and lower trim)<small>Atlasgrau Metallic, matte trim</small></td></tr><tr><td><i style="background:#6e7072"></i></td><td class="cc">700</td><td>Alto Grey Metallic (matte, bumpers and lower trim)<small>Altograu Metallic, matte trim</small></td></tr></table><p>1997 model year S-Class list. Source: AutomotiveTouchup paint catalog (checked November 16, 2026). Colors vary by year and on-screen swatches are approximate. Check your car’s paint on the door-pillar or radiator-support tag, or on the data card.</p></div></details></div>
+<div class="cnt" id="cnt"></div>
+</div>
+<main class="list g" id="list"></main>
+<div class="bar g"><div><small id="bn">0 parts in cart</small><strong id="sum">0USD</strong></div><button type="button" id="clr" class="ol" hidden>Clear</button><label class="tx" for="tax"><input id="tax" type="checkbox">Tax</label><button type="button" id="open">Cart</button></div>
+<div class="sheet g" id="cart" hidden>
+<div class="sh"><b>Cart</b><button type="button" id="close">Close</button></div>
+<div id="items"></div>
+<div class="rset"><label for="usd" hidden>USD <input id="usd" type="number" value="1"></label><label for="eur">1 EUR = <input id="eur" type="number" inputmode="decimal" min="0" step="0.01" value="1.08"> USD</label><label for="cny">1 CNY = <input id="cny" type="number" inputmode="decimal" min="0" step="0.001" value="0.14"> USD</label><label for="jpy">100 JPY = <input id="jpy" type="number" inputmode="decimal" min="0" step="0.01" value="0.66"> USD</label><label for="ship">Shipping <input id="ship" type="number" inputmode="numeric" min="0" step="1" value="0"> USD</label><label for="labor">Labor <input id="labor" type="number" inputmode="numeric" min="0" step="1" value="0"> USD</label><label for="duty">Duty <input id="duty" type="number" inputmode="decimal" min="0" step="0.1" value="8"> % + VAT 10%</label><button type="button" id="rreset">Reset</button></div><p class="brk" id="brk"></p>
+<p class="note">Rates are examples. Update them to today’s rates. Import duties and taxes depend on your country and are not included.</p>
+<div class="sb"><button type="button" class="pri" id="copy">Copy list</button><button type="button" id="clear">Clear</button></div>
+</div>
+<div class="sheet g" id="pk" hidden>
+<div class="sh"><b>Code · Model</b><button type="button" id="pkx">Close</button></div>
+<div class="pl"><b>Mercedes-Benz</b><button type="button" class="now" id="pkw"><em class="nw">W140 S-Class</em> <small>S320, S420, S500, S600, CL600</small></button><span class="soon"><em>R129 SL</em><small>coming</small><i>300SL, 300SL-24, 500SL, 600SL, SL280, SL320, SL500, SL600</i></span><span class="soon"><em>W126 S-Class</em><small>coming</small><i>260SE, 280SE, 300SE, 300SEL, 380SE, 380SEL, 420SEL, 500SEL, 560SEL, 300SD, 350SD, 350SDL, 380SEC, 500SEC, 560SEC</i></span><button type="button" class="soon w124l" onclick="location.href='?car=w124'"><em>W124 E-Class</em><small>1st release · growing</small><i>300E</i></button><span class="soon"><em>W201 190E</em><small>coming</small><i>190, 190E, 190E 2.3, 190E 2.6, 190E 2.3-16, 190E 2.5-16, 190D</i></span><span class="soon"><em>R107 SL</em><small>coming</small><i>280SL, 350SL, 380SL, 450SL, 500SL, 560SL, 350SLC, 380SLC, 450SLC, 500SLC</i></span><span class="soon"><em>W123 E-Class</em><small>coming</small><i>200, 230E, 240D, 250, 280E, 300D, 300TD, 300CD, 280CE</i></span><span class="soon"><em>W460 G-Class</em><small>coming</small><i>230GE, 280GE, 300GD, 300GE, G300, G320, G500, G55 AMG</i></span><b>Porsche</b><span class="soon"><em>356</em><small>coming</small><i>356, 356A, 356B, 356C (1948-65)</i></span><span class="soon"><em>911 · 1964-89</em><small>coming</small><i>911 F-series, 911 G-series, 911 Carrera 3.2</i></span><span class="soon"><em>930 Turbo</em><small>coming</small><i>930 Turbo 3.0, 3.3</i></span><span class="soon"><em>964</em><small>coming</small><i>Carrera 2, Carrera 4, RS, Turbo</i></span><span class="soon"><em>993</em><small>coming</small><i>Carrera, Carrera 4S, Targa, Turbo, GT2</i></span><span class="soon"><em>924 · 944 · 968</em><small>coming</small><i>924, 924 Turbo, 944, 944 S2, 944 Turbo, 968</i></span><span class="soon"><em>928</em><small>coming</small><i>928, 928 S, S4, GT, GTS</i></span><span class="soon"><em>986 · 996</em><small>coming</small><i>Boxster 986, 911 996</i></span><b>BMW</b><span class="soon"><em>E9</em><small>coming</small><i>3.0 CS, 3.0 CSi, 3.0 CSL</i></span><span class="soon"><em>E21 · E30</em><small>coming</small><i>3 Series, E30 M3</i></span><span class="soon"><em>E28 · E34</em><small>coming</small><i>5 Series, M5</i></span><span class="soon"><em>E24</em><small>coming</small><i>6 Series, M635CSi</i></span><span class="soon"><em>E32</em><small>coming</small><i>7 Series, 750iL V12</i></span><span class="soon"><em>E31</em><small>coming</small><i>850i, 850CSi</i></span><span class="soon"><em>E36</em><small>coming</small><i>3 Series, M3</i></span><b>Land Rover - Jaguar</b><span class="soon"><em>Series</em><small>coming</small><i>Land Rover Series I, II, IIA, III</i></span><span class="soon"><em>Defender</em><small>coming</small><i>90, 110, 130</i></span><span class="soon"><em>Range Rover Classic</em><small>coming</small><i>2-door, 4-door, LSE</i></span><span class="soon"><em>Discovery 1</em><small>coming</small><i>200Tdi, 300Tdi, V8</i></span><span class="soon"><em>Jaguar E-Type</em><small>coming</small><i>Series 1, 2, 3</i></span><span class="soon"><em>Jaguar XJ6 · XJ40 · XJS</em><small>coming</small><i>XJ6 Series 1-3, XJ40, XJS</i></span><b>Ferrari</b><span class="soon"><em>Dino 246</em><small>coming</small><i>246 GT, 246 GTS</i></span><span class="soon"><em>308 · 328</em><small>coming</small><i>308 GTB, 308 GTS, 328 GTB, 328 GTS</i></span><span class="soon"><em>348 · F355</em><small>coming</small><i>348 tb/ts/Spider, F355 Berlinetta/GTS/Spider</i></span><span class="soon"><em>Testarossa</em><small>coming</small><i>Testarossa, 512 TR, F512 M</i></span><b>Lamborghini</b><span class="soon"><em>Miura</em><small>coming</small><i>P400, P400 S, P400 SV</i></span><span class="soon"><em>Countach</em><small>coming</small><i>LP400, LP400 S, LP500 S, Quattrovalvole, 25th Anniversary</i></span><span class="soon"><em>Diablo</em><small>coming</small><i>Diablo, VT, SV, Roadster</i></span><b>Fiat</b><span class="soon"><em>500</em><small>coming</small><i>Nuova 500, 500 F, 500 L, 500 R (1957-75)</i></span><span class="soon"><em>124 Spider</em><small>coming</small><i>124 Sport Spider, Spidereuropa</i></span><span class="soon"><em>X1/9</em><small>coming</small><i>X1/9 1300, 1500</i></span><span class="soon"><em>131 · 126</em><small>coming</small><i>131 Abarth, 126</i></span><b>Renault</b><span class="soon"><em>4 · 5</em><small>coming</small><i>Renault 4, Renault 5, 5 Turbo</i></span><span class="soon"><em>Alpine</em><small>coming</small><i>A110, A310, GTA</i></span><span class="soon"><em>R8 · Clio</em><small>coming</small><i>R8 Gordini, Clio Williams</i></span><b>Peugeot</b><span class="soon"><em>404 · 504</em><small>coming</small><i>404, 504 Coupé, 504 Cabriolet</i></span><span class="soon"><em>205</em><small>coming</small><i>205 GTI, 205 T16</i></span><span class="soon"><em>406 Coupé</em><small>coming</small><i>406 Coupé</i></span><b>Japan</b><span class="soon"><em>Toyota</em><small>coming</small><i>Land Cruiser 40/60/80, Supra A70/A80, Corolla AE86</i></span><span class="soon"><em>Nissan</em><small>coming</small><i>Skyline GT-R R32/R33/R34, Fairlady Z S30, 300ZX Z32</i></span><span class="soon"><em>Honda</em><small>coming</small><i>NSX NA1, Civic EF/EG</i></span><span class="soon"><em>Mazda</em><small>coming</small><i>RX-7 FC/FD, MX-5 NA</i></span><b>USA</b><span class="soon"><em>Ford</em><small>coming</small><i>Mustang 1964-73, Bronco 1966-77</i></span><span class="soon"><em>Chevrolet</em><small>coming</small><i>Corvette C2/C3, Camaro 1967-81</i></span><span class="soon"><em>Jeep</em><small>coming</small><i>CJ, Wagoneer</i></span><span class="soon"><em>Cadillac</em><small>coming</small><i>Eldorado, DeVille</i></span><b>Korea</b><span class="soon"><em>Hyundai</em><small>coming</small><i>Pony, Stellar, Grandeur 1st gen, Sonata Y2/Y3</i></span><span class="soon"><em>Kia</em><small>coming</small><i>Brisa, Pride</i></span><span class="soon"><em>Daewoo</em><small>coming</small><i>Royale</i></span>
+</div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="../../data.js?v=1794791400"></script><script src="../../w124.js?v=1794811483"></script>
+<script>
+/* 외화 표시: USD는 자료 원가 그대로, EUR·JPY는 원화 환산을 그 통화 환율로 나눈 어림값
+   (한국수출입은행 2026-10-08 고시: 1유로 1,500.04원, 100엔 847.46원) */
+const FX={USD:{s:'$',k:0},EUR:{s:'€',k:1500.04},CNY:{s:'CN¥',k:190},JPY:{s:'JP¥',k:8.4746}};let FXC='USD';
+try{FXC=localStorage.getItem('w140fx')||'USD';if(!FX[FXC])FXC='USD'}catch(e){}
+function fxSel(usd){return '<select class="fx" aria-label="Foreign currency (USD, EUR, JPY)">'+Object.keys(FX).map(c=>'<option value="'+c+'"'+(c===FXC?' selected':'')+'>'+fxv(usd,c)+'</option>').join('')+'</select>'}
+function fxv(usd,cc){cc=cc||FXC;const f=FX[cc];if(cc==='USD')return f.s+Number(usd).toLocaleString('en-US',{maximumFractionDigits:2});const v=usd*ST.usd/({EUR:ST.eur,CNY:ST.cny,JPY:ST.jpy/100}[cc]||f.k);return f.s+v.toLocaleString('en-US',{maximumFractionDigits:cc==='JPY'?0:2})}
+document.addEventListener('change',e=>{if(e.target.matches&&e.target.matches('select.fx')){FXC=e.target.value;try{localStorage.setItem('w140fx',FXC)}catch(x){}render()}});
+document.addEventListener('click',e=>{if(e.target.matches&&e.target.matches('select.fx'))e.stopPropagation()},true);
+const SECN={c:'Engine',d:'Steering',e:'Brakes',f:'Front suspension',g:'Rear suspension',h:'Bushings and mounts',i:'Cooling',j:'Ignition and intake',k:'Transmission',l:'Filters and consumables',n:'Wheels and tires',m:'Fluids'};
+const TRW=[['새 순정은 단종 · 순정 복원품 가격','new genuine discontinued · reconditioned genuine price'],['바퀴 1개에 5개, 4바퀴 20개','5 per wheel, 20 for 4 wheels'],['예시 가격 · 브랜드마다 다름','example price · varies by brand'],['4개 필요','4 needed'],['S320은 225/60 R16','S320 uses 225/60 R16'],['S320은 92~93만','S320: 1992-93 only'],['1대분 1세트','one set per car'],['프론트와 같은 번호','same number as front'],['기통 수만큼','one per cylinder'],['좌우 2개','two per car'],['전기 중기형','Early-mid'],['Early','early'],['Mid','mid'],['Late','late'],['self-leveling','self-leveling'],['no','without'],['yes','with'],['좌','L'],['우','R'],['4단 계열','4-speed family'],['1995','1995'],['새 번호','new no.'],['옛 번호','old no.'],['옛 표기','old listing'],['필요량','need'],['한 통','bottle'],['전용',' only'],['공용',' shared'],['기준',' reference'],['확인',' verified'],['목록',' listing'],['5단','5-speed'],['4단','4-speed'],['Sedan','sedan'],['교환','change'],['보쉬','Bosch'],['리터','L'],['pcs','pcs'],['세트','set'],['~','-']];
+const tr=t=>{let o=String(t||'');for(const [a,b] of TRW)o=o.split(a).join(b);return o.replace(/\s+,/g,',').replace(/\s{2,}/g,' ').trim()};
+const nm=r=>{const e=r.en||r.ko;const m=/\(([^)]*)\)\s*$/.exec(r.ko);if(!m||/\(/.test(e))return e;const x=tr(m[1]);return /[가-힣]/.test(x)||!/\d|^(early|mid|late|early-mid)$/i.test(x)?e:e+' ('+x+')'};
+const SECE={"c": ["Engine parts", "Ignition coils, sensors, injectors, chain, oil pump"], "d": ["Steering", "Turns the wheels when you turn the wheel"], "e": ["Brakes", "Stops the car. Discs, hoses, sensors"], "f": ["Front suspension", "Holds the front wheels and absorbs shocks. Arms, shocks, springs"], "g": ["Rear suspension", "Holds the rear wheels and absorbs shocks. Arms, shocks, springs"], "h": ["Bushings and mounts", "Rubber mounts between body, chassis and engine"], "i": ["Cooling", "Keeps the engine cool. Belts, water pump, radiator"], "j": ["Ignition and intake", "Spark and air intake"], "k": ["Transmission", "Early and mid cars: 4-speed (722.3); late cars: 5-speed (722.6)"], "l": ["Filters and consumables", "Things you replace on schedule"], "n": ["Wheels and tires", "Wheels, wheel bolts, center caps, tires"], "m": ["Fluids", "Engine oil, transmission fluid, brake fluid. Quantity is in liters"]};TRW.unshift(...[]);window.W140DATA.sec.forEach(x=>{const t=SECE[x[0]];if(t){x[1]=t[0];x[2]=t[1]}});
+const D=window.W140DATA;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PH={e:'Early',m:'Mid',l:'Late'};
+const MODS=[['','All'],['S320','S320'],['S420','S420'],['S500','S500'],['S600','S600'],['CL600','CL600'],['SL600','SL600']];
+const SHEET='https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing',TROLL='https://smartstore.naver.com/trollparts/qna?cp=1';
+let ST={my:'',cat:'',ph:'',vin:'',ads:'',sls:'',cart:{},usd:1,eur:1.08,cny:0.14,jpy:0.66,ship:0,duty:8,labor:0,tax:false};
+const MODEL={'140032':['S320','S320 (140.032)'],'140033':['S320','S320 L (140.033)'],'140042':['S420','S420 (140.042)'],'140043':['S420','S420 L (140.043)'],'140050':['S500','S500 (140.050)'],'140051':['S500','S500 L (140.051)'],'140056':['S600','S600 (140.056)'],'140057':['S600','S600 L (140.057)'],'140076':['CL600','CL600 (140.076)']};
+let VMSG='';const PQ={};
+try{const v=JSON.parse(localStorage.getItem('w140m-en')||'null');if(v&&typeof v==='object')ST=Object.assign(ST,{usd:v.usd||ST.usd,eur:v.eur||ST.eur,cny:v.cny||ST.cny,jpy:v.jpy||ST.jpy,ship:+v.ship||0,duty:v.duty==null?8:+v.duty,labor:+v.labor||0,tax:!!v.tax})}catch(e){}
+const save=()=>{try{localStorage.setItem('w140m-en',JSON.stringify(ST))}catch(e){}};
+let Q='';
+try{sessionStorage.removeItem('w140pc')}catch(e){}
+const won=n=>'$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+/* 옵션(ADS, 뒤 레벨링)을 고르면 맞지 않는 쇼바, 스프링, 펌프를 숨긴다. 모름이면 다 보여 준다 */
+function optOk(r){const o=r.opt;if(!o)return true;if(o.hyd)return !(ST.ads==='0'&&ST.sls==='0');if(o.ads!=null&&ST.ads!==''&&String(o.ads)!==ST.ads)return false;const sls=ST.sls!==''?ST.sls:(ST.ads==='1'?'1':'');if(o.sls!=null&&sls!==''&&String(o.sls)!==sls)return false;return true}
+function fits(r){if(!optOk(r))return false;if(ST.ph&&r.ph&&!r.ph.includes(ST.ph))return false;if(!ST.my)return true;if(ST.my==='SL600'){if(!'abcj'.includes(r.s))return false;return (r.fit+' '+r.ko).includes('S600')}const my=ST.my==='CL600'?'S600':ST.my;const f=r.fit+' '+r.ko;if(f.includes(my))return true;if(ST.my==='S420'&&f.includes('S500'))return true;return /기준/.test(r.fit)}
+function shown(){const q=Q.trim().toLowerCase().replace(/\s+/g,'');return D.rows.filter(r=>fits(r)&&(!ST.cat||(ST.cat==='_d'?(!r.ref&&!r.tbd)&&!r.spec:r.s===ST.cat))&&(!q||(r.ko+r.en+r.pn).toLowerCase().replace(/\s+/g,'').includes(q)))}
+function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{el.hidden=true},3000)}
+function card(r){const on=ST.cart[r.id]>0;const ph=(r.ph||'').split('').map(c=>PH[c]).join(' - ');
+return `<article class="c${on?' on':''}"><div class="nl"><div class="n">${esc(nm(r))}${r.chk?`<em>${esc(tr(r.chk))}</em>`:''}</div>
+<div class="pf"><button type="button" class="pn" data-pn="${esc(r.pn)}" title="Click to copy the number">${esc(r.pn)}</button><span class="f">${esc((ph?ph+', ':'')+tr(r.fit))}</span></div></div>
+<div class="a"><span class="w${r.ref?'':' no'}">${r.ref?fxSel(r.ref)+'<b class="krw" data-u="'+r.ref+'">'+won(r.ref*ST.usd*(ST.cart[r.id]||PQ[r.id]||r.q||1))+'</b>':'No price'}</span><span class="qs"><button type="button" data-qm="${r.id}" aria-label="One less">−</button><b>${ST.cart[r.id]||PQ[r.id]||r.q||1}</b><button type="button" data-qp="${r.id}" aria-label="One more">+</button></span><button type="button" class="add" data-add="${r.id}"><i class="bx"></i>${on?'Added':'Add'}</button><details><summary>Where to buy</summary><div class="lk">${r.links.map(l=>`<a href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join('')}<a href="${TROLL}" target="_blank" rel="noopener">Ask TrollParts before you buy</a></div></details></div></article>`}
+const JOBS=[["Transmission service (5-speed)", ["140 277 00 95", "140 271 00 80", "203 540 02 53", "001 990 11 17", "MB 236.10 / 236.14"]], ["Transmission service (4-speed)", ["129 277 01 95", "126 271 11 80", "000 997 65 32", "140 271 00 60", "001 990 11 17", "MB 236.6 / 236.7"]], ["Engine oil change", ["119 180 00 09", "120 180 00 09", "MB 229.1"]], ["Belt drive", ["011 997 45 92", "011 997 64 92", "011 997 06 92", "010 997 88 92", "103 200 08 70", "011 997 67 92", "119 200 11 70", "104 200 15 28", "104 200 08 70", "120 200 05 70", "119 200 14 70", "104 200 05 70", "120 200 03 70", "601 200 10 70"]], ["Cooling system", ["119 200 21 01", "104 200 32 01", "120 200 11 01", "119 200 00 15", "110 200 05 15", "120 200 00 15", "140 500 08 75", "140 500 01 75", "140 500 07 75", "140 501 33 82", "140 500 08 49", "124 500 04 06"]], ["ADS Shock replacement", ["140 320 15 30", "140 320 13 30", "140 320 99 13", "140 320 94 13", "000 989 91 03 09"]], ["Suspension bushing refresh", ["140 330 82 07", "140 330 00 18", "140 323 10 85", "140 352 86 65", "204 352 00 27", "140 326 17 81", "140 330 29 42", "140 330 39 42", "140 350 87 08", "140 350 30 41", "140 350 49 41", "140 240 22 17", "140 240 21 17", "140 240 08 18"]]];
+const MORE=`<details class="more"><summary>Add by part group</summary><p>Only parts that match the chosen model and years are added.</p><div class="jb">${(()=>{const L=s=>s.replace(/\s*[(（][^()（）]*[)）]\s*$/,''),S=(s,c)=>{const m=/[(（]([^()（）]*)[)）]\s*$/.exec(s);return (m?m[1]:s)+' '+c};return `<div class="jgrow"><span>${esc(L(JOBS[0][0]))}</span><button type="button" data-job="0">${esc(S(JOBS[0][0],'722.6'))}</button><button type="button" data-job="1">${esc(S(JOBS[1][0],'722.3'))}</button></div>`+JOBS.slice(2).map((j,k)=>`<button type="button" data-job="${k+2}">${esc(j[0])}</button>`).join('')})()}</div></details>
+<details class="more"><summary>Classic car world sites</summary>
+<p>10 places to follow the classic car world: values, listings, auction results and buying guides.</p>
+<ul><li><a href="https://www.hagerty.com/media/" target="_blank" rel="noopener">Hagerty (US)</a> - The reference for classic car values and buying guides, with what to check per model.</li><li><a href="https://www.hemmings.com/" target="_blank" rel="noopener">Hemmings (US)</a> - America’s largest classic car marketplace and magazine, with many cars and parts ads.</li><li><a href="https://bringatrailer.com/" target="_blank" rel="noopener">Bring a Trailer (US)</a> - Online auctions. Past results and comments are a great way to learn a car.</li><li><a href="https://www.classic.com/" target="_blank" rel="noopener">Classic.com</a> - Collects auction results worldwide to show value trends per model.</li><li><a href="https://www.classicdriver.com/" target="_blank" rel="noopener">Classic Driver (Switzerland)</a> - European high-end classic listings and reading.</li><li><a href="https://www.carandclassic.com/" target="_blank" rel="noopener">Car &amp; Classic (UK)</a> - UK and European classic car marketplace and auctions.</li><li><a href="https://www.classic-trader.com/" target="_blank" rel="noopener">Classic Trader (Germany)</a> - German-centered European classic car marketplace.</li><li><a href="https://www.mobile.de/" target="_blank" rel="noopener">mobile.de (Germany)</a> - Germany’s largest used car marketplace. Listings and prices from Mercedes’ home market.</li><li><a href="https://rmsothebys.com/" target="_blank" rel="noopener">RM Sotheby's</a> - The world’s top classic car auction house. See how high great cars go.</li><li><a href="https://www.mercedes-benz.com/en/vehicles/mercedes-benz-classic/" target="_blank" rel="noopener">Mercedes-Benz Classic (Germany, official)</a> - Mercedes-Benz’s own classic site: history, Classic Center, genuine parts.</li></ul>
+</details>
+<details class="more"><summary>Classic car workshops</summary>
+<p>Trusted classic car workshops in Korea. Details will follow.</p>
+<ul class="shops"><li><b>Yuilsa</b> <small>details coming</small></li><li><b>Jeonwonsa</b> <small>details coming</small></li><li><b>Hanyangsa</b> <small>details coming</small></li><li><b>Chagilla</b> <small>details coming</small></li><li><b>HK Sunroof</b> <small>details coming</small></li><li><b>Miseong Seat</b> <small>details coming</small></li></ul>
+</details>
+<details class="more"><summary>Where to buy online</summary>
+<p>Shops for buying direct. Shipping regions and stock differ by shop, so check by part number before ordering.</p>
+<p><b>10 major Mercedes parts sites (US, UK, Germany, Japan)</b></p>
+<ul><li><a href="https://www.pelicanparts.com/Mercedes" target="_blank" rel="noopener">Pelican Parts (US)</a> - Large shop with genuine and OEM parts. Easy to search by part number.</li><li><a href="https://www.fcpeuro.com/Mercedes~Benz-parts/" target="_blank" rel="noopener">FCP Euro (US)</a> - European car specialist. Shows genuine, OEM and aftermarket side by side.</li><li><a href="https://www.mbpartsgiant.com/" target="_blank" rel="noopener">MB Parts Giant (US)</a> - Genuine Mercedes parts. Pick a model to see part groups.</li><li><a href="https://mbparts.mbusa.com/" target="_blank" rel="noopener">Mercedes-Benz USA official parts</a> - Official genuine parts sold by US Mercedes dealers.</li><li><a href="https://parts.theslshop.com/" target="_blank" rel="noopener">The SL Shop (UK)</a> - Classic Mercedes specialist. R129 and W140 parts, rebuild services.</li><li><a href="https://www.niemoeller.de/en/mercedes-benz-oldtimer-spare-parts/mb-parts-search" target="_blank" rel="noopener">Niemöller (Germany)</a> - German classic Mercedes parts dealer. Search by part number.</li><li><a href="https://oldtimer-ersatzteile24.de/?lang=eng" target="_blank" rel="noopener">Oldtimer-Ersatzteile24 (Germany)</a> - German oldtimer parts shop with an English site.</li><li><a href="https://www.autodoc.parts/spares/mercedes-benz/s-class/s-class-w140/958-600-se-sel-140-056-140-057" target="_blank" rel="noopener">Autodoc (Germany)</a> - One of Europe’s largest parts shops. W140 aftermarket parts by model.</li><li><a href="https://usedparts.mercedes-benz.com/mercedes-benz-body-parts-attachments-oxid" target="_blank" rel="noopener">Mercedes-Benz official used parts (Germany)</a> - Used genuine parts run by Mercedes-Benz.</li><li><a href="https://yoshiparts.com/" target="_blank" rel="noopener">Yoshiparts (Japan)</a> - Find and order genuine parts by number, from Japanese stock.</li></ul>
+<p><b>6 Porsche parts sites</b></p>
+<ul><li><a href="https://www.porsche.com/international/accessoriesandservice/classic/genuineparts" target="_blank" rel="noopener">Porsche Classic Genuine parts (official)</a> - Classic genuine parts supplied by Porsche.</li><li><a href="https://www.pelicanparts.com/" target="_blank" rel="noopener">Pelican Parts (US)</a> - Leading shop for air- and water-cooled Porsche parts.</li><li><a href="https://www.design911.co.uk/" target="_blank" rel="noopener">Design 911 (UK)</a> - Porsche specialist. Genuine and aftermarket.</li><li><a href="https://fvd.net/de-en" target="_blank" rel="noopener">FVD Brombacher (Germany)</a> - German Porsche parts specialist.</li><li><a href="https://www.heritagepartscentre.com/eu/porsche" target="_blank" rel="noopener">Heritage Parts Centre (UK)</a> - Classic Porsche parts.</li><li><a href="https://lnengineering.com/shop-genuine-porsche-parts/" target="_blank" rel="noopener">LN Engineering (US)</a> - Genuine Porsche and engine parts. Strong on 986 and 996.</li></ul>
+<p><b>BMW parts sites (6)</b></p>
+<ul><li><a href="https://bmwgroup-classic.com/en/offers-and-services/parts-shop.html" target="_blank" rel="noopener">BMW Group Classic Parts Shop (Germany, official)</a> - BMW’s own classic genuine parts shop.</li><li><a href="https://www.leebmann24.com/lt/en/page/bmw-spare-parts" target="_blank" rel="noopener">Leebmann24 (Germany)</a> - German BMW dealer’s genuine parts shop. Search by part number.</li><li><a href="https://www.fcpeuro.com/BMW-Parts" target="_blank" rel="noopener">FCP Euro (US)</a> - European car shop with genuine, OEM and aftermarket side by side.</li><li><a href="https://www.turnermotorsport.com/BMW-E30-Parts/m-38-febi" target="_blank" rel="noopener">Turner Motorsport (US)</a> - BMW specialist. E-body parts such as the E30.</li><li><a href="https://myclassicparts.com" target="_blank" rel="noopener">My Classic Parts</a> - Classic BMW parts, including discontinued and rare parts.</li><li><a href="https://www.pelicanparts.com/" target="_blank" rel="noopener">Pelican Parts (US)</a> - BMW parts too, from a large parts shop.</li></ul>
+<p><b>4 major package forwarders (for Korea)</b></p>
+<p>For shops that do not ship to Korea, a forwarder receives the parts and sends them on. Big, heavy parts cost a lot to ship, so check weight and volume charges first.</p>
+<ul><li><a href="https://post.malltail.com/" target="_blank" rel="noopener">Malltail</a> - Korea’s largest forwarder, with warehouses in the US, Germany, Japan, the UK and more.</li><li><a href="https://www.hoottown.com/" target="_blank" rel="noopener">Hootown (Hanjin)</a> - Forwarder run by Hanjin, formerly Ihanex.</li><li><a href="https://www.iporter.com/" target="_blank" rel="noopener">iPorter</a> - Forwarding from the US, Germany, Japan and the UK.</li><li><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">OhMyZip</a> - Mainly US forwarding.</li></ul>
+<p><b>Useful links</b></p>
+<p >For checking whether a part is still made or its number changed. We have not confirmed whether you can order directly there.</p>
+<div class="lk"><a href="https://teilesuche.mercedes-benz-classic.com/" target="_blank" rel="noopener">Mercedes-Benz Classic parts search (Germany, official)</a><a href="https://www.mercedes-benz.com/en/vehicles/mercedes-benz-classic/classiccenter/classic-spare-parts/parts/" target="_blank" rel="noopener">Mercedes-Benz Classic genuine parts</a><a href="https://www.mercedes-benz.com/en/vehicles/mercedes-benz-classic/classiccenter/classic-spare-parts/classic-partner/" target="_blank" rel="noopener">Mercedes-Benz Classic partners</a></div>
+</details>
+<details class="more"><summary>Buy through Korea</summary><p><b>TrollParts in Korea gives technical advice on classic car maintenance (W140). Asking before you buy is the easiest way to buy.</b></p>
+<ul>
+<li>Give them your VIN and they confirm the right part numbers in the Mercedes catalog (EPC), so you avoid returning a wrong part overseas.</li>
+<li>The same part can have different numbers by year and spec. This is where beginners go wrong most.</li>
+<li>For discontinued parts, ask whether a superseded number, a rebuild or a used part is the better route.</li>
+<li>Ask what to fix first and which parts should be replaced together. That is the difference from a shop that only sells parts.</li>
+<li>No worries about overseas shipping times, import taxes or returns.</li>
+<li>Estimate parts and prices here first, then paste the cart’s "Copy list" to speed things up.</li>
+</ul><div class="lk"><a href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">Go to TrollParts</a></div></details>
+<details class="more"><summary>Rebuild guide</summary>
+<p>A rebuilt (refurbished) part is a used part taken apart, with worn pieces replaced and reassembled. It is the route when new parts are discontinued or too expensive. Use it with the "Find rebuild" button on each row. Ask whether they accept your part number before sending it.</p>
+<div class="core"><b>Never throw away the old part (the core)</b>
+<ul>
+<li>The core is the failed old part removed from the car. Rebuilders rebuild from this core.</li>
+<li>Rebuilding is a one-for-one exchange: you give the old part and get a rebuilt one. Many shops will not do it without a core.</li>
+<li>If you get the rebuilt part first, a core deposit is charged and refunded when the old part arrives.</li>
+<li>As more parts are discontinued, cores get rare. Without a core, rebuilding gets harder every year.</li>
+<li>When using a workshop, say "give me back the removed parts" up front. Otherwise they go to scrap.</li>
+<li>Photograph the part number, then wrap and store it safely. Broken cores are not accepted.</li>
+</ul></div>
+<p><b>10 mechanical rebuilders - steering box, shocks, throttle, air pump, alternator</b></p>
+<ul><li><a href="https://rpm-depot.de/en/product/throttle-body-overhaul-m104-m119-m120-mercedes-w124-r129-w140-w202-w210" target="_blank" rel="noopener">RPM Depot (Germany) - throttle</a> - M104, M119, M120 Throttle body overhaul. W140 and R129.</li><li><a href="https://www.autohausaz.com/catalog/b/cm-hydraulics-parts" target="_blank" rel="noopener">C&M Hydraulics (US) - steering box, secondary air pump</a> - Good at rebuilding steering boxes. Also rebuilt air pumps and hydraulic pumps. Sold through AutohausAZ.</li><li><a href="https://classic-parts-finder.com/en/car-parts/mercedes-benz/sl-r129/engine/mercedes-air-pump-v12-60-w140-r129_4743" target="_blank" rel="noopener">Classic Parts Finder - air pump</a> - V12 6.0 air pumps and other like-new genuine used parts. W140 and R129.</li><li><a href="https://mbzparts.com/w140" target="_blank" rel="noopener">MBZ Parts (US) - shocks</a> - Rebuilt hydraulic shocks and W140 used and rebuilt parts.</li><li><a href="https://aerosus.net/mercedes/s-class.html" target="_blank" rel="noopener">Aerosus - shocks, suspension</a> - S-Class shock and suspension replacements.</li><li><a href="https://parts.theslshop.com/products/mercedes-benz-sl-r129-w124-w140-alternator-80a-refurbishment-service-0081544202.html" target="_blank" rel="noopener">The SL Shop (UK) - alternator</a> - R129, W124, W140 Alternator rebuild service.</li><li><a href="https://www.rscauto.de/" target="_blank" rel="noopener">RSC Auto (Germany) - hydraulic cylinders</a> - R129 Soft-top hydraulic cylinder rebuilds.</li><li><a href="https://www.mbusa.com/en/owners/parts/remanufactured" target="_blank" rel="noopener">Mercedes-Benz genuine remanufactured parts (official)</a> - Genuine remanufactured parts sold by Mercedes-Benz.</li><li><a href="https://www.boschaftermarket.com/xrm/media/images/services/programs/bosch_exchange/en_8/benefits_remanufactured_starters_alternators_flyer.pdf" target="_blank" rel="noopener">Bosch eXchange (Germany) - starter, alternator</a> - Bosch guide to its remanufactured starters and alternators.</li><li><a href="https://cruisecontrolrepair.squarespace.com/products-services/rebuild-service-mercedes-climate-control" target="_blank" rel="noopener">Cruise Control Repair (US) - climate control unit</a> - 1981~1995 Mercedes climate control unit rebuilds.</li></ul>
+<p>Water pumps are usually replaced new rather than rebuilt, so no rebuilder is listed. Find a new one by part number at the parts sites above.</p>
+<p><b>5 electronics rebuilders - ECU, ABS, instrument cluster</b></p>
+<ul><li><a href="https://www.ecutesting.com/common-faults/mercedes/" target="_blank" rel="noopener">ECU Testing (UK)</a> - Mercedes ECU and ABS module testing and repair.</li><li><a href="https://actronics.co.uk/abs-ecu/mercedes-benz" target="_blank" rel="noopener">ACtronics (Netherlands - UK)</a> - Mercedes ABS module and control unit rebuilds.</li><li><a href="https://controlunits.com" target="_blank" rel="noopener">ControlUnits (UK)</a> - Automotive control unit rebuild specialist.</li><li><a href="https://www.remante.com/products/ecu" target="_blank" rel="noopener">Remante</a> - ECU and ABS rebuilt units, sales and repair.</li><li><a href="https://bosch-repair-service.com/en/category/display-instrument/" target="_blank" rel="noopener">Bosch Electronic Service (Germany)</a> - Instrument cluster and display repair.</li></ul>
+</details>
+<details class="more"><summary>How to use</summary>
+<ol>
+<li>Pick a model. You can also enter your VIN.</li>
+<li>Click a part group to open its parts.</li>
+<li>Tick the parts you need. The total appears at the bottom in US dollars.</li>
+<li>Pick Early, Mid or Late under Year to keep only parts that fit your car.</li>
+<li>In the bottom bar, click "View cart" to find exchange rates, shipping and labor. Update the rates to today’s.</li>
+<li>Click "Where to buy" at the end of a row to see the current price; if it differs, change the number in the price box. For aftermarket prices, click "Aftermarket" and type it in.</li>
+<li>Check the total in the bottom bar, then in "View cart"at "Copy list" to send it to your parts dealer.</li>
+</ol>
+<p>Your VIN is saved only on this device. It identifies the model, not options or year.</p>
+<p>Prices are pre-filled US dealer prices (USD), updated on the 30th of every month. More cars will follow.</p><p><b>What it does</b></p>
+<ul>
+<li>Identifies the make and W140 model (S320, S420, S500, S600, CL600) from the VIN.</li>
+<li>Shows only parts that fit your model and year.</li>
+<li>Puts genuine and aftermarket prices side by side; choose per row.</li>
+<li>Mix USD, EUR, CNY and JPY prices and still get one USD total.</li>
+<li>Each row has "Where to buy" links. Clicking a shop link copies the part number, so just paste it into the shop’s search box.</li>
+<li>Your prices and ticks are saved on this device only. Nobody else can see them.</li>
+</ul>
+<p><b>What it cannot do</b></p>
+<ul>
+<li>No checkout here. Order from each shop.</li>
+<li>Prices are US dealer list prices, updated on the 30th, and may not be the lowest.</li>
+<li>The VIN does not reveal options such as ADS or self-leveling, or the year. This is not the Mercedes EPC. US-market cars (starting WDBGA) and the S280, S350, CL420 and CL500 are not identified.</li>
+<li>2026 (November 13): 168 part numbers were checked against the US Mercedes dealer catalog (MB Parts Giant), both per part and per model year, and models, years, superseded numbers and prices were corrected. Based on US specs, so other markets may differ.</li>
+<li>Most part numbers are for the 1996 model year. Rows with a red "check number"  tag, or without a year tag, should be checked against your VIN before ordering.</li>
+<li>Beyond the W140, only the make is identified. Cars before 1981 do not have 17-digit VINs.</li>
+<li>Shift linkage, valve body and MAP sensor are not listed yet.</li>
+</ul>
+<p><b>Coming later</b></p>
+<ul>
+<li>Now: Mercedes-Benz W140 (S320, S420, S500, S600, CL600).</li>
+<li>More classic Mercedes will follow: R129 SL (SL320, SL500, SL600), W126 S-Class, W124 E-Class, W201 190E, R107 SL, W123, G-Class (W460).</li>
+<li>Porsche too, air-cooled (356, early 911, 930, 964, 993) and water-cooled (924, 944, 928, 968, Boxster 986, 911 996).</li>
+<li>Then BMW: the E-body cars recognized as classics.</li>
+<li>Land Rover (Defender, Range Rover) and Jaguar.</li>
+<li>Ferrari, Lamborghini and other supercars.</li>
+<li>Japanese cars, classics only.</li>
+<li>American cars: Ford, Chrysler, GM.</li>
+<li>Youngtimers are not classics yet, so they are not included.</li>
+<li>Korean cars over 30 years old, such as the Grandeur and Sonata. Many parts are discontinued, so we start with what can still be found.</li>
+</ul>
+<p><b>From the maker</b></p>
+<div class="say">
+<p>Made for classic car people. Enjoy.</p>
+<p>Please tell us about errors or missing parts.</p>
+</div>
+</details>
+<details class="more"><summary>Limits</summary>
+<p>What is still missing. We fix it step by step.</p>
+<ul><li>Prices are US dealer estimates updated on the 30th of each month; changes in between are not tracked.</li><li>Shipping depends on the shop and weight, so enter it yourself. Import duties and taxes depend on your country and are not calculated.</li><li>The year (Early, Mid, Late) is estimated from the last six VIN digits and is not official.</li><li>ADS and self-leveling options cannot be read from the VIN. Choose them yourself or check the data card.</li><li>Part numbers were checked against one catalog. Always cross-check before ordering.</li><li>Discontinued parts have no price and are left out of the total.</li><li>Only the W140 for now, with few body, interior or electrical parts. We are filling it in step by step.</li></ul>
+</details>
+<details class="more"><summary>Ask us</summary>
+<dl class="qa">
+<dt>Can I buy here?</dt><dd>No checkout. Estimate numbers and prices, then use each row’s "Where to buy" links to buy.</dd>
+<dt>How do I know a part fits my car?</dt><dd>VIN box, enter your 17-digit VIN and click Find to keep only parts for your model. Check again with the seller using your VIN before ordering.</dd>
+<dt>Why are some prices empty?</dt><dd>No reference price was found. Type the price you see at a shop, or use "Find rebuild" to look for rebuilt and used parts.</dd>
+<dt>Genuine vs aftermarket?</dt><dd>Genuine parts come in a Mercedes box; aftermarket parts are made by other companies to the same spec. Choose per row and enter prices separately.</dd>
+<dt>Can I trust the total?</dt><dd>It is an estimate. Enter today’s rates, shipping and labor in the cart to get closer to reality.</dd>
+<dt>Is my list saved?</dt><dd>Only in this browser on this device. It will not appear on other devices, so use the cart’s "Copy list" to move it.</dd>
+<dt>Which cars are coming?</dt><dd>Mercedes-Benz W140 now. Next: classic Mercedes (R129, W126, W124, 190E, R107, W123, G-Class), air- and water-cooled Porsche, BMW E-body, Land Rover and Jaguar, Ferrari and Lamborghini, Japanese classics, American cars, and Korean cars over 30 years old. No youngtimers.</dd>
+<dt>Who made this, and why?</dt><dd>Made for classic car people everywhere. Please tell us about errors or missing parts.</dd>
+<dt>Where can I ask other questions?</dt><dd>Click "Q&amp;A" at the top to reach TrollParts and ask there.</dd>
+<dt>Anywhere else to ask?</dt><dd>For part questions, <a href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">ask TrollParts (Korea)</a>.</dd>
+</dl></details>
+<details class="more"><summary>Report an error</summary><p>Spotted a wrong number or price, or a missing part? Tell us and we will fix it.</p><div class="lk"><a href="${TROLL}" target="_blank" rel="noopener">Report an error - TrollParts</a><a href="../?pc=1">DESKTOP view</a></div></details>`;
+function render(){const so=D.sec.map(x=>x[0]);const v=shown().map((r,i)=>[r,i]).sort((a,b)=>so.indexOf(a[0].s)-so.indexOf(b[0].s)||a[1]-b[1]).map(x=>x[0]);$('lv').hidden=!(ST.vin&&ST.vin.length===17);dcard();(()=>{const t=VMSG?VMSG:(ST.my==='CL600'?'CL600: engine parts match the S600, body parts differ':'');$('cnt').textContent=t;$('cnt').hidden=!t})();
+$('mods').innerHTML=MODS.map(m=>`<button type="button" data-m="${m[0]}" aria-pressed="${ST.my===m[0]}">${m[1]}</button>`).join('');
+let h='',last='';const name=Object.fromEntries(D.sec.map(s=>[s[0],s[1]]));
+const osel=(k,t)=>`<select data-o="${k}" aria-label="${t} option">${[['',t+' not sure'],['1',t+' yes'],['0',t+' no']].map(o=>`<option value="${o[0]}"${ST[k]===o[0]?' selected':''}>${o[1]}</option>`).join('')}</select>`;
+for(const r of v){if(r.s!==last){last=r.s;const rs=v.filter(x=>x.s===last);h+=`<h2 class="sec"><span>${esc(name[last])}</span><button type="button" class="sall${rs.every(x=>ST.cart[x.id]>0)?' on':''}" data-sall="${last}"><i class="bx"></i>All</button></h2>`;if(last==='f')h+=`<div class="frow">${osel('ads','ADS')}</div>`;if(last==='g')h+=`<div class="frow">${osel('ads','ADS')}${osel('sls','self-leveling')}</div>`}h+=card(r)}
+$('list').innerHTML=(h||'<p class="empty">No matching parts. Try another model or group.</p>')+MORE;total()}
+function total(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0,miss=0;
+for(const id of ids){const r=D.rows.find(x=>x.id===id);if(!r)continue;if(r.ref)s+=r.ref*ST.usd*ST.cart[id];else miss++}
+const pure=s,free=!ST.usd||s/ST.usd<=200;const sh=+ST.ship||0,lb=+ST.labor||0,dty=ST.tax&&!free&&pure?(pure+sh)*(+ST.duty||0)/100:0,vat=ST.tax&&!free&&pure?(pure+sh+dty)*0.1:0;s=pure?pure+sh+dty+vat+lb:0;{const bk=document.getElementById('brk');if(bk)bk.textContent=pure?('Parts '+won(pure)+' + Shipping '+won(sh)+' + Tax '+won(dty+vat)+' + Labor '+won(lb)+' = '+won(s)+(ST.tax&&free?' (200 USD or less: no tax)':'')):''};$('open').textContent=ids.length?'Cart '+ids.length:'Cart';$('clr').hidden=!ids.length;$('bn').textContent='Parts in cart '+ids.length+''+(miss?', No price '+miss:'')+(ST.tax&&pure?(free?', 200 USD or less: tax-free':', tax included'):'');$('sum').textContent=won(s);
+$('items').innerHTML=ids.length?ids.map(id=>{const r=D.rows.find(x=>x.id===id);if(!r)return'';return `<div class="ci"><b>${esc(nm(r))}</b><span class="t">${r.ref?won(r.ref*ST.usd*ST.cart[id]):'No price'}</span><small>${esc(r.pn)}${r.ph?' · '+r.ph.split('').map(c=>PH[c]).join(' - '):''}</small><span class="qy"><button type="button" data-q="-1" data-id="${id}" aria-label="One less">-</button><span>${ST.cart[id]}</span><button type="button" data-q="1" data-id="${id}" aria-label="One more">+</button></span></div>`}).join(''):'<p class="note">Your cart is empty.</p>'}
+function listText(){const ids=Object.keys(ST.cart).filter(k=>ST.cart[k]>0);let s=0;const L=ids.map(id=>{const r=D.rows.find(x=>x.id===id);const t=r.ref?r.ref*ST.usd*ST.cart[id]:0;s+=t;return nm(r)+' / '+r.pn+' / '+ST.cart[id]+' pcs'+(r.ref?' / '+won(t):'')});
+const H=['['+(window.CAR==='w124'?'W124 300E':'W140')+' parts list]'+(ST.my?' '+ST.my:'')+(ST.ph?' '+PH[ST.ph]:'')];if(ST.vin)H.push('VIN: '+ST.vin);if(ST.ads||ST.sls)H.push('Options: '+[ST.ads?'ADS '+(ST.ads==='1'?'yes':'no'):'',ST.sls?'rear self-leveling '+(ST.sls==='1'?'yes':'no'):''].filter(Boolean).join(', '));
+const free=!ST.usd||s/ST.usd<=200,sh=+ST.ship||0,lb=+ST.labor||0,dty=ST.tax&&!free&&s?(s+sh)*(+ST.duty||0)/100:0,vat=ST.tax&&!free&&s?(s+sh+dty)*0.1:0,tt=s?s+sh+dty+vat+lb:0;
+return H.concat(L,['Parts '+won(s)+' + Shipping '+won(sh)+' + Tax '+won(dty+vat)+' + Labor '+won(lb),'Total '+won(tt)+' ('+'US dealer list prices'+(ST.tax&&free?', 200 USD or less: no tax':'')+')','https://iloveclassiccars.github.io/']).join('\n')}
+function copy(t,ok){try{navigator.clipboard.writeText(t).then(ok,()=>toast('Could not copy. Press and hold to copy it yourself.'))}catch(e){toast('Could not copy. Press and hold to copy it yourself.')}}
+$('cat').innerHTML='<option value="">All parts</option><option value="_d">Discontinued</option>'+D.sec.filter(s=>D.rows.some(r=>r.s===s[0])).map(s=>`<option value="${s[0]}">${esc(s[1])}</option>`).join('');
+$('cat').value=ST.cat;$('ph').value=ST.ph;$('usd').value=ST.usd;
+$('ph').addEventListener('change',e=>{ST.ph=e.target.value;save();render()});
+$('list').addEventListener('change',e=>{const o=e.target.closest('select[data-o]');if(!o)return;ST[o.dataset.o]=o.value;save();render()});
+$('cat').addEventListener('change',e=>{ST.cat=e.target.value;save();render();scrollTo(0,0)});
+const PHN={e:'Early',m:'Mid',l:'Late'};
+/* 차대번호 끝 여섯 자리(생산 순번)로 연식을 어림한다. 경계 앞뒤 15,000대는 단정하지 않는다 */
+function phaseOf(n){if(n<197000)return'e';if(n<227000)return'';if(n<314000)return'm';if(n<344000)return'';return'l'}
+/* 차대번호 글자에서 바로 읽히는 것만 카드로 보여 준다. 출고일, 색상, 옵션은 여기서 읽을 수 없다 */
+const BODY={'140032':'Sedan','140033':'Sedan, long','140042':'Sedan','140043':'Sedan, long','140050':'Sedan','140051':'Sedan, long','140056':'Sedan','140057':'Sedan, long','140076':'Coupe'},ENG={S320:'M104 inline six 3.2',S420:'M119 V8 4.2',S500:'M119 V8 5.0',S600:'M120 V12 6.0',CL600:'M120 V12 6.0'};
+function dcard(){const el=$('dc'),m=/^WDB(\d{6})([12])([A-Z])(\d{6})$/.exec(ST.vin||''),h=m&&MODEL[m[1]];if(!h){el.hidden=true;el.innerHTML='';return}
+const ph=phaseOf(Number(m[4]));const rows=[['Model',h[1]],['Body',BODY[m[1]]],['Engine',ENG[h[0]]],['Steering',m[2]==='1'?'Left-hand drive':'Right-hand drive'],['Plant','ABCDE'.includes(m[3])?'Sindelfingen':''],['Serial',m[4]+(ph?' - '+PHN[ph]+' (estimate)':' - phase boundary')]].filter(r=>r[1]);
+el.innerHTML='<b>Your car, read from the VIN</b><dl>'+rows.map(r=>'<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>').join('')+'</dl><p>Build date, colour and options (ADS, self-leveling) cannot be read from the VIN alone. Check them on LastVIN below. Option code 214 (217 on early cars) is ADS with rear self-leveling, 480 is rear self-leveling. Then set the ADS and self-leveling boxes below.</p>';el.hidden=false}
+function smart(raw){const v=raw.toUpperCase().replace(/[^A-Z0-9]/g,'');
+const eu=/^WDB(\d{6})(?:[12][A-Z](\d{6}))?/.exec(v),us=/^WDBG[AB](\d\d)(?:[A-Z][0-9X][A-Z][A-Z](\d{6}))?/.exec(v);
+const hit=eu?MODEL[eu[1]]:us?MODEL['1400'+us[1]]:null,ser=eu?eu[2]:us?us[1+1]:null;
+if(eu||us){Q='';if(hit){ST.my=hit[0];ST.vin=v;VMSG='Model from VIN: '+hit[1]+((eu?eu[1]:'1400'+us[1])==='140076'?' (engine parts match the S600, body parts differ)':'');
+if(ser){const ph=phaseOf(Number(ser));if(ph){ST.ph=ph;VMSG+=', phase: '+PHN[ph]+' (estimated from the serial)'}else{ST.ph='';VMSG+='. This car sits on a phase boundary, so choose the years yourself'}$('ph').value=ST.ph}}
+else{ST.vin='';VMSG='Could not read the model from this VIN. Choose the model below'}}
+else if(/^W[A-Z0-9]{16}$/.test(v)){Q='';ST.vin='';VMSG='W140 This is not a W140 VIN, so the model could not be read. Choose the model below'}
+else{Q=raw;if(ST.vin){ST.vin=''}VMSG=''}
+save();render()}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.__bip=e});
+$('q').addEventListener('input',e=>smart(e.target.value));
+const go=()=>{const v=$('q').value.trim();if(!v){toast('Enter a 17-digit VIN or a part name');$('q').focus();return}smart(v);$('q').blur();scrollTo(0,0)};
+$('lv').addEventListener('click',()=>{if(ST.vin)copy(ST.vin,()=>toast('VIN copied. Paste it into the LastVIN box.'))});
+$('go').addEventListener('click',go);$('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}});
+$('tax').checked=!!ST.tax;$('tax').addEventListener('change',e=>{ST.tax=e.target.checked;save();total()});
+$('usd').addEventListener('input',e=>{const n=Number(e.target.value);if(n>0){ST.usd=n;save();render()}});
+['eur','cny','jpy','ship','duty','labor'].forEach(k=>{const el=$(k);el.value=ST[k];el.addEventListener('input',()=>{const n=Number(el.value);if(n>=0&&el.value!==''){ST[k]=n;save();render()}})});
+$('rreset').addEventListener('click',()=>{Object.assign(ST,{usd:1,eur:1.08,cny:0.14,jpy:0.66,ship:0,duty:8,labor:0});['usd','eur','cny','jpy','ship','duty','labor'].forEach(k=>$(k).value=ST[k]);save();render()});
+$('mods').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ST.my=(ST.my===b.dataset.m?'':b.dataset.m);if(ST.vin){ST.vin='';$('q').value=''}VMSG='';save();render()});
+$('list').addEventListener('click',e=>{const p=e.target.closest('.pn');if(p){copy(p.dataset.pn.replace(/\s+/g,''),()=>toast('Part number '+p.dataset.pn+' copied'));return}
+const sa=e.target.closest('[data-sall]');if(sa){const rs=shown().filter(r=>r.s===sa.dataset.sall);const allOn=rs.every(r=>ST.cart[r.id]>0);rs.forEach(r=>{if(allOn)delete ST.cart[r.id];else if(!ST.cart[r.id])ST.cart[r.id]=r.q||1});save();render();toast(allOn?'Group removed':'This group: '+rs.length+' parts added');return}
+if(e.target.closest('[data-a2hs]')){if(window.__bip){window.__bip.prompt();window.__bip=null}else toast(/iphone|ipad|ipod/i.test(navigator.userAgent)?'In Safari, tap Share and choose "Add to Home Screen".':'In the browser menu, choose "Add to Home Screen".');return}
+const jb=e.target.closest('[data-job]');if(jb){const j=JOBS[Number(jb.dataset.job)];const m=D.rows.filter(r=>j[1].includes(r.pn)&&fits(r));if(!m.length){toast('No parts match the chosen model and year');return}m.forEach(r=>{if(!ST.cart[r.id])ST.cart[r.id]=r.q||1});save();render();toast(j[0]+' Parts '+m.length+' parts added');return}
+const a=e.target.closest('[data-add]');if(a){const id=a.dataset.add;if(ST.cart[id]>0)delete ST.cart[id];else{const r0=D.rows.find(x=>x.id===id);ST.cart[id]=PQ[id]||(r0&&r0.q)||1}save();const c=a.closest('.c');const on=ST.cart[id]>0;c.classList.toggle('on',on);a.innerHTML='<i class="bx"></i>'+(on?'Added':'Add');total()}});
+$('items').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;const id=b.dataset.id;const n=(ST.cart[id]||0)+Number(b.dataset.q);if(n>0)ST.cart[id]=n;else delete ST.cart[id];save();render()});
+$('open').addEventListener('click',()=>{$('pk').hidden=true;$('cart').hidden=!$('cart').hidden});
+$('pick').addEventListener('click',()=>{$('cart').hidden=true;$('pk').hidden=false});
+$('pkx').addEventListener('click',()=>{$('pk').hidden=true});
+$('pkw').addEventListener('click',()=>{$('pk').hidden=true});
+$('close').addEventListener('click',()=>{$('cart').hidden=true});
+const wipe=()=>{ST.cart={};save();render();$('cart').hidden=true;toast('Cart cleared')};
+const ask=b=>{if(b.dataset.sure){clearTimeout(ask.t);delete b.dataset.sure;b.textContent='Clear';wipe();return}b.dataset.sure='1';b.textContent='Really clear?';clearTimeout(ask.t);ask.t=setTimeout(()=>{delete b.dataset.sure;b.textContent='Clear'},3000)};
+$('clear').addEventListener('click',e=>ask(e.currentTarget));$('clr').addEventListener('click',e=>ask(e.currentTarget));
+$('copy').addEventListener('click',()=>copy(listText(),()=>toast('List copied. Paste it to your parts supplier.')));
+if(ST.vin){$('q').value=ST.vin;smart(ST.vin)}else render();
+(function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://futurenix.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
+;(()=>{const BUILD=1794791400;let busy=false;const bar=()=>{let n=$('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='A new version is out. Tap to reload.';n.onclick=()=>location.reload();document.body.appendChild(n)}};
+const chk=()=>{if(busy)return;busy=true;fetch('../version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}if(tried===String(j.build)||!$('cart').hidden){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};
+chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+/* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
+;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
+const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
+const n=top<h?Math.min(h-top+8,160):0;document.documentElement.style.setProperty('--nb',n+'px')};
+[300,1000,2500,5000,9000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);addEventListener('orientationchange',f);if(window.MutationObserver)new MutationObserver(()=>setTimeout(f,400)).observe(document.body,{childList:true})})();
+</script>
+<style>
+/* 미리보기 M27: 글씨 가늘고 산뜻하게 (PC 미리보기와 같은 느낌) */
+body,body *{font-weight:400!important}
+[aria-pressed="true"],[aria-current="true"]{font-weight:400!important}
+.nl{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;min-width:0}
+.nl .n,.nl .pf{grid-column:auto}
+.nl .pf .f{flex:0 1 auto}
+/* 임팩트는 상품 이름에: 크고 밝게. 담기·파는 곳은 작고 가늘게 */
+.c .n{font-size:19px!important;font-weight:400!important;color:color-mix(in srgb,var(--ink) 40%,#fff)!important;letter-spacing:-.01em;line-height:1.3}
+:root[data-theme="light"] .c .n{color:#1a1f1c!important}
+
+.c .n small{font-size:13px!important}
+.a{align-items:center}
+.a button,.a summary{padding:4px 0!important;font-size:13px!important;font-weight:400!important;border-color:color-mix(in srgb,var(--accent) 40%,transparent)!important;color:color-mix(in srgb,var(--accent) 75%,var(--ink))!important;background:none!important;border-radius:6px!important}
+.a .w{font-size:14px!important;order:0;margin-right:auto;text-align:left!important;min-width:0!important;display:inline-flex;align-items:baseline;gap:5px}
+.a .add,.a details{flex:0 0 64px!important}
+.a .w select.fx{font:inherit;font-size:12px;font-family:var(--mono);padding:1px 1px 1px 3px;border:1px solid var(--line);border-radius:4px;background:none;color:var(--mute);align-self:center;max-width:92px}
+.a .w .krw{font-weight:400!important}
+.a .add{display:inline-flex!important;align-items:center;justify-content:center;gap:6px}
+.a .add .bx{width:15px;height:15px;border:1px solid currentColor;border-radius:3px;display:inline-block;position:relative;flex:0 0 auto}
+
+#ph{display:none!important}
+.mct{position:relative;min-width:0}
+.mct summary{list-style:none;cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--panel);color:var(--ink);white-space:nowrap;font-size:15px;height:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between}
+.mct summary::-webkit-details-marker{display:none}
+.mct summary::after{content:"▾";color:var(--mute);margin-left:6px}
+.mct .ctm{position:absolute;z-index:40;right:0;top:calc(100% + 4px);width:min(340px,92vw);max-height:60vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.mct .ctm b{display:block;margin-bottom:6px}
+.mct .ctm table{width:100%;border-collapse:collapse;font-size:13px}
+.mct .ctm td{border-top:1px solid var(--line);padding:5px 4px;vertical-align:middle}
+.mct .ctm td i{display:inline-block;width:20px;height:13px;border:1px solid var(--line);border-radius:2px}
+.mct .ctm .cc{font-family:var(--mono);white-space:nowrap}
+.mct .ctm td small{display:block;color:var(--mute);font-size:11px}
+.mct .ctm p{margin:8px 0 0;font-size:11px;color:var(--mute);line-height:1.5}
+.sall{display:inline-flex!important;align-items:center;gap:6px;background:none!important;border-color:color-mix(in srgb,var(--accent) 45%,transparent)!important;font-weight:400!important}
+.sall .bx{width:15px;height:15px;border:1px solid currentColor;border-radius:3px;display:inline-block;position:relative}
+.sall.on .bx{background:var(--accent);border-color:var(--accent)}
+.sall.on .bx::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid var(--panel);border-width:0 2px 2px 0;transform:rotate(45deg)}
+@media (max-width:375px){.a .add,.a details{flex:0 0 54px!important}.a .w .krw{font-size:13px}.a .w select.fx{max-width:78px;font-size:11px}.a{gap:6px!important}}
+
+/* 차대번호 찾기 줄 작게, 투명한 녹색 */
+.sr{border-width:1px!important;border-color:color-mix(in srgb,var(--accent) 55%,transparent)!important}
+#q{padding:7px 10px!important}
+#q::placeholder{font-size:14px}
+#go{font-size:14px!important;font-weight:400!important;padding:0 14px!important;background:color-mix(in srgb,var(--accent) 16%,transparent)!important;color:var(--accent)!important;border-left:1px solid color-mix(in srgb,var(--accent) 45%,transparent)!important}
+
+/* 카드는 한글 이름 · 영문 이름 · 가격 · 담기 클릭만 */
+.c .pf,.c .n em,.c .a details{display:none!important}
+.a .add{flex:0 0 92px!important}
+
+/* 위아래 칸 높이 절반 정도로 */
+.crumb{padding-bottom:6px!important}
+.crumb button{padding:4px 12px!important}
+#q{padding:3px 10px!important}
+#go{padding:0 12px!important}
+.chips button{padding:3px 12px!important}
+.frow select{padding:4px 10px!important}
+.mct summary{padding:4px 12px!important}
+.sall{padding:3px 10px!important}
+.tools{gap:6px!important;row-gap:6px!important}
+.bar{padding-top:5px!important;padding-bottom:calc(5px + env(safe-area-inset-bottom,0px) + var(--nb,0px))!important}
+.bar button{padding:6px 14px!important}
+.bar .ol{padding:5px 10px!important}
+.bar strong{font-size:18px!important}
+.bar .tx input{width:18px!important;height:18px!important}
+
+.lng{position:relative}
+.lng summary{list-style:none;cursor:pointer;border:1px solid rgb(143,163,151);border-radius:4px;padding:2px 8px;font-size:12px;line-height:18px;color:rgb(143,163,151)}
+.lng summary::-webkit-details-marker{display:none}
+.lngm{position:absolute;right:0;top:calc(100% + 6px);z-index:60;min-width:170px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 0;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.lngm a{padding:9px 14px;color:var(--ink)!important;text-decoration:none;white-space:nowrap;font-size:15px;border:0!important}
+.lngm small{color:var(--mute);font-size:11px;margin-left:4px}
+.c.on .a .add .bx{background:var(--accent);border-color:var(--accent)}
+.c.on .a .add .bx::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid var(--panel);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.a .w{white-space:nowrap!important}
+.a details[open]{flex:1 1 100%!important;order:4}
+.pvtag{position:fixed;right:6px;left:auto;bottom:76px;top:auto;font-size:10px!important;opacity:.6!important;z-index:99;background:#8a6a2f;color:#fff;font-size:12px;padding:3px 8px;border-radius:4px;opacity:.9;pointer-events:none}
+</style>
+<style>
+/* 컬러코드 스킨: 목록 줄 누를 수 있게 */
+.ctm tr{cursor:pointer}.ctm tr.on td{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.ctm .rst{display:block;margin:6px 0 4px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--ink);font:inherit;font-size:12px}
+/* 글씨: 투명하면서도 선명하게 */
+body{-webkit-font-smoothing:antialiased}
+</style>
+<script>
+/* 컬러코드 → 스킨: 도장색을 바탕에 살짝 섞고, 강조색은 어두운 바탕에서 읽히게 밝혀서 씀 */
+(()=>{const R=document.documentElement,K='skinPaint',cs0=getComputedStyle(R),base={};['accent','bg','panel','line','band','accent-bg'].forEach(k=>base[k]=cs0.getPropertyValue('--'+k).trim());
+const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),toH=a=>'#'+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+const mix=(a,b,t)=>a.map((v,i)=>v*(1-t)+b[i]*t),lum=a=>{const c=a.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+function apply(code,hex){const s=document.querySelector('.ctm'),sum=document.querySelector('.ctab>summary');
+ if(!hex){Object.entries(base).forEach(([k,v])=>R.style.setProperty('--'+k,v));try{localStorage.removeItem(K)}catch(e){}
+  if(sum)sum.innerHTML='Color code';document.querySelectorAll('.ctm tr').forEach(t=>t.classList.remove('on'));return}
+ const p=hx(hex),W=[255,255,255],D=[12,14,16];let a=p.slice(),t=0;while(lum(a)<.32&&t<.9){t+=.05;a=mix(p,W,t)}
+ const f=lum(p)>.3?.45:1;R.style.setProperty('--accent',toH(a));R.style.setProperty('--bg',toH(mix(D,p,.26*f)));R.style.setProperty('--panel',toH(mix([22,25,28],p,.32*f)));R.style.setProperty('--line',toH(mix([42,46,50],p,.45*f)));R.style.setProperty('--band',toH(mix([8,9,10],p,.30*f)));R.style.setProperty('--accent-bg',toH(mix(mix(D,p,.26*f),a,.20)));
+ document.querySelectorAll('.ctm tr').forEach(t=>t.classList.toggle('on',t.querySelector('.cc').textContent===code));
+ if(sum)sum.innerHTML='<i style="display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid #fff4;background:'+hex+'"></i>'+code;
+ try{localStorage.setItem(K,code+'|'+hex)}catch(e){}}
+const m=document.querySelector('.ctm');if(!m)return;
+const b=document.createElement('button');b.type='button';b.className='rst';b.textContent='Back to default (Forest)';m.querySelector('b').after(b);b.onclick=()=>{apply();const d=b.closest('details');if(d)d.open=false};
+m.querySelectorAll('tr').forEach(t=>t.addEventListener('click',()=>{const i=t.querySelector('i'),c=t.querySelector('.cc').textContent;const rgb=getComputedStyle(i).backgroundColor.match(/\d+/g).map(Number);apply(c,toH(rgb));t.closest('details').open=false}));
+try{const v=localStorage.getItem(K);if(v){const[c,h]=v.split('|');apply(c,h)}}catch(e){}})();
+</script>
+<style>
+/* 글씨: 어두운 화면 글씨색을 밝혀 가늘지만 또렷하게 */
+@media all{:root:not([data-theme="light"]){--ink:#c9cfca;--mute:#98a39c}}
+:root[data-theme="dark"]{--ink:#c9cfca;--mute:#98a39c}
+</style>
+<style>
+/* 부품 분류 메뉴 (데스크탑 왼쪽 메뉴와 같은 모양) */
+#cat{display:none!important}
+.frow{justify-content:flex-end}
+.frow .mct{flex:0 0 auto;margin-left:auto}
+.catm{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;margin:6px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.catm::-webkit-scrollbar{display:none}
+.catm button{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 10px 7px 12px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:8px;background:transparent;color:color-mix(in srgb,var(--ink) 80%,transparent);font:inherit;font-size:14px;font-weight:400;white-space:nowrap;cursor:pointer}
+.catm button span{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:22px;padding:0 6px;border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);border-radius:4px;font-family:var(--mono);font-size:12px;color:color-mix(in srgb,var(--ink) 65%,transparent)}
+.catm button[aria-current="true"]{background:var(--accent-bg);border-color:color-mix(in srgb,var(--accent) 60%,transparent);border-left:3px solid var(--accent);color:var(--ink);font-weight:400}
+.catm button[aria-current="true"] span{border-color:var(--accent);color:var(--ink)}
+/* 넓은 화면에서는 옆으로 밀지 않고 여러 줄로 펼쳐 한눈에 */
+@media (min-width:700px){.catm{flex-wrap:wrap;overflow:visible}}
+</style>
+<script>
+(()=>{const nav=document.getElementById('catm'),sel=document.getElementById('cat');if(!nav||!sel)return;
+const D=window.W140DATA;const cnt=id=>id?D.rows.filter(r=>r.s===id).length:D.rows.length;
+const items=[['','All parts']].concat(D.sec.filter(s=>D.rows.some(r=>r.s===s[0])).map(s=>[s[0],s[1]]));
+nav.innerHTML=items.map(i=>'<button type="button" data-c="'+i[0]+'"><b style="font-weight:inherit">'+i[1]+'</b><span>'+cnt(i[0])+'</span></button>').join('');
+const mark=()=>nav.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.c===sel.value)));
+nav.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sel.value=b.dataset.c;sel.dispatchEvent(new Event('change',{bubbles:true}));mark();b.scrollIntoView({inline:'nearest',block:'nearest'})});
+mark();})();
+</script>
+<style>
+.rset{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:10px 0 4px}
+.rset label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mute);white-space:nowrap}
+.rset input{width:100%;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit;font-family:var(--mono);text-align:right}
+.rset label[for="duty"]{grid-column:1/-1}.rset label[for="duty"] input{width:70px;flex:none}
+.rset #rreset{grid-column:1/-1;justify-self:start;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--ink);font:inherit;font-size:13px}
+.brk{margin:6px 0 2px;font-size:12.5px;color:var(--mute);line-height:1.6}
+</style><style>
+#mods button[data-m=""]{display:none!important}
+.frow{display:none!important}
+/* 컬러코드: 첫 부품 묶음 이름(엔진 부품) 바로 옆 */
+#list h2.sec .mct{margin:0 auto;font-size:13px}
+#list h2.sec .mct summary{padding:3px 10px!important;font-size:13px!important;border-radius:999px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--ink)!important}
+#list h2.sec{display:flex;align-items:center}
+#list h2.sec .mct .ctm{left:50%!important;right:auto!important;transform:translateX(-50%);width:min(340px,calc(100vw - 24px))!important}
+.mrowm{display:flex;align-items:center;gap:8px}
+.mrowm #mods{flex:1 1 auto;min-width:0;margin:0}
+.mrowm .mct{flex:0 0 auto}
+.mrowm #mods{gap:4px!important;overflow-x:auto!important;flex-wrap:nowrap;scrollbar-width:none}
+.mrowm #mods button{padding:5px 6px!important;font-size:14px!important;min-width:0!important;line-height:1.4}
+.mrowm #mods button:not([aria-pressed="true"]),.mrowm .mct summary{border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--ink)!important}
+.mrowm .mct summary{padding:5px 11px!important;font-size:14px!important;border-radius:999px!important;line-height:1.4}
+.mrowm .mct .ctm{right:0}
+</style>
+<script>
+(()=>{const mods=document.getElementById('mods'),mct=document.querySelector('.mct');if(!mods||!mct)return;
+const park=document.createElement('div');park.hidden=true;document.body.appendChild(park);
+const place=()=>{const h=document.querySelector('#list h2.sec');if(h){if(mct.parentNode!==h){h.insertBefore(mct,h.querySelector('.sall'))}}else if(mct.parentNode!==park){park.appendChild(mct)}};
+place();new MutationObserver(()=>{mct.open=false;place()}).observe(document.getElementById('list'),{childList:true});})();
+</script><style>
+#pick .mdl{margin-left:6px;color:var(--ink);font-size:inherit;opacity:.85}
+#pick .chv{margin-left:auto;color:var(--mute);font-size:12px}
+</style><style>
+/* ENGLISH 단추 가로 15% 줄임 (66px → 약 56px) */
+header .lng>summary{padding-left:4px!important;padding-right:4px!important;letter-spacing:-.03em}
+</style><style>
+/* 모델 칩 6개(S320 ~ SL600)가 한 줄에 들어가게 */
+#mods{gap:4px!important;flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none}
+#mods::-webkit-scrollbar{display:none}
+#mods button{padding:4px 8px!important;font-size:14px!important;flex:1 1 auto;text-align:center;min-width:0}
+@media (max-width:372px){#mods button{padding:4px 5px!important;font-size:13px!important}}
+</style><style>
+/* 코드명 · 모델 창 · 장바구니 창: 내용이 길면 창 안에서 아래까지 스크롤 */
+.sheet{max-height:calc(100vh - 60px)!important;max-height:calc(100dvh - 60px)!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+</style><style>
+#pk.drop{position:fixed!important;left:12px!important;right:12px!important;bottom:auto!important;width:auto!important;border-radius:12px!important;transform:none!important;animation:pkdown .18s ease-out;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+@keyframes pkdown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+</style>
+<script>
+(()=>{const pk=document.getElementById('pk'),pick=document.getElementById('pick');if(!pk||!pick)return;pk.classList.add('drop');
+const pos=()=>{const t=Math.round(pick.getBoundingClientRect().bottom+6);pk.style.setProperty('top',t+'px','important');pk.style.setProperty('max-height',(innerHeight-t-12)+'px','important')};
+pick.addEventListener('click',()=>requestAnimationFrame(pos));addEventListener('resize',()=>{if(!pk.hidden)pos()});addEventListener('scroll',()=>{if(!pk.hidden)pos()},{passive:true});})();
+</script><style>
+#pk .pl .soon{display:grid!important;grid-template-columns:1fr auto;align-items:center;row-gap:4px}
+#pk .pl .soon em{font-style:normal}
+#pk .pl .soon i{grid-column:1/-1;font-style:normal;font-size:12px;line-height:1.5;color:var(--mute);opacity:.85}
+</style><style>header h1{display:flex!important;align-items:center;white-space:nowrap;min-width:0}header h1 .carc{flex:0 0 auto;width:44px;height:21px;margin-left:0;margin-right:7px;color:var(--accent);opacity:.9}@media (max-width:380px){header h1{font-size:15px!important}header h1 .carc{width:38px;height:18px;margin-right:5px}}@media (max-width:362px){header h1 .carc{display:none}}</style><style>@media (max-width:362px){header h1 .carc{display:inline-block!important}}</style><style>@media (max-width:350px){header h1 .carc{width:32px!important;height:15px!important;margin-right:4px!important}}</style><style>
+/* 오른쪽 Q&A · PC · ENGLISH 단추 5% 축소 */
+header .tl > a,header .tl .lng>summary{font-size:11.4px!important;line-height:1.55!important}
+header .tl > a{padding:1.5px 7.6px!important}
+header .tl .lng>summary{padding:1.5px 3.8px!important}
+</style><div class="sheet g appsh" id="apsh" hidden><div class="sh"><b>Put it on your home screen</b><button type="button" id="apx">Close</button></div>
+<p class="note" id="apmsg" hidden></p>
+<div class="sb"><button type="button" class="pri" id="apgo">YES</button><button type="button" id="apno">NO</button></div>
+<ol class="lim" id="apios" hidden><li>Tap the <b>Share button</b>(square with an up arrow) at the bottom (top on iPad).</li><li><b>"Add to Home Screen"</b> → top right <b>[Add]</b> and you are done.</li></ol></div>
+<style>
+header .tl .appb{font:inherit;font-size:11.4px;line-height:1.55;padding:1.5px 7px;border:1px solid currentColor;border-radius:4px;background:none;color:inherit;cursor:pointer;margin-left:0}
+.appsh .lim li{margin:6px 0;line-height:1.6}
+</style>
+<script>
+(()=>{const b=document.getElementById('appb'),sh=document.getElementById('apsh'),go=document.getElementById('apgo'),no=document.getElementById('apno'),msg=document.getElementById('apmsg'),ios=document.getElementById('apios');if(!b)return;
+try{if('serviceWorker' in navigator&&/github\.io$/.test(location.hostname))navigator.serviceWorker.register('../../sw.js',{scope:'../../'})}catch(e){}
+const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;if(standalone){b.hidden=true;return}
+const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const install=()=>{const p=window.__bip;if(!p)return false;p.prompt();p.userChoice.then(c=>{window.__bip=null;sh.hidden=true;if(c&&c.outcome==='accepted'){b.hidden=true;toast('Installed "Parts Calculator" app on your home screen')}}).catch(()=>{});return true};
+b.addEventListener('click',()=>{if(install())return;
+ document.getElementById('cart').hidden=true;const pk=document.getElementById('pk');if(pk)pk.hidden=true;
+ ios.hidden=true;go.hidden=false;no.textContent='NO';msg.hidden=true;sh.hidden=false});
+go.addEventListener('click',()=>{if(install())return;
+ if(isIOS){msg.hidden=false;msg.textContent='Apple does not let websites install apps on iPhone, so just tap twice as below.';ios.hidden=false;go.hidden=true;no.textContent='Close'}
+ else{msg.hidden=false;msg.textContent='This browser cannot install directly. Open the site in Chrome or Safari and tap [App] again. (In Chrome: three dots at top right → "Install app")';go.hidden=true;no.textContent='Close'}});
+no.addEventListener('click',()=>{sh.hidden=true});document.getElementById('apx').addEventListener('click',()=>{sh.hidden=true});
+addEventListener('appinstalled',()=>{b.hidden=true;sh.hidden=true});})();
+</script><style>@media (max-width:372px){header h1{font-size:14px!important}header h1 .carc{width:30px!important;height:14px!important;margin-right:4px!important}header .tl{gap:4px}}@media (max-width:350px){header h1{font-size:13px!important}header h1 .carc{width:26px!important;height:12px!important;margin-right:3px!important}}</style><style>@media (min-width:373px) and (max-width:400px){header h1 .carc{width:38px!important;height:18px!important;margin-right:6px!important}}</style><style>
+#list h2.sec .qam{margin-left:8px;font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;white-space:nowrap;line-height:1.5}
+</style>
+<script>
+(()=>{const qa=document.querySelector('header .tl > a[href*="trollparts/qna"]');if(!qa)return;qa.classList.add('qam');
+const L=document.getElementById('list'),park=document.createElement('div');park.hidden=true;document.body.appendChild(park);
+const place=()=>{const h=L.querySelector('h2.sec');if(h){const sp=h.querySelector('span');if(qa.parentNode!==h)sp.after(qa)}else if(qa.parentNode!==park)park.appendChild(qa)};
+place();new MutationObserver(place).observe(L,{childList:true});})();
+</script><style>
+.qs{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto;margin-right:8px;height:34px}
+.qs button{width:30px;height:100%;border:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;cursor:pointer;padding:0}
+.qs b{min-width:24px;text-align:center;font-family:var(--mono);font-weight:400;font-size:14px;color:var(--ink)}
+.c .a .add{margin-left:0!important}
+#bn{display:none!important}
+</style>
+<script>
+document.getElementById('list').addEventListener('click',e=>{const b=e.target.closest('[data-qm],[data-qp]');if(!b)return;e.stopPropagation();
+const id=b.dataset.qm||b.dataset.qp,d=b.dataset.qp?1:-1,r=window.W140DATA.rows.find(x=>x.id===id);
+const cur=ST.cart[id]||PQ[id]||(r&&r.q)||1,n=Math.max(1,cur+d);
+if(ST.cart[id]>0){ST.cart[id]=n;save();total()}else PQ[id]=n;
+b.parentNode.querySelector('b').textContent=n;const k=b.closest('.a')&&b.closest('.a').querySelector('.krw');if(k)k.textContent=Math.round(Number(k.dataset.u)*ST.usd*n).toLocaleString('ko-KR')+'USD'},true);
+</script><style>
+#list h2.sec ~ h2.sec .sall{display:none!important}
+</style>
+<script>
+(()=>{const L=document.getElementById('list');
+const ids=()=>[...L.querySelectorAll('[data-add]')].map(b=>b.dataset.add);
+const mark=()=>{const b=L.querySelector('h2.sec .sall');if(!b)return;const a=ids();b.classList.toggle('on',a.length>0&&a.every(i=>ST.cart[i]>0))};
+L.addEventListener('click',e=>{const b=e.target.closest('.sall');if(!b)return;e.stopPropagation();e.preventDefault();
+ const a=ids(),all=a.length&&a.every(i=>ST.cart[i]>0);
+ if(all)a.forEach(i=>{delete ST.cart[i]});else a.forEach(i=>{if(!(ST.cart[i]>0)){const r=window.W140DATA.rows.find(x=>x.id===i);ST.cart[i]=PQ[i]||(r&&r.q)||1}});
+ save();render();toast(all?'All removed':'All '+a.length+' visible parts added')},true);
+new MutationObserver(mark).observe(L,{childList:true});mark();})();
+</script><style>
+article.c .a .add{border:0!important;background:transparent!important;box-shadow:none!important;width:28px!important;height:28px!important}
+article.c .a .add .bx,.sall .bx{position:relative;display:inline-block;width:18px!important;height:18px!important;box-sizing:border-box;border:1.5px solid color-mix(in srgb,var(--ink) 45%,transparent)!important;border-radius:5px!important;background:transparent!important;transition:background .15s,border-color .15s}
+article.c .a .add .bx::after,.sall .bx::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;border:solid transparent;border-width:0 2px 2px 0;transform:rotate(45deg)}
+article.c.on .a .add .bx,.sall.on .bx{background:var(--accent)!important;border-color:var(--accent)!important}
+article.c.on .a .add .bx::after,.sall.on .bx::after{border-color:var(--bg)}
+article.c .a .add .bx svg,.sall .bx svg{display:none}
+.sall{gap:7px!important}
+</style><style>
+/* 선택 칸: 모서리 깎지 않은 정사각형 */
+article.c .a .add .bx,.sall .bx{border-radius:0!important;width:17px!important;height:17px!important;aspect-ratio:1/1}
+</style><style>
+/* 가격 줄: 칸을 고정 폭으로 맞춰 카드마다 오와 열이 같게, 단추는 작고 단순하게 */
+article.c .a{display:grid!important;grid-template-columns:auto 1fr auto auto;align-items:center;gap:8px!important;flex-wrap:nowrap!important}
+article.c .a .w{display:contents!important}
+article.c .a .w select.fx{grid-column:1;width:90px!important;max-width:90px!important;min-width:0!important;height:28px;font-size:11.5px!important;padding:0 14px 0 6px!important;-webkit-appearance:none!important;appearance:none!important;background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%2398a39c'/%3E%3C/svg%3E") no-repeat right 5px center!important}
+article.c .a .krw{grid-column:2;justify-self:end;font-size:14px!important;white-space:nowrap;letter-spacing:-.01em}
+article.c .a .w.no{display:block!important;grid-column:1/3}
+article.c .a .qs{grid-column:3;margin:0!important;height:28px;border-radius:6px;width:66px;justify-content:space-between;box-sizing:border-box}
+article.c .a .qs button{width:22px!important;font-size:14px}article.c .a .qs b{min-width:16px;font-size:13px}
+article.c .a .add{grid-column:4;white-space:nowrap!important;word-break:keep-all;width:auto!important;min-width:0!important;flex:none!important;height:28px;padding:0 8px!important;gap:5px!important;border-radius:6px!important;font-size:13px!important}
+article.c .a .add .bx{width:14px!important;height:14px!important}
+article.c .a details{display:none!important}
+@media (max-width:385px){article.c .a{gap:5px!important}article.c .a .w select.fx{width:82px!important;max-width:82px!important;font-size:10.5px!important;padding-right:12px!important;padding-left:4px!important}.bar #sum{font-size:15px!important}.bar{gap:5px}.bar #open{padding:6px 9px!important;font-size:13px!important}.bar #clr{padding:5px 8px!important;font-size:12px!important}article.c .a .krw{font-size:12.5px!important}}
+/* 아래 띠: 합계가 길어도 비우기 단추와 겹치지 않게 */
+.bar{gap:8px}
+.bar>div:first-child{flex:1 1 auto;min-width:0;overflow:hidden}
+.bar #sum{font-size:clamp(16px,5.2vw,22px)!important;white-space:nowrap;display:block;overflow:hidden;text-overflow:ellipsis}
+.bar #clr,.bar .tx,.bar #open{flex:0 0 auto}
+.bar #open{padding:7px 12px!important;font-size:14px!important;min-height:0!important;height:auto!important;border-radius:8px!important}
+.bar #clr{padding:6px 10px!important;font-size:13px!important;min-height:0!important;height:auto!important}
+.bar .tx{font-size:11px!important}
+@media (max-width:372px){.bar{gap:5px!important;padding-left:10px!important;padding-right:10px!important}.bar #sum{font-size:15px!important}.bar #open{padding:6px 9px!important;font-size:13px!important}.bar #clr{padding:5px 7px!important;font-size:12px!important}}
+/* 담기: 글씨 없이 체크 상자만, "All"의 상자 크기와 같게 */
+article.c .a .add{font-size:0!important;width:28px!important;height:28px!important;padding:0!important;justify-content:center!important;gap:0!important}
+article.c .a .add .bx{width:17px!important;height:17px!important;margin:0!important;border-radius:0!important}
+article.c .a .qs{height:28px!important}
+article.c .a .w select.fx{height:28px!important}
+</style><style>
+/* 카드의 한글 부품 이름: 19px → 16px */
+article.c .n{font-size:16px!important}
+article.c .n small{font-size:12px!important}
+</style><style>/* 카드 부품 이름 10% 더 축소: 16 → 14.4px */article.c .n{font-size:14.4px!important}article.c .n small{font-size:11px!important}</style><style>
+.bar{padding-top:6px!important;padding-bottom:calc(6px + env(safe-area-inset-bottom))!important;min-height:0!important}
+.bar #open{padding:5px 12px!important;font-size:14px!important}
+.bar #clr{padding:4px 10px!important}
+.bar #sum{font-size:clamp(15px,4.6vw,19px)!important}
+.bar .tx{gap:2px}
+.bar .tx input{width:16px;height:16px;margin:0}
+details.more summary{font-size:15px}
+</style><style>
+/* 장바구니 단추 10% 축소 */
+.bar #open{padding:3.5px 9px!important;font-size:11.4px!important}
+</style>
+<style>/* 토론 2: 금액은 또렷하게 */.a .w .krw,#sum,#items .ci .t{font-weight:500!important}</style>
+<style>#list h2.sec .sall{flex-direction:row-reverse;margin-right:7px!important}</style>
+<style>/* 아이폰(iOS) 다크 디자인 + 클래식 (Mobile) */
+:root:not([data-theme="light"]){--bg:#0a0c0b;--panel:#1c1e1d;--line:rgba(120,124,122,.28);--ink:#d9dcda;--mute:#8e938f;--band:rgba(16,18,17,.78)}
+:root{--sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue','Noto Sans KR','Apple SD Gothic Neo',sans-serif;--serif:ui-serif,'New York','Noto Serif KR','Noto Serif CJK KR','Noto Serif JP','Noto Serif SC',Georgia,serif;--ivory:#f2efe6;--champ:#c9b27c;--hair:rgba(120,124,122,.28);--fill:rgba(118,118,128,.20)}
+body{font-family:var(--sans)!important;-webkit-font-smoothing:antialiased}
+.top{backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid color-mix(in srgb,var(--champ) 40%,transparent)}
+.top h1{font-family:var(--serif)!important;font-weight:500!important;letter-spacing:.01em;color:var(--ivory)!important}
+.top .tl a,.top .tl summary,.top .tl .appb{border-radius:7px!important}
+.crumb button{border:0!important;border-radius:12px!important;background:var(--fill)!important}
+.sr{border:0!important;border-radius:10px!important;background:var(--fill)!important;overflow:hidden}
+.sr #q{background:transparent!important}
+.chips button{border:0!important;background:var(--fill)!important}
+.chips button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 22%,transparent)!important;color:var(--accent)!important}
+.tools{border-bottom:.5px solid var(--hair)!important}
+article.c{border:0!important;border-radius:14px!important;background:var(--panel)!important}
+article.c.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}
+article.c .n{color:var(--ivory)!important;font-weight:500!important;letter-spacing:-.01em}
+article.c .a .w select.fx,article.c .a .qs{border:0!important;background:var(--fill)!important;border-radius:8px!important}
+#list h2.sec>span:first-child{font-family:var(--serif);color:var(--ivory);letter-spacing:.02em}
+#list h2.sec .qam,#list h2.sec .mct summary,#list h2.sec .sall{border-radius:8px!important}
+.bar{backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(16,18,17,.78)!important;border-top:.5px solid color-mix(in srgb,var(--champ) 35%,transparent)}
+.bar #sum{color:var(--ivory);font-family:var(--sans)!important;font-weight:600}
+.bar #open{border-radius:10px!important}
+.sheet{border-radius:16px 16px 0 0!important;border-top:0!important}
+</style>
+<style>.bar .tx,label[for="duty"]{display:none!important}</style>
+<style id="w124css">.codes a.cw{text-decoration:none;color:var(--band-fg);border:1px solid var(--band-fg);border-radius:4px;padding:2px 10px;font-family:var(--mono);white-space:nowrap}.codes a.cw:hover{background:var(--band-fg);color:var(--panel)}.pl a.w124l{text-decoration:none;color:inherit;display:block}.pl a.w124l small{color:var(--accent)}html.w124 #mods,html.w124 .ctab,html.w124 .mct,html.w124 .jobs,html.w124 .phl,html.w124 .srcs,html.w124 a.xls,html.w124 #side [data-cat=home],html.w124 .phx,html.w124 .dsc{display:none!important}#w124n{margin:8px 0 10px;font-size:12.5px;line-height:1.5;opacity:.8}</style><script id="w124js">(function(){if(window.CAR!=='w124')return;var d=document,h=d.documentElement;h.classList.add('w124');var N="W124 300E, first release, more coming. Confirm the country of manufacture with the seller before buying — call or ask for a photo of the box.";var p=d.createElement('p');p.id='w124n';p.textContent=N;if(/\/m\//.test(location.pathname))p.style.padding='0 16px';var a=d.getElementById('list')||d.getElementById('cnt');if(a&&a.parentNode)a.parentNode.insertBefore(p,a);var b=d.querySelector('#pick b');if(b)b.textContent='W124';var m=d.querySelector('#pick .mdl');if(m)m.textContent='300E';var w=d.getElementById('pkw');if(w){w.classList.remove('now');w.addEventListener('click',function(e){e.stopImmediatePropagation();location.href='?'},true)}var l=d.querySelector('.pl .w124l');if(l)l.classList.add('now');function fx(el){if(!el)return;new MutationObserver(function(){var t=el.innerHTML;if(t.indexOf('W140')>=0)el.innerHTML=t.split('W140').join('W124 300E')}).observe(el,{childList:true,subtree:true,characterData:true});el.innerHTML=el.innerHTML.split('W140').join('W124 300E')}fx(d.getElementById('crumb'));})();</script></body>
+</html>

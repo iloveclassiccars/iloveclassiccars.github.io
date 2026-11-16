@@ -9,18 +9,19 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
-</head>
+<style id="lngfix">.top{z-index:50!important}.lngm{z-index:1000!important;background:#1c1e1d!important}</style><style id="rowfix">html body .top a.qna.qna,html body .top a.tom.tom{height:27px!important;display:inline-flex!important;align-items:center!important;box-sizing:border-box!important;font-size:13px!important;padding:0 10px!important;line-height:1!important}html body .top details.lng.lng{height:27px!important;box-sizing:border-box!important}html body .top details.lng>summary{height:25px!important;display:flex!important;align-items:center!important;font-size:13px!important;padding:0 10px!important;line-height:1!important}#codes{flex-wrap:nowrap!important}#codes>*{flex:0 0 auto!important}#crumb{flex-wrap:nowrap!important;gap:6px!important}#crumb>*,#crumb>* *{font-size:12px!important;white-space:nowrap}#crumb>*{flex:0 0 auto!important;padding-inline:6px!important}#crumb>span:first-child{padding-inline:0!important}</style><style id="jobgcss">html body div.jobs{flex-wrap:nowrap!important;gap:6px!important}html body div.jobs>*,html body #jobs>*{flex:0 0 auto!important;white-space:nowrap}html body #jobs .jobg>summary{background:rgba(118,118,128,.2);border:1px solid transparent;border-radius:8px;padding:5px 9px;color:rgb(217,220,218);font-size:13.5px;line-height:20.9px;display:inline-block}html body #jobs .jobg:not(.jmore)>summary::before{content:"+ ";color:var(--accent,#7fd18b)}html body #jobs .jobg[open]>summary{border-color:rgba(201,178,124,.45)}#jobs .jobg{position:relative;display:inline-block}#jobs .jobg>summary{list-style:none;cursor:pointer}#jobs .jobg>summary::-webkit-details-marker{display:none}#jobs .jobg>summary::after{content:" \25BE";opacity:.7}#jobs .jgm{position:absolute;left:0;top:calc(100% + 6px);z-index:1000;display:flex;flex-direction:column;gap:6px;padding:8px;background:#1c1e1d;border:1px solid rgba(201,178,124,.35);border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.45);min-width:100%;white-space:nowrap}#jobs .jgm button{width:100%;text-align:left}</style><style id="navfix">html body #makes button{font-size:12px!important}html body #makes{gap:5px!important}</style><style id="rowfitcss">details.rmore{order:99}html body #codes,html body #crumb,html body #makes{flex-wrap:nowrap!important}html body #codes>*,html body #crumb>*,html body #makes>*{flex-shrink:0!important}details.rmore{position:relative;display:inline-block;flex:0 0 auto}details.rmore>summary{list-style:none;cursor:pointer;white-space:nowrap;border:1px solid rgba(201,178,124,.45);border-radius:8px;padding:2px 9px;font-size:12px;color:inherit}details.rmore>summary::-webkit-details-marker{display:none}details.rmore>summary::after{content:" \25BE";opacity:.7}details.rmore .rmm{position:absolute;right:0;top:calc(100% + 6px);z-index:1000;display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px;background:#1c1e1d;border:1px solid rgba(201,178,124,.35);border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.45);white-space:nowrap}details.rmore .rmm>*{text-align:left}</style></head>
 <body style="margin:0">
+<script>/* 언어 자동: 한국어가 아닌 브라우저는 처음 들어오면 영어판으로. 메뉴에서 고른 언어는 기억 */(function(){try{var q=location.search,L=localStorage;if(/[?&]lang=ko/.test(q))L.setItem('lang','ko');if(/[?&]lang=en/.test(q))L.setItem('lang','en');var sim=(q.match(/[?&]simlang=([A-Za-z-]+)/)||[])[1];if(!sim&&!/github\.io$/.test(location.hostname))return;var nav=sim||(navigator.languages&&navigator.languages[0])||navigator.language||'ko';if(L.getItem('lang')==='ko')return;{var LG=L.getItem('lang');if(LG&&LG!=='ko'&&/^(en|ja|zh|de|fr|es|ru)$/.test(LG)){location.replace('https://iloveclassiccars.github.io/'+LG+'/');return}}if(!/^ko/i.test(nav))document.addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.id='enbar';d.style.cssText='display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:7px 12px;background:#12241a;color:#c9cfca;font:400 13px system-ui,sans-serif;border-bottom:1px solid rgba(255,255,255,.12)';d.innerHTML='<span>This page is in Korean.</span><a id="enl" href="https://iloveclassiccars.github.io/en/?lang=en" style="color:#9fd3a6;border:1px solid currentColor;border-radius:4px;padding:2px 9px;text-decoration:none">View in English</a><button type="button" style="background:none;border:1px solid rgba(255,255,255,.25);border-radius:4px;color:inherit;padding:2px 9px;cursor:pointer">한국어 유지</button>';(function(){var c=(nav||'').slice(0,2).toLowerCase(),M={ja:['ja','日本語で見る'],zh:['zh','查看中文版'],de:['de','Auf Deutsch ansehen'],fr:['fr','Voir en français'],es:['es','Ver en español'],ru:['ru','Открыть на русском']};if(M[c]){var a=d.querySelector('#enl');a.href='https://iloveclassiccars.github.io/'+M[c][0]+'/?lang='+M[c][0];a.textContent=M[c][1]}})();d.querySelector('button').onclick=function(){try{localStorage.setItem('lang','ko')}catch(e){}d.remove()};document.body.prepend(d)})}catch(e){}})();</script>
 <script>(function(){try{if(/[?&]pc=1/.test(location.search))sessionStorage.setItem('w140pc','1');if(sessionStorage.getItem('w140pc')==='1')return;if(/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname)&&matchMedia('(max-width:640px)').matches)location.replace('m/')}catch(e){}})();</script>
 <title>클래식카 부품 계산기</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300..700&family=JetBrains+Mono:wght@300..700&display=swap">
 <style>
 b,strong,h1,h2,h3,h4,th,dt{font-weight:570}
 /* 배치: 위에 검은 띠(제조사 탭) - 차대번호 검색 줄 - 왼쪽 부품 분류, 오른쪽 부품 표 - 아래 붙어 다니는 합계 띠 */
 :root{--bg:#f4f6f5;--panel:#ffffff;--ink:#5a635e;--mute:#6d7a73;--line:#d5dcd8;--accent:#1c6424;--accent-bg:#e6f1e7;--warn:#a51e1e;--band:#12241a;--band-fg:#adb4ae;--band-mute:#869589;
 --sans:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}}
+@media all{:root:not([data-theme="light"]){--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#101613;--panel:#18211c;--ink:#a4aba5;--mute:#7e8a83;--line:#2c3a32;--accent:#6fcf7b;--accent-bg:#1c3122;--warn:#ff8f8f;--band:#0a120d;--band-fg:#aab0ab;--band-mute:#8fa397;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -344,22 +345,22 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 @media(min-width:1200px){.codes .in{justify-content:space-between;flex-wrap:nowrap;gap:8px}.codes .in>*{flex:0 1 auto;white-space:nowrap}}
 @media(min-width:1240px){.jobs{flex-wrap:nowrap;justify-content:space-between;gap:6px}.jobs button{padding:5px 7px;font-size:13px;white-space:nowrap;flex:0 0 auto}.jobs #jobl{margin-right:0;font-size:13.5px;white-space:nowrap}.crumb{flex-wrap:nowrap}.crumb>*{white-space:nowrap;flex:0 0 auto}.crumb .xls{margin-left:auto}.vlk{justify-content:space-between;flex-wrap:nowrap}.vlk>*{white-space:nowrap}.vlk b{margin-right:0}}
 </style>
-<header class="top"><div class="in"><h1><button type="button" id="home" title="첫 화면으로"><small>HOME</small> 클래식카 부품 계산기</button></h1>
-<div class="makes" id="makes" aria-label="제조사"></div><a class="qna" href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">Q&amp;A 묻고 답하기</a><span class="toms"><a class="tom" href="m/">휴대폰 화면</a><a class="tom" href="en/">ENGLISH</a></span></div></header>
+<header class="top"><div class="in"><h1><button type="button" id="home" title="첫 화면으로"><small class="hbx"><svg class="hico" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="HOME"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10v9.5h4.5v-5.5h4v5.5h4.5V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>HOME</span></small> <svg class="carc" viewBox="0 0 64 30" width="46" height="22" role="img" aria-label="클래식 세단"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M5.2 14.2l35.8 1.3 19-1.6"/><path d="M5.2 14.2c-1.2.2-1.9 1-1.9 2.2v4.4c0 .8.6 1.4 1.4 1.4h3.8M17.4 22.6l15.4.9M41.6 24.2l4.6-.1"/><path d="M41 15.5v8.7M60 13.9v8.2c0 .4-.3.8-.7.8L46 24"/><path d="M9.6 13.9l3.6-5.3c.3-.4.8-.7 1.3-.7h15.6c.5 0 1 .2 1.3.6l5.4 4.1"/><path d="M36.8 12.6l15.4-.9 7.8 2.2"/><path d="M41.2 24.9l19.2-1.6"/><path d="M52.2 11.7v-1.6"/></g><path d="M12.6 13.7l2.6-4h6.4v4.2zM23.4 9.7h6.5c.3 0 .6.1.8.3l4.3 3.9l-11.6-.2z" fill="currentColor" opacity=".32"/><circle cx="52.2" cy="9.8" r=".7" fill="currentColor"/><path d="M48.8 15.2l6.4-.5v6.6l-6.4.5z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M49 16.8l6-.45M49 18.2l6-.45M49 19.6l6-.45M49 21l6-.45" stroke="currentColor" stroke-width=".8"/><path d="M42.4 16.2l5.6-.35v2.7l-5.6.35zM56.2 15l3.4-.3v2.5l-3.4.3z" fill="currentColor" opacity=".55"/><path d="M8 18.6l32.4 1.3" stroke="currentColor" stroke-width=".9" opacity=".5"/><path d="M22.6 13.9v8.9" stroke="currentColor" stroke-width=".9" opacity=".5"/><circle cx="13.2" cy="22.8" r="4.1" fill="var(--bg,#101613)" stroke="currentColor" stroke-width="1.5"/><circle cx="13.2" cy="22.8" r="1.5" fill="currentColor"/><circle cx="37.2" cy="23.8" r="4.3" fill="var(--bg,#101613)" stroke="currentColor" stroke-width="1.5"/><circle cx="37.2" cy="23.8" r="1.6" fill="currentColor"/></svg>클래식카 부품 계산기</button></h1>
+<div class="makes" id="makes" aria-label="제조사"></div><a class="qna" href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">Q&amp;A</a><span class="toms"><a class="tom" href="m/">Mobile</a><details class="tom lng"><summary>ENGLISH</summary><div class="lngm"><a href="./?pc=1&lang=ko">한국어</a><a href="en/?lang=en">English</a><a href="ja/?lang=ja">日本語</a><a href="zh/?lang=zh">简体中文</a><a href="de/?lang=de">Deutsch</a><a href="fr/?lang=fr">Français</a><a href="es/?lang=es">Español</a><a href="ru/?lang=ru">Русский</a></div></details></span></div></header>
 <div class="codes"><div class="in" id="codes"></div></div>
 <div class="r129n" id="r129n" hidden><div class="in"><div class="rh"><b>R129 특별 안내</b><button type="button" id="r129x">닫기</button></div><ul><li>R129 (SL320, SL500, SL600) 부품은 준비 중입니다.</li><li>R129는 W140과 차체가 다릅니다. 하체, 브레이크, 조향, 부싱에 W140 부품 번호를 쓰면 안 됩니다.</li><li>엔진은 W140과 같은 계열입니다. SL320 - M104, SL500 - M119, SL600 - M120.</li><li>지금은 R129 SL600 버튼에서 S600과 같은 M120 엔진 쪽 부품만 보입니다. 주문 전에 내 차대번호로 번호를 꼭 확인하십시오.</li><li>소프트탑과 유압 실린더는 R129 전용 묶음으로 따로 올립니다.</li><li>자세한 부품 문의는 <a href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">트롤파츠 안강민 선생님께 문의</a>하십시오.</li></ul></div></div>
 <div class="soonp" id="soon" hidden><div class="in"><h2 id="soont"></h2><p id="soonv" hidden></p><p id="soonp">이 제조사는 아직 준비 중입니다. 지금은 Mercedes-Benz W140만 열려 있습니다. 위 코드명은 앞으로 올릴 차입니다.</p><ul id="roadl" hidden></ul><button type="button" id="back">Mercedes-Benz W140으로 가기</button></div></div>
 <div class="model" id="pm"><div class="in">
-<div class="mrow"><div class="vin vbar"><label for="vin">VIN <small>(Vehicle Identification Number)</small></label><input id="vin" type="text" maxlength="17" autocomplete="off" spellcheck="false" placeholder="차대번호 17자리를 넣어주세요"><button type="button" id="vingo">찾기</button></div><div class="vin vbar fbar"><label for="find">PART <small>(Part Name, Number)</small></label><input id="find" type="search" placeholder="부품 이름이나 번호를 넣어주세요"><button type="button" id="findgo">찾기</button></div></div>
-<div class="vlk"><b>차대번호 부품번호 검색 사이트</b><a href="https://www.lastvin.com/" target="_blank" rel="noopener">라스트빈 (데이터카드)</a><a href="https://mb.vin/" target="_blank" rel="noopener">mb.vin (데이터카드)</a><a href="https://7zap.com/en/catalog/cars/mercedes/" target="_blank" rel="noopener">7zap 부품 카탈로그 (EPC)</a><a href="https://teilesuche.mercedes-benz-classic.com/" target="_blank" rel="noopener">벤츠 클래식 부품 검색</a><span class="xc">부품번호 반드시 크로스 체킹 하세요.</span></div>
+<div class="mrow"><div class="vin vbar"><label for="vin">VIN <small>(Vehicle Identification Number)</small></label><input id="vin" type="text" maxlength="17" autocomplete="off" spellcheck="false" placeholder="차대번호 17자리를 넣어주세요"><button type="button" id="vingo">찾기</button></div><div class="vin vbar fbar"><label for="find">PART <small>(Part Name, Number)</small></label><input id="find" type="search" placeholder="부품 이름 또는 번호"><button type="button" id="findgo">찾기</button></div></div>
+<div class="vlk"><b>차대번호 부품번호 검색 사이트</b><a href="https://www.lastvin.com/" target="_blank" rel="noopener">LastVIN (데이터카드)</a><a href="https://mb.vin/" target="_blank" rel="noopener">mb.vin (데이터카드)</a><a href="https://7zap.com/en/catalog/cars/mercedes/" target="_blank" rel="noopener">7zap 부품 카탈로그 (EPC)</a><a href="https://teilesuche.mercedes-benz-classic.com/" target="_blank" rel="noopener">벤츠 클래식 부품 검색</a><span class="xc">부품번호 반드시 크로스 체킹 하세요.</span></div>
 <small id="vinm" hidden></small>
 <input type="checkbox" id="only" checked hidden>
 </div></div>
 <div class="in cols" id="pc">
 <nav class="side" id="side" aria-label="부품 분류"></nav>
 <div class="main">
-<div class="mrow2"><div class="mods" id="mods" aria-label="모델별 전체 묶음"></div><label for="ph" class="phl"><span>연식</span><select id="ph"><option value="">전체</option><option value="e">전기형 (1991~1994.2)</option><option value="m">중기형 (1994.3~1996.5)</option><option value="l">후기형 (1996.6~1998)</option></select></label></div>
-<div class="jobs"><span id="jobl">W140 작업별 담기</span><span id="jobs" style="display:contents"></span></div>
+<div class="mrow2"><div class="mods" id="mods" aria-label="모델별 전체 묶음"></div><label for="ph" class="phl"><span>연식</span><select id="ph"><option value="">전체</option><option value="e">전기형 (1991~1994.2)</option><option value="m">중기형 (1994.3~1996.5)</option><option value="l">후기형 (1996.6~1998)</option></select></label><details class="ctab"><summary>컬러코드</summary><div class="ctm"><b>벤츠 W140 컬러코드 (도장색)</b><table><tr><td><i style="background:#14161a"></i></td><td class="cc">197</td><td>옵시디언 블랙 메탈릭<small>Obsidian Black Metallic</small></td></tr><tr><td><i style="background:#0b0b0b"></i></td><td class="cc">040</td><td>블랙<small>Black (Tiefschwarz)</small></td></tr><tr><td><i style="background:#f2f1ec"></i></td><td class="cc">149</td><td>폴라 화이트<small>Polar White</small></td></tr><tr><td><i style="background:#1b2230"></i></td><td class="cc">189</td><td>블랙 오팔 메탈릭<small>Black Opal Metallic</small></td></tr><tr><td><i style="background:#171b26"></i></td><td class="cc">199</td><td>블랙 펄 메탈릭<small>Black Pearl Metallic</small></td></tr><tr><td><i style="background:#1f4a3a"></i></td><td class="cc">269</td><td>브릴리언트 에메랄드 메탈릭<small>Brilliant Emerald Metallic</small></td></tr><tr><td><i style="background:#2c5a55"></i></td><td class="cc">279</td><td>칼립소 그린 메탈릭<small>Calypso Green Metallic</small></td></tr><tr><td><i style="background:#3b3550"></i></td><td class="cc">339</td><td>바이올란 메탈릭<small>Violan Metallic</small></td></tr><tr><td><i style="background:#3d6a86"></i></td><td class="cc">341</td><td>아쿠아마린 블루 메탈릭<small>Aquamarinblau Metallic</small></td></tr><tr><td><i style="background:#5a1a22"></i></td><td class="cc">512</td><td>알만딘 레드 메탈릭<small>Almandinrot Metallic</small></td></tr><tr><td><i style="background:#6b1424"></i></td><td class="cc">572</td><td>루비 펄<small>Ruby Pearl</small></td></tr><tr><td><i style="background:#9e1b22"></i></td><td class="cc">582</td><td>임페리얼 레드<small>Imperial Red</small></td></tr><tr><td><i style="background:#e2a33a"></i></td><td class="cc">601</td><td>아프리코트 옐로<small>Aprikosengelb</small></td></tr><tr><td><i style="background:#9a9ea0"></i></td><td class="cc">702</td><td>스모크 실버 메탈릭<small>Smoke Silver Metallic</small></td></tr><tr><td><i style="background:#7f8486"></i></td><td class="cc">721</td><td>문스톤 그레이 메탈릭<small>Moonstone Gray Metallic</small></td></tr><tr><td><i style="background:#b9bcbd"></i></td><td class="cc">735</td><td>아스트랄 실버 메탈릭<small>Astralsilber Metallic</small></td></tr><tr><td><i style="background:#c4c7c8"></i></td><td class="cc">744</td><td>브릴리언트 실버 메탈릭<small>Brilliant Silver Metallic</small></td></tr><tr><td><i style="background:#2f4a44"></i></td><td class="cc">891</td><td>알렉산드라이트 그린 메탈릭<small>Alexandritgrün Metallic</small></td></tr><tr><td><i style="background:#1a2238"></i></td><td class="cc">904</td><td>미드나이트 블루<small>Midnight Blue</small></td></tr><tr><td><i style="background:#3e4f7a"></i></td><td class="cc">928</td><td>아이리스 블루<small>Irisblau</small></td></tr><tr><td><i style="background:#5c6062"></i></td><td class="cc">181</td><td>아틀라스 그레이 메탈릭 (무광, 범퍼·하단)<small>Atlasgrau Metallic, matte trim</small></td></tr><tr><td><i style="background:#6e7072"></i></td><td class="cc">700</td><td>알토 그레이 메탈릭 (무광, 범퍼·하단)<small>Altograu Metallic, matte trim</small></td></tr></table><p>1997년식 S클래스 기준 목록입니다. 출처: AutomotiveTouchup 도장 카탈로그 1곳 (2026년 11월 16일 조회). 연식마다 색이 다르고, 화면의 색 견본은 어림입니다. 내 차 색은 앞 도어 기둥이나 라디에이터 서포트의 색상 표, 또는 데이터카드로 확인하십시오.</p></div></details></div>
+<div class="jobs"><span id="jobl">부품별 담기</span><span id="jobs" style="display:contents"></span></div>
 <div class="crumb" id="crumb"></div>
 <div id="list" style="display:flex;flex-direction:column;gap:18px"></div>
 <details class="help" open><summary>계산기 쓰는 법</summary>
@@ -395,7 +396,7 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <p><b>앞으로 올릴 차</b></p>
 <ul>
 <li>지금은 벤츠 W140 (S320, S420, S500, S600, CL600)입니다.</li>
-<li>벤츠 클래식카를 차례로 올리겠습니다. R129 SL (SL320, SL500, SL600), W126 S클래스, W124 E클래스, W201 190E, R107 SL, W123, G바겐 (W460, W463).</li>
+<li>벤츠 클래식카를 차례로 올리겠습니다. R129 SL (SL320, SL500, SL600), W126 S클래스, W124 E클래스, W201 190E, R107 SL, W123, G바겐 (W460).</li>
 <li>청춘의 차 포르쉐도 올리겠습니다. 공랭식 (356, 911 초기형, 930, 964, 993)과 수랭식 (924, 944, 928, 968, 박스터 986, 911 996) 모두입니다.</li>
 <li>그다음은 BMW입니다. E바디 가운데 클래식카로 지정된 차를 올리겠습니다.</li>
 <li>랜드로버 (디펜더, 레인지로버)와 재규어도 올리겠습니다.</li>
@@ -474,12 +475,12 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <dt>담아 둔 목록은 남아 있나요?</dt><dd>지금 쓰는 기기의 이 브라우저에만 저장됩니다. 다른 기기에서는 보이지 않으니, 장바구니의 "목록 복사"로 옮기십시오.</dd>
 <dt>앞으로 어떤 차가 올라오나요?</dt><dd>지금은 벤츠 W140입니다. 벤츠 클래식 (R129, W126, W124, 190E, R107, W123, G바겐), 포르쉐 공랭식과 수랭식, BMW E바디, 랜드로버와 재규어, 페라리와 람보르기니, 일본 클래식카, 미국차, 30년 넘은 국산차 순서로 올립니다. 영타이머는 올리지 않습니다.</dd>
 <dt>누가 왜 만들었나요?</dt><dd>클래식카인들이 잘 사용했으면 해서 만들었습니다. 틀린 곳과 빠진 부품이 보이면 알려 주십시오.</dd>
-<dt>여기 없는 질문은 어디에 하나요?</dt><dd>위쪽 "Q&amp;A 묻고 답하기"를 누르면 트롤파츠로 갑니다. 거기서 문의해 주십시오.</dd>
+<dt>여기 없는 질문은 어디에 하나요?</dt><dd>위쪽 "Q&amp;A"를 누르면 트롤파츠로 갑니다. 거기서 문의해 주십시오.</dd>
 <dt>더 물어볼 곳이 있나요?</dt><dd>부품 문의는 <a href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">트롤파츠 안강민 선생님께 문의</a>하십시오.</dd>
 </dl></details>
 
 </div></div>
-<div class="cart" id="cart" hidden><div class="in cin"><div class="chead"><b>장바구니</b><span><button type="button" id="copy">목록 복사</button> <button type="button" id="clear">전체 비우기</button> <button type="button" id="close">닫기</button></span></div><div id="items"></div><div class="set"><label for="usd">1달러 <input id="usd" type="number" min="0" step="1" value="1400"> 원</label><label for="eur">1유로 <input id="eur" type="number" min="0" step="1" value="1600"> 원</label><label for="ship">배송비 <input id="ship" type="number" min="0" step="1000" value="0"> 원</label><label for="duty">관세 <input id="duty" type="number" min="0" step="1" value="8"> % + 부가세 10 %</label><label for="labor">공임 <input id="labor" type="number" min="0" step="10000" value="0"> 원</label><button id="reset" type="button">처음 값으로</button><small>환율은 예시입니다. 오늘 환율로 고쳐 쓰십시오. 미국에서 오는 200달러 이하 주문은 관부가세가 없습니다.</small></div><p class="cnote" id="cmsg">여기서 결제는 되지 않습니다. 줄마다 "파는 곳"에서 주문하십시오.</p></div></div>
+<div class="cart" id="cart" hidden><div class="in cin"><div class="chead"><b>장바구니</b><span><button type="button" id="copy">목록 복사</button> <button type="button" id="clear">전체 비우기</button> <button type="button" id="close">닫기</button></span></div><div id="items"></div><div class="set"><label for="usd">1달러 <input id="usd" type="number" min="0" step="1" value="1400"> 원</label><label for="eur">1유로 <input id="eur" type="number" min="0" step="1" value="1600"> 원</label><label for="cny">1위안 <input id="cny" type="number" min="0" step="1" value="190"> 원</label><label for="jpy">100엔 <input id="jpy" type="number" min="0" step="1" value="850"> 원</label><label for="ship">배송비 <input id="ship" type="number" min="0" step="1000" value="0"> 원</label><label for="duty">관세 <input id="duty" type="number" min="0" step="1" value="8"> % + 부가세 10 %</label><label for="labor">공임 <input id="labor" type="number" min="0" step="10000" value="0"> 원</label><button id="reset" type="button">처음 값으로</button><small>환율은 예시입니다. 오늘 환율로 고쳐 쓰십시오. 미국에서 오는 200달러 이하 주문은 관부가세가 없습니다.</small></div><p class="cnote" id="cmsg">여기서 결제는 되지 않습니다. 줄마다 "파는 곳"에서 주문하십시오.</p></div></div>
 <div class="rep" id="rep" hidden><div class="in cin"><div class="chead"><b>틀린 곳 제보</b><span><button type="button" id="repx">닫기</button></span></div>
 <p class="cnote" id="repp"></p>
 <label for="repn">맞는 번호나 고칠 내용<input id="repn" type="text" autocomplete="off" placeholder="예: 번호가 140 000 00 00으로 바뀌었습니다"></label>
@@ -487,36 +488,38 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <textarea id="rept" readonly rows="6" aria-label="제보 내용"></textarea>
 <div class="repb"><a id="repgo" href="https://smartstore.naver.com/trollparts/qna?cp=1" target="_blank" rel="noopener">제보 내용 복사하고 트롤파츠 열기</a><small>복사된 내용을 트롤파츠 문의에 붙여 넣어 주십시오. 확인한 뒤 계산기에 반영합니다.</small></div></div></div>
 <div class="toast" id="toast" role="status" hidden></div>
-<div class="bar"><div class="in"><button id="home2" type="button" title="첫 화면으로"><b>HOME</b></button><button id="open" type="button">장바구니 보기</button><button id="clear2" type="button">비우기</button><label for="tax" class="txl" title="미국에서 오는 200달러 이하 주문은 관부가세가 없습니다"><input id="tax" type="checkbox"> 관세 + 부가세</label><span>담은 부품 <b id="cnt">0</b>가지</span><strong id="sum">0원</strong><small id="miss"></small><div class="fwg"><details class="fwd"><summary>배송대행 서비스</summary><div class="fm"><small>해외에서 구매하시는 분들은 배송대행 서비스를 이용하시기 바랍니다. 한국 직배송이 안 되는 가게는 배대지 주소로 받습니다.</small><a href="https://post.malltail.com/" target="_blank" rel="noopener">몰테일</a><a href="https://www.hoottown.com/" target="_blank" rel="noopener">훗타운 (한진)</a><a href="https://www.iporter.com/" target="_blank" rel="noopener">아이포터</a><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">오마이집</a></div></details></div></div></div>
-<script src="data.js?v=1794780914"></script>
+<div class="bar"><div class="in"><button id="home2" type="button" title="첫 화면으로"><b class="hbx"><svg class="hico" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="HOME"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10v9.5h4.5v-5.5h4v5.5h4.5V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>HOME</span></b></button><button id="open" type="button">장바구니 보기</button><button id="clear2" type="button">비우기</button><label for="tax" class="txl" title="미국에서 오는 200달러 이하 주문은 관부가세가 없습니다"><input id="tax" type="checkbox"> 관세 + 부가세</label><span>담은 부품 <b id="cnt">0</b>가지</span><strong id="sum">0원</strong><small id="miss"></small><div class="fwg"><details class="fwd"><summary>배송대행 서비스</summary><div class="fm"><small>해외에서 구매하시는 분들은 배송대행 서비스를 이용하시기 바랍니다. 한국 직배송이 안 되는 가게는 배대지 주소로 받습니다.</small><a href="https://post.malltail.com/" target="_blank" rel="noopener">몰테일</a><a href="https://www.hoottown.com/" target="_blank" rel="noopener">훗타운 (한진)</a><a href="https://www.iporter.com/" target="_blank" rel="noopener">아이포터</a><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">오마이집</a></div></details></div></div></div>
+<script src="data.js?v=1794791400"></script><script src="w124.js?v=1794811483"></script>
 <script>
 const D=window.W140DATA;
 const OFF=[['트롤파츠 (국내)','https://smartstore.naver.com/trollparts/qna?cp=1'],['독일 클래식 벤츠 부품상 니묄러','https://www.niemoeller.de/en/search'],['벤츠 미국 클래식 센터 (공식)','https://classicparts.mbusa.com/about']];
-const SRC={"a": [["S320 엔진 (1998년식, 후기형)", "https://mbpartsgiant.com/parts-list/1998-mercedes_benz-s320/engine/engine-parts-mounts-timing-lubrication-system"], ["S500 엔진 (1996년식, 중기형)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/engine/cylinder-head-valves"], ["S600 엔진 (1996년식, 중기형)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/engine/engine-parts-mounts-timing-lubrication-system"]], "b": [["S600 엔진 (1996년식, 중기형)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/engine/engine-parts-mounts-timing-lubrication-system"], ["S600 점화 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/electrical/ignition-system"]], "c": [["S320 연료 분사 (1997년식)", "https://www.mbpartsgiant.com/parts-list/1997-mercedes_benz-s320/air-fuel-delivery/fuel-injection"], ["S500 연료 분사 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/air-fuel-delivery/fuel-injection"], ["S600 연료 분사 (1996년식)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/air-fuel-delivery/fuel-injection"]], "d": [["조향 기어와 링크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/steering/steering-gear-linkage"], ["파워 스티어링 펌프 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/steering/p-s-pump"]], "e": [["프론트 브레이크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/brakes/front-brakes"], ["리어 브레이크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/brakes/rear-brakes"]], "f": [["프론트 서스펜션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/front-suspension"]], "g": [["리어 서스펜션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/rear-suspension-components"]], "h": [["프론트 멤버 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/suspension-mounting-front"], ["엔진, 미션 마운트 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/engine/engine-trans-mounting"]], "i": [["냉각 팬과 라디에이터 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/belts-cooling/cooling-fan"], ["벨트와 풀리 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/belts-cooling/belts-pulleys-belts"], ["S600 워터 펌프 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/belts-cooling/water-pump"]], "j": [["S500 점화 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/electrical/ignition-system"], ["S500 스로틀 바디 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/air-fuel-delivery/throttle-body"]], "k": [["미션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/transmission/automatic-transmission"], ["미션 오일 팬 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/maintenance-lubrication/transmission-components-maintenance"], ["미션 필터 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/maintenance-lubrication/automatic-transmission-maintenance"]]};
+const SRC={"a": [["S320 엔진 (1998년식, 후기형)", "https://mbpartsgiant.com/parts-list/1998-mercedes_benz-s320/engine/engine-parts-mounts-timing-lubrication-system"], ["S500 엔진 (1996년식, 중기형)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/engine/cylinder-head-valves"], ["S600 엔진 (1996년식, 중기형)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/engine/engine-parts-mounts-timing-lubrication-system"]], "b": [["S600 엔진 (1996년식, 중기형)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/engine/engine-parts-mounts-timing-lubrication-system"], ["S600 점화 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/electrical/ignition-system"]], "c": [["S320 연료 분사 (1997년식)", "https://www.mbpartsgiant.com/parts-list/1997-mercedes_benz-s320/air-fuel-delivery/fuel-injection"], ["S500 연료 분사 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/air-fuel-delivery/fuel-injection"], ["S600 연료 분사 (1996년식)", "https://mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/air-fuel-delivery/fuel-injection"]], "d": [["조향 기어와 링크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/steering/steering-gear-linkage"], ["파워 스티어링 펌프 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/steering/p-s-pump"]], "e": [["프론트 브레이크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/brakes/front-brakes"], ["리어 브레이크 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/brakes/rear-brakes"]], "f": [["프론트 서스펜션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/front-suspension"]], "g": [["리어 서스펜션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/rear-suspension-components"]], "h": [["프론트 멤버 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/suspension/suspension-mounting-front"], ["엔진, 미션 마운트 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/engine/engine-trans-mounting"]], "i": [["냉각 팬과 라디에이터 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/belts-cooling/cooling-fan"], ["벨트와 풀리 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/belts-cooling/belts-pulleys-belts"], ["S600 워터 펌프 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/belts-cooling/water-pump"]], "j": [["S500 점화 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/electrical/ignition-system"], ["S500 스로틀 바디 (1996년식)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/air-fuel-delivery/throttle-body"]], "k": [["미션 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/transmission/automatic-transmission"], ["미션 오일 팬 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/maintenance-lubrication/transmission-components-maintenance"], ["미션 필터 (1996년식 S500)", "https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/maintenance-lubrication/automatic-transmission-maintenance"]], "n": [["W140 휠 7.5Jx16 ET51, 140 401 14 02 (Hubcap Haven, 순정 복원품)", "https://www.hubcaphaven.com/p/3128/aly65188-mercedes-cl500-cl600-s320-s420-s500-s600-wheel-silver-1404011402.html"], ["휠 볼트 000 990 53 07 (S500 1994~2006)", "https://mbpartsgiant.com/oem-mercedes_benz-s500-wheel_hub_bolt"], ["센터 캡 6-6-47-0203 (Pelican Parts)", "https://www.pelicanparts.com/catalog/shopcart/MISC/POR_MISC_MBZHUB_pg3.htm"], ["순정 타이어 크기 (Goodyear, 1997년식)", "https://www.goodyear.com/en-us/vehicles/Mercedes~-Benz/S~-Class/1997"], ["타이어 예시 가격 235/60R16 (tiresize.com)", "https://tiresize.com/tires/Mercedes-Benz/S500/1997/Coupe/"]]};
 SRC.k=[['5단 722.6 (ECS, 1998년식 S600)','https://www.ecstuning.com/Mercedes_Benz-1998-S600-140.057-Base-Sedan-V12_6.0L/Popular/Drivetrain/2'],['5단 722.6 (FCP Euro, S600)','https://www.fcpeuro.com/Mercedes~Benz-parts/S600/Automatic-Transmission/'],['4단 722.3 (ECS, 1995년식 S500)','https://www.ecstuning.com/Mercedes_Benz-1995-S500-140.051-Base-Sedan-V8_5.0L/Drivetrain/Automatic_Transmission/2'],['미션 필터, 팬 (mbpartsgiant)','https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s500/maintenance-lubrication/transmission-components-maintenance']];
+const JGL=s=>s.replace(/\s*[(（][^()（）]*[)）]\s*$/,'');const JGS=(s,c)=>{const m=/[(（]([^()（）]*)[)）]\s*$/.exec(s);return (m?m[1]:s)+' '+c};function JG(a){if(a.length<2)return a.join('');const s0=esc(JOBS[0][0]),s1=esc(JOBS[1][0]);const b0=a[0].replace(s0,esc(JGS(JOBS[0][0],'722.6'))),b1=a[1].replace(s1,esc(JGS(JOBS[1][0],'722.3')));return `<details class="jobg"><summary>${esc(JGL(JOBS[0][0]))}</summary><div class="jgm">${b0}${b1}</div></details>`+a.slice(2).join('')}
 const JOBS=[["미션 오일 교환 (5단)", ["140 277 00 95", "140 271 00 80", "203 540 02 53", "001 990 11 17", "MB 236.10 / 236.14"]], ["미션 오일 교환 (4단)", ["129 277 01 95", "126 271 11 80", "000 997 65 32", "140 271 00 60", "001 990 11 17", "MB 236.6 / 236.7"]], ["엔진 오일 교환", ["119 180 00 09", "120 180 00 09", "MB 229.1"]], ["벨트 라인", ["011 997 45 92", "011 997 64 92", "011 997 06 92", "010 997 88 92", "103 200 08 70", "011 997 67 92", "119 200 11 70", "104 200 15 28", "104 200 08 70", "120 200 05 70", "119 200 14 70", "104 200 05 70", "120 200 03 70", "601 200 10 70"]], ["냉각 계통", ["119 200 21 01", "104 200 32 01", "120 200 11 01", "119 200 00 15", "110 200 05 15", "120 200 00 15", "140 500 08 75", "140 500 01 75", "140 500 07 75", "140 501 33 82", "140 500 08 49", "124 500 04 06"]], ["ADS 쇼바 교환", ["140 320 15 30", "140 320 13 30", "140 320 99 13", "140 320 94 13", "000 989 91 03 09"]], ["하체 부싱 전체 교환", ["140 330 82 07", "140 330 00 18", "140 323 10 85", "140 352 86 65", "204 352 00 27", "140 326 17 81", "140 330 29 42", "140 330 39 42", "140 350 87 08", "140 350 30 41", "140 350 49 41", "140 240 22 17", "140 240 21 17", "140 240 08 18"]]];
 SRC.l=[['에어컨 필터 (1996년식 S600)','https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/a-c-heating/blower-motor-fan']];SRC.m=[['용량 (S500, S600 오너스 매뉴얼)','https://cellphone.manualsonline.com/manuals/mfg/mercedesbenz/s_600.html?p=130'],['쇼바 오일 (ECS)','https://www.ecstuning.com/Mercedes_Benz-1998-S600-140.057-Base-Sedan-V12_6.0L/Popular/6']];SRC.i.push(['S600 냉각 팬 (1996년식)','https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/belts-cooling/cooling-fan'],['S600 벨트 (1996년식)','https://www.mbpartsgiant.com/parts-list/1996-mercedes_benz-s600/belts-cooling/belts-pulleys-belts']);
 SRC.c=[...new Map([...(SRC.a||[]),...(SRC.b||[]),...(SRC.c||[])].map(l=>[l[1],l])).values()];
-const KEY='w140-parts-calc-v6';let S={};
+const KEY='w140-parts-calc-v6'+(window.CAR==='w124'?'-w124':'');let S={};
 try{S=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){S={}}
+{const k=['_usd','_eur','_cny','_jpy','_shipw','_tax','_duty','_labor'];for(const x of Object.keys(S))if(!k.includes(x))delete S[x]}
 function seed(){for(const r of D.rows){if(!S[r.id]){const o={q:r.q||1};if(r.ref){o.p=String(r.ref);o.c='USD'}if(r.aref){o.a=String(r.aref);o.c='USD'}S[r.id]=o}else if(r.ref&&!S[r.id].p){S[r.id].p=String(r.ref);if(!S[r.id].c)S[r.id].c='USD'}}}
 seed();
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
-const CUR={USD:'달러',EUR:'유로',KRW:'원'};
+const CUR={USD:'달러',EUR:'유로',CNY:'위안',JPY:'엔',KRW:'원'};
 let DSCON=false;let MY='',VM='',PICK=S._pick||'',CAT='all',Q='';const MODS=['S320','S420','S500','S600','CL600','SL600'];
-const MAKES=[['Mercedes-Benz',['W140','R129 (SL320, SL500, SL600)','W126','W124','W201 (190E)','R107','W123','W460, W463 (G바겐)']],['Porsche',['356','911 초기형','930','964','993','924','944','928','968','986 박스터','996']],['BMW',['E30','E28','E34','E32','E24','E31']],['Land Rover - Jaguar',['Defender','Range Rover Classic','Discovery 1','Series','Jaguar E-Type','Jaguar XJ6','Jaguar XJ40','Jaguar XJS']],['Ferrari',['308','328','348','F355','Testarossa']],['Lamborghini',['Countach','Diablo']],['Japan',[]],['USA',['Ford','Chrysler','GM']],['Korea',['그랜저','쏘나타','30년 넘은 국산차']]];let MAKE=0;
-function wmi(v){const w=v.slice(0,3);if(/^WD[BCD]/.test(w))return 0;if(/^WP[01]/.test(w))return 1;if(/^WB[AS]/.test(w))return 2;if(w==='SAJ'||w==='SAL')return 3;if(w==='ZFF')return 4;if(w==='ZHW'||w==='ZA9')return 5;if(w[0]==='J')return 6;if(/^[145]/.test(w))return 7;if(w[0]==='K')return 8;return -1}
+const MAKES=[['Mercedes-Benz',['W140','R129 (SL320, SL500, SL600)','W126 S-Class','W124 E-Class','W201 190E','R107 SL','W123 E-Class','W460 G-Class']],['Porsche',['356','911 초기형','930','964','993','924','944','928','968','986 박스터','996']],['BMW',['E30','E28','E34','E32','E24','E31']],['Land Rover - Jaguar',['Defender','Range Rover Classic','Discovery 1','Series','Jaguar E-Type','Jaguar XJ6','Jaguar XJ40','Jaguar XJS']],['Ferrari',['308','328','348','F355','Testarossa']],['Lamborghini',['Countach','Diablo']],['Fiat',['500','124 Spider','X1/9','131','126']],['Renault',['4','5 Turbo','Alpine A110','Alpine A310','Clio Williams']],['Peugeot',['404','504','205 GTI','205 T16','406 Coupé']],['Japan',[]],['USA',['Ford','Chrysler','GM']],['Korea',['그랜저','쏘나타','30년 넘은 국산차']]];let MAKE=0;
+function wmi(v){const w=v.slice(0,3);if(/^WD[BCD]/.test(w))return 0;if(/^WP[01]/.test(w))return 1;if(/^WB[AS]/.test(w))return 2;if(w==='SAJ'||w==='SAL')return 3;if(w==='ZFF')return 4;if(w==='ZHW'||w==='ZA9')return 5;if(w==='ZFA')return 6;if(w==='VF1')return 7;if(w==='VF3')return 8;if(w[0]==='J')return 9;if(/^[145]/.test(w))return 10;if(w[0]==='K')return 11;return -1}
 function vmsg(){$('vinm').hidden=!$('vinm').textContent}
-let ROAD=false;function makes(){const tb=(i,l,p)=>`<button type="button" data-i="${i}" aria-pressed="${p}">${l}</button>`;$('makes').innerHTML=MAKES.map((m,i)=>tb(i,m[0],i===MAKE&&!ROAD)).join('');const cs=MAKES[MAKE][1];$('codes').innerHTML='<span>코드명</span>'+(cs.length?cs.map(c=>c==='W140'?'<b>W140</b>':/^R129/.test(c)?`<button type="button" id="r129b" aria-expanded="${!$('r129n').hidden}">${esc(c)}<small>특별 안내</small></button>`:`<i>${esc(c)}<small>준비 중</small></i>`).join(''):'<span>준비 중입니다</span>');const off=MAKE!==0||ROAD;$('pm').hidden=$('pc').hidden=off;$('soon').hidden=!off;$('soont').textContent=ROAD?'앞으로 올릴 차':MAKES[MAKE][0];$('soonp').hidden=ROAD;$('roadl').hidden=!ROAD;if(ROAD)$('roadl').innerHTML=MAKES.map((m,k)=>{const c=m[1].filter(x=>x!=='W140');return `<li><b>${esc(m[0])}</b>${c.length?' - '+c.map(esc).join(', '):''}</li>`}).join('');if(off)$('r129n').hidden=true}
+let ROAD=false;function makes(){const tb=(i,l,p)=>`<button type="button" data-i="${i}" aria-pressed="${p}">${l}</button>`;$('makes').innerHTML=MAKES.map((m,i)=>tb(i,m[0],i===MAKE&&!ROAD)).join('');const cs=MAKES[MAKE][1];$('codes').innerHTML='<span>코드명</span>'+(cs.length?cs.map(c=>c==='W140'?(window.CAR==='w124'?'<a class="cw" href="?">W140 <small>S-Class</small></a>':'<b>W140 <small>S-Class</small></b>'):/^W124/.test(c)?(window.CAR==='w124'?'<b>W124 <small>300E · 1차</small></b>':'<a class="cw" href="?car=w124">W124 <small>1차</small></a>'):/^R129/.test(c)?`<button type="button" id="r129b" aria-expanded="${!$('r129n').hidden}">R129 <small>SL</small></button>`:`<i>${esc(c)}<small>준비 중</small></i>`).join(''):'<span>준비 중입니다</span>');const off=MAKE!==0||ROAD;$('pm').hidden=$('pc').hidden=off;$('soon').hidden=!off;$('soont').textContent=ROAD?'앞으로 올릴 차':MAKES[MAKE][0];$('soonp').hidden=ROAD;$('roadl').hidden=!ROAD;if(ROAD)$('roadl').innerHTML=MAKES.map((m,k)=>{const c=m[1].filter(x=>x!=='W140');return `<li><b>${esc(m[0])}</b>${c.length?' - '+c.map(esc).join(', '):''}</li>`}).join('');if(off)$('r129n').hidden=true}
 function r129(on){$('r129n').hidden=!on;const b=$('r129b');if(b)b.setAttribute('aria-expanded',on)}
 $('codes').addEventListener('click',e=>{if(e.target.closest('#r129b'))r129($('r129n').hidden)});$('r129x').addEventListener('click',()=>r129(false));
 const PHN={e:'전기형',m:'중기형',l:'후기형'};
 const MODEL={'140032':'S320 (140.032)','140033':'S320 롱 (140.033)','140042':'S420 (140.042)','140043':'S420 롱 (140.043)','140050':'S500 (140.050)','140051':'S500 롱 (140.051)','140056':'S600 (140.056)','140057':'S600 롱 (140.057)','140076':'CL600 (140.076)'};
 const VINMSG='';
-function rates(){return{usd:parseFloat($('usd').value)||0,eur:parseFloat($('eur').value)||0}}
-function toKRW(v,cur,x){return cur==='USD'?v*x.usd:cur==='EUR'?v*x.eur:v}
+function rates(){return{usd:parseFloat($('usd').value)||0,eur:parseFloat($('eur').value)||0,cny:parseFloat($('cny').value)||0,jpy:(parseFloat($('jpy').value)||0)/100}}
+function toKRW(v,cur,x){return cur==='USD'?v*x.usd:cur==='EUR'?v*x.eur:cur==='CNY'?v*x.cny:cur==='JPY'?v*x.jpy:v}
 function eq(f){if(/전용|기준/.test(f))return '';const l=['S320','S500','S600'].filter(m=>f.includes(m));return l.length>1?l.join(' = ')+' 호환':''}
 function fitsMy(r){const pv=$('ph').value;if(pv&&r.ph&&!r.ph.includes(pv))return 0;if(PICK==='SL600'){if(!'abcj'.includes(r.s))return 0;return (r.fit+' '+r.ko).includes('S600')?2:0}if(!MY||!$('only').checked)return 1;const f=r.fit+' '+r.ko;if(f.includes(MY))return 1;if(MY==='S420'&&f.includes('S500'))return 2;if(/기준/.test(r.fit))return 2;return 0}
 function hit(r){if(!Q)return true;const q=Q.toLowerCase();return r.ko.toLowerCase().includes(q)||r.en.toLowerCase().includes(q)||r.pn.replace(/ /g,'').toLowerCase().includes(q.replace(/[ .-]/g,''))&&/[0-9]/.test(q)}
@@ -524,8 +527,8 @@ function line(r,x){const s=S[r.id]||{};const p=parseFloat(s.use==='a'?s.a:s.p);c
 function vin(){const v=$('vin').value.toUpperCase().replace(/[^A-Z0-9]/g,'');const m=/^WDB(\d{6})/.exec(v);
 const mm=m&&MODEL[m[1]]?MODEL[m[1]]:'';VM=mm?(mm.startsWith('CL600')?'CL600':mm.slice(0,4)):'';const cur=PICK||VM;const my=cur==='CL600'||cur==='SL600'?'S600':cur;if(my!==MY){MY=my;setTimeout(render,0)}
 $('vinm').hidden=false;$('vinm').textContent=v.length&&v.length!==17?'차대번호는 17자리입니다. 지금 '+v.length+'자리입니다.':(PICK?'':mm?'차대번호로 본 차종: '+mm+'. 이 차종에 맞는 부품만 보여 줍니다. 연식과 옵션은 주문 전에 다시 확인하십시오.':VINMSG);return v}
-function tags(r){let h='';if(r.nla)h+='<span class="tg w">순정 단종 - 재고품이나 리퍼비시로</span>';else if(!r.ref&&!r.spec)h+='<span class="tg w">신품 가격 없음 - 리퍼비시나 중고로</span>';if(fitsMy(r)===2)h+=`<span class="tg w">${PICK==='SL600'?'S600 목록 기준 - SL600':MY==='S420'?'S500 목록 기준 - S420':'다른 차 목록 기준 - '+esc(MY||'내 차')} 번호 확인 필요</span>`;if(r.ph)h+=`<span class="tg">${r.ph.split('').map(c=>PHN[c]).join(' - ')}</span>`;const e=eq(r.fit);if(e&&/^(S\d{3}(, | = )?)+( 공용)?$/.test(r.fit))h+=`<span class="tg eq">${esc(e)}</span>`;else h+=`<span class="tg">${esc(r.fit)}</span>`;return h}
-function rowHTML(r,x){const s=S[r.id]||{};const a=s.use==='a';const l=line(r,x);const pn=r.pn.replace(/ /g,'');const rf=!r.ref&&!r.spec?[['리퍼비시 (재생품) - 이베이','https://www.ebay.com/sch/i.html?_nkw='+pn+'+%28refurbished%2Crebuilt%2Cremanufactured%29&_sop=15'],['중고품 - 이베이','https://www.ebay.com/sch/i.html?_nkw='+pn+'+used&_sop=15']]:[];
+function tags(r){let h='';if(r.nla)h+='<span class="tg w">순정 단종 - 재고품이나 리퍼비시로</span>';else if((!r.ref&&!r.tbd)&&!r.spec)h+='<span class="tg w">신품 가격 없음 - 리퍼비시나 중고로</span>';if(fitsMy(r)===2)h+=`<span class="tg w">${PICK==='SL600'?'S600 목록 기준 - SL600':MY==='S420'?'S500 목록 기준 - S420':'다른 차 목록 기준 - '+esc(MY||'내 차')} 번호 확인 필요</span>`;if(r.ph)h+=`<span class="tg">${r.ph.split('').map(c=>PHN[c]).join(' - ')}</span>`;const e=eq(r.fit);if(e&&/^(S\d{3}(, | = )?)+( 공용)?$/.test(r.fit))h+=`<span class="tg eq">${esc(e)}</span>`;else h+=`<span class="tg">${esc(r.fit)}</span>`;return h}
+function rowHTML(r,x){const s=S[r.id]||{};const a=s.use==='a';const l=line(r,x);const pn=r.pn.replace(/ /g,'');const rf=(!r.ref&&!r.tbd)&&!r.spec?[['리퍼비시 (재생품) - 이베이','https://www.ebay.com/sch/i.html?_nkw='+pn+'+%28refurbished%2Crebuilt%2Cremanufactured%29&_sop=15'],['중고품 - 이베이','https://www.ebay.com/sch/i.html?_nkw='+pn+'+used&_sop=15']]:[];
 const shops=(r.spec?[]:OFF).map(o=>`<a href="${esc(o[1])}" target="_blank" rel="noopener" class="paste" data-pn="${esc(pn)}">${esc(o[0])}</a>`).join('');
 const lk=o=>`<a href="${esc(o[1])}" target="_blank" rel="noopener">${esc(o[0])}</a>`;const finds=(rf.length?'<b class="mh">신품 가격 없음 - 리퍼비시나 중고</b>'+rf.map(lk).join('')+(r.links.length?'<hr>':''):'')+r.links.map(lk).join('');
 return `<div class="row${s.on?' on':''}" data-id="${r.id}"><input type="checkbox" id="${r.id}-on" ${s.on?'checked':''} aria-label="${esc(r.ko)} 담기">
@@ -536,29 +539,29 @@ return `<div class="row${s.on?' on':''}" data-id="${r.id}"><input type="checkbox
 <div class="sub${l.krw?'':' no'}">${l.krw?won(l.krw):'가격 없음'}${rf.length?`<a class="rf" href="#" data-h="리퍼비시 안내">리퍼비시 찾기</a>`:''}</div>
 <details class="buy"><summary>파는 곳</summary><div class="menu">${shops}${shops&&finds?'<hr>':''}${finds}</div></details></div>`}
 function render(){const x=rates();const vis=D.rows.filter(r=>fitsMy(r));const cur=PICK||VM;const cd=m=>(m==='SL600'?'R129 ':m==='CL600'?'C140 ':'W140 ')+m;const cm=cur?cd(cur):'W140';
-$('mods').innerHTML='<span>내 차 고르기</span>'+[['','전체']].concat(MODS.map(m=>[m,cd(m)])).map(m=>`<button type="button" data-m="${m[0]}" aria-pressed="${cur===m[0]}">${m[1]}</button>`).join('');
+$('mods').innerHTML='<span>모델명</span>'+[['','전체']].concat(MODS.map(m=>[m,cd(m)])).map(m=>`<button type="button" data-m="${m[0]}" aria-pressed="${cur===m[0]}">${m[1]}</button>`).join('');
 const secs=D.sec.map(s=>({id:s[0],t:s[1],sub:s[2],n:vis.filter(r=>r.s===s[0]).length})).filter(s=>s.n);const now=secs.find(s=>s.id===CAT);
-$('jobl').textContent=cm+' 작업별 담기';
+$('jobl').textContent='부품별 담기';
 const on=rs=>rs.length>0&&rs.every(r=>S[r.id]&&S[r.id].on);
-$('jobs').innerHTML=JOBS.map((j,i)=>{const m=vis.filter(r=>j[1].includes(r.pn));return m.length?`<button type="button" data-job="${i}" aria-pressed="${on(m)}">${esc(j[0])}</button>`:`<button type="button" disabled title="고른 차종과 연식에 맞는 부품이 없습니다">${esc(j[0])} - 해당 없음</button>`}).join('');
-const NV=vis.filter(r=>!r.spec&&(CAT==='all'||CAT==='home'||r.s===CAT)),ND=NV.filter(r=>!r.ref).length;const DSC=NV.length?`<button type="button" class="dsc" data-dsc="1" aria-pressed="${DSCON}">${DSCON?`단종품목 ${ND}가지만 보는 중`:`단종률 <b>${(ND/NV.length*100).toFixed(1)}%</b> (${NV.length}가지 중 ${ND}가지 신품 가격 없음)`}<i>${DSCON?'전체 보기':'단종품목 보기'}</i></button><span class="upd">가격 갱신 매월 30일</span>`:'';
-$('crumb').innerHTML=CAT==='home'&&!Q?`<span>${esc(cur?cm:'W140 전체')} 부품 묶음 ${secs.length}가지, 부품 ${vis.length}가지</span><a class="xls" href="https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing" target="_blank" rel="noopener">전체 부품 목록 스프레드시트 <b>클릭</b></a>${DSC}`:`<button type="button" data-cat="home">작업별 부품</button><span>&gt;</span><span>${esc(Q?'찾기: '+Q:now?now.t:'전체 부품')}</span><a class="xls" href="https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing" target="_blank" rel="noopener">전체 부품 목록 스프레드시트 <b>클릭</b></a>${Q?'':DSC}`;
-$('side').innerHTML='<b>부품 분류</b>'+[['all','전체 부품',vis.length,'모든 부품을 한 화면에 펼칩니다'],['home','작업별 부품',secs.length,'묶음별로 나눠 봅니다']].concat(D.sec.map(s=>[s[0],s[1],vis.filter(r=>r.s===s[0]).length,s[2]])).filter(s=>s[2]||s[0]==='all'||s[0]==='home').map(s=>`<button type="button" data-cat="${s[0]}" aria-current="${CAT===s[0]}"><span class="sn">${esc(s[1])}</span><span>${s[2]}</span></button>`).join('')+'<i class="g2"></i>'+[['클래식카 정비소','클래식카 정비소'],['해외 구매 안내','해외 구매 안내'],['국내에서 가장 편하게','국내 구매 안내'],['리퍼비시 안내','리퍼비시 안내'],['클래식카 월드 사이트','클래식카 월드 사이트'],['계산기 쓰는 법','계산기 쓰는 법'],['계산기의 한계','계산기의 한계'],['묻고 답하기','묻고 답하기']].map(g=>`<button type="button" data-h="${g[0]}"><span class="sn">${g[1]}</span></button>`).join('')+'<button type="button" data-rp="_"><span class="sn">틀린 곳 제보</span></button>';
+$('jobs').innerHTML=JG(JOBS.map((j,i)=>{const m=vis.filter(r=>j[1].includes(r.pn));return m.length?`<button type="button" data-job="${i}" aria-pressed="${on(m)}">${esc(j[0])}</button>`:`<button type="button" disabled title="고른 차종과 연식에 맞는 부품이 없습니다">${esc(j[0])} - 해당 없음</button>`}));
+const NV=vis.filter(r=>!r.spec&&(CAT==='all'||CAT==='home'||r.s===CAT)),ND=NV.filter(r=>(!r.ref&&!r.tbd)).length;const DSC=NV.length?`<button type="button" class="dsc" data-dsc="1" aria-pressed="${DSCON}">${DSCON?`단종품목 ${ND}가지만 보는 중`:`단종률 <b>${(ND/NV.length*100).toFixed(1)}%</b> (${NV.length}가지 중 ${ND}가지 신품 가격 없음)`}<i>${DSCON?'전체 보기':'단종품목 보기'}</i></button><span class="upd">가격 갱신 매월 30일</span>`:'';
+$('crumb').innerHTML=CAT==='home'&&!Q?`<span>${esc(cur?cm:'W140 전체')} 부품 묶음 ${secs.length}가지, 부품 ${vis.length}가지</span><a class="xls" href="https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing" target="_blank" rel="noopener">전체 부품 목록 스프레드시트 <b>클릭</b></a>${DSC}`:`<span>${esc(Q?'찾기: '+Q:now?now.t:'전체 부품')}</span><a class="xls" href="https://docs.google.com/spreadsheets/d/1t9QOkviaqu-_bTaCfTdQOB66g77e3NSli_ROUe8g4S8/edit?usp=sharing" target="_blank" rel="noopener">전체 부품 목록 스프레드시트 <b>클릭</b></a>${Q?'':DSC}`;
+$('side').innerHTML='<b>부품 분류</b>'+[['all','전체 부품',vis.length,'모든 부품을 한 화면에 펼칩니다'],['home','작업별 부품',secs.length,'묶음별로 나눠 봅니다']].concat(D.sec.map(s=>[s[0],s[1],vis.filter(r=>r.s===s[0]).length,s[2]])).filter(s=>s[2]||s[0]==='all'||s[0]==='home').map(s=>`<button type="button" data-cat="${s[0]}" aria-current="${CAT===s[0]}"><span class="sn">${esc(s[1])}</span><span>${s[2]}</span></button>`).join('')+'<i class="g2"></i>'+[['클래식카 월드 사이트','클래식카 월드 사이트'],['클래식카 정비소','클래식카 정비소'],['해외 구매 안내','해외 구매 안내'],['국내에서 가장 편하게','국내 구매 안내'],['리퍼비시 안내','리퍼비시 안내'],['계산기 쓰는 법','계산기 쓰는 법'],['계산기의 한계','계산기의 한계'],['묻고 답하기','묻고 답하기']].map(g=>`<button type="button" data-h="${g[0]}"><span class="sn">${g[1]}</span></button>`).join('')+'<button type="button" data-rp="_"><span class="sn">틀린 곳 제보</span></button>';
 if(CAT==='home'&&!Q){$('list').innerHTML='<div class="tiles">'+secs.map(s=>`<button type="button" class="tile" data-cat="${s.id}"><b>${esc(s.t)}</b><small>${esc(s.sub)}</small><span>부품 ${s.n}가지</span></button>`).join('')+`<button type="button" class="tile" data-cat="all"><b>전체 부품</b><small>모든 묶음을 한 화면에 펼칩니다</small><span>부품 ${vis.length}가지</span></button></div>`;total();return}
-let h='';for(const [sid,t,sub] of D.sec){if(CAT!=='all'&&CAT!=='home'&&CAT!==sid)continue;const rs=vis.filter(r=>r.s===sid&&hit(r)&&(!DSCON||(!r.ref&&!r.spec)));if(!rs.length)continue;
+let h='';for(const [sid,t,sub] of D.sec){if(CAT!=='all'&&CAT!=='home'&&CAT!==sid)continue;const rs=vis.filter(r=>r.s===sid&&hit(r)&&(!DSCON||((!r.ref&&!r.tbd)&&!r.spec)));if(!rs.length)continue;
 h+=`<section class="sec" id="sec-${sid}"><div class="sech"><h3>${esc(t)}</h3><small>${esc(PICK==='SL600'?'S600과 같은 M120 엔진 기준입니다. SL600 번호는 주문 전에 확인하십시오':sub)}</small></div>`;
 h+=`<div class="sal"><button type="button" class="sa" data-sec="${sid}" aria-pressed="${rs.every(r=>S[r.id]&&S[r.id].on)}"><i></i>전체 선택</button>`+((SRC[sid]||[]).length?`<details class="srcs"><summary>기준가 출처 보기</summary><div>${SRC[sid].map(l=>`<a href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join('')}</div></details>`:'')+'</div>';
 h+=rs.map(r=>rowHTML(r,x)).join('')+'</section>'}
 $('list').innerHTML=h||'<div class="sec empty">'+(PICK==='SL600'&&Q&&D.rows.some(r=>hit(r))?'SL600은 R129 차체라서 이 부품은 W140과 번호가 다릅니다. 하체, 브레이크, 조향, 부싱은 아직 넣지 못했습니다. 지금은 S600과 같은 엔진 쪽 부품만 볼 수 있습니다.':MY&&Q&&D.rows.some(r=>hit(r))?esc(PICK||MY)+'에는 맞지 않는 부품입니다. 모델을 "전체"로 바꾸면 다른 차종의 번호가 보입니다.':'찾는 부품이 없습니다. 찾기 칸을 지우거나 분류를 "전체 부품"으로 바꿔 보십시오.')+'</div>';total()}
-function calc(){const x=rates();let t=0,n=0,m=0;for(const r of D.rows){const s=S[r.id];if(!s||!s.on||!fitsMy(r))continue;n++;const l=line(r,x);if(!l.krw){m++;continue}t+=l.krw}return{t,n,m}}
-function onRows(){return D.rows.filter(r=>S[r.id]&&S[r.id].on&&fitsMy(r))}
+function calc(){const x=rates();let t=0,n=0,m=0;for(const r of D.rows){const s=S[r.id];if(!s||!s.on)continue;n++;const l=line(r,x);if(!l.krw){m++;continue}t+=l.krw}return{t,n,m}}
+function onRows(){return D.rows.filter(r=>S[r.id]&&S[r.id].on)}
 function cart(){const x=rates();const on=onRows();
 $('items').innerHTML=on.length?on.map(r=>{const l=line(r,x);return `<div class="ci"><span><b>${esc(r.ko)}</b> <small>${esc(r.pn)}</small><br><small>${l.kind} ${l.p>0?l.p+' '+CUR[l.cur]:'가격 없음'} x ${l.q}${esc(r.u||'개')}</small></span><span class="lt">${l.krw?won(l.krw):'-'}</span><button type="button" class="rm" data-id="${r.id}">빼기</button></div>`}).join(''):'<p class="cnote">담은 부품이 없습니다. 목록에서 체크하면 여기에 들어옵니다.</p>';
 $('open').textContent='장바구니 보기 ('+on.length+')'}
 function cartText(){const x=rates();const sh=parseFloat($('ship').value)||0,lb=parseFloat($('labor').value)||0;return (vin()?'차대번호 '+vin()+'\n':'')+(sh?'배송비 '+sh.toLocaleString('ko-KR')+'원\n':'')+($('tax').checked?'관부가세 넣음 (관세 '+(parseFloat($('duty').value)||0)+'%, 부가세 10%, 200달러 이하는 없음)\n':'')+(lb?'공임 '+lb.toLocaleString('ko-KR')+'원\n':'')+onRows().map(r=>{const l=line(r,x);return r.ko+' / '+r.en+' / '+r.pn+' / '+l.q+(r.u||'개')+' / '+(l.krw?won(l.krw):'가격 없음')}).join('\n')+'\n합계 '+$('sum').textContent}
 function total(){const VV=vin();const r=calc();const ship=parseFloat($('ship').value)||0,labor=parseFloat($('labor').value)||0;const xr=rates(),txo=$('tax').checked,dr=parseFloat($('duty').value)||0,free=!xr.usd||r.t/xr.usd<=200;const dty=txo&&!free?(r.t+ship)*dr/100:0,vat=txo&&!free?(r.t+ship+dty)*0.1:0,tax=dty+vat;const extra=ship+tax;
 $('cnt').textContent=r.n;$('sum').textContent=won(r.t+extra+labor);$('miss').textContent=(r.m?`가격 안 적은 것 ${r.m}가지 제외. `:'')+((extra||labor)?`부품 ${won(r.t)} + 배송비 ${won(ship)} + 관부가세 ${won(tax)} + 공임 ${won(labor)}`:'')+(txo&&free&&r.t?' 200달러 이하라 관부가세 없음.':'');
-vmsg();cart();try{localStorage.setItem(KEY,JSON.stringify(Object.assign({},S,{_usd:$('usd').value,_eur:$('eur').value,_shipw:$('ship').value,_tax:$('tax').checked?'1':'',_duty:$('duty').value,_labor:$('labor').value,_vin:VV,_ph:$('ph').value,_cat:CAT,_pick:PICK})))}catch(e){}}
+vmsg();cart();try{localStorage.setItem(KEY,JSON.stringify(Object.assign({},S,{_usd:$('usd').value,_eur:$('eur').value,_cny:$('cny').value,_jpy:$('jpy').value,_shipw:$('ship').value,_tax:$('tax').checked?'1':'',_duty:$('duty').value,_labor:$('labor').value,_vin:VV,_ph:$('ph').value,_cat:CAT,_pick:PICK})))}catch(e){}}
 function subOf(row){const r=D.rows.find(x=>x.id===row.dataset.id);const l=line(r,rates());const el=row.querySelector('.sub');const a=el.querySelector('.rf');el.firstChild.textContent=l.krw?won(l.krw):'가격 없음';el.classList.toggle('no',!l.krw);if(a)a.hidden=!!l.krw}
 function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>{el.hidden=true},4000)}
 function copy(t,ok,fail){try{navigator.clipboard.writeText(t).then(ok,fail)}catch(x){fail()}}
@@ -581,7 +584,7 @@ $('side').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)
 $('crumb').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.dsc){DSCON=!DSCON;if(DSCON&&CAT==='home')CAT='all';Q='';$('find').value='';render();return}DSCON=false;CAT='home';Q='';$('find').value='';render()});
 $('makes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.road){ROAD=true}else{ROAD=false;MAKE=+b.dataset.i}$('soonv').hidden=true;makes();scrollTo(0,0)});
 /* 방문자 통계: 공개 사이트에서만 GoatCounter로 셉니다. 숫자는 만든 사람의 통계 화면에서만 보입니다. */
-(function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://classiccar-parts.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
+(function(){try{if(!/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname))return;const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://futurenix.goatcounter.com/count');document.head.appendChild(s)}catch(e){}})();
 $('back').addEventListener('click',()=>{ROAD=false;MAKE=0;makes()});
 function goHome(){JSEL='';ROAD=false;$('r129n').hidden=true;MAKE=0;PICK='';CAT='all';Q='';$('find').value='';$('ph').value='';$('cart').hidden=true;$('soonv').hidden=true;makes();vin();render();scrollTo(0,0)}
 $('home').addEventListener('click',goHome);$('home2').addEventListener('click',goHome);
@@ -593,7 +596,7 @@ $('open').addEventListener('click',()=>{$('cart').hidden=!$('cart').hidden});
 $('close').addEventListener('click',()=>{$('cart').hidden=true});
 $('items').addEventListener('click',e=>{const b=e.target.closest('.rm');if(!b)return;S[b.dataset.id].on=false;render()});
 $('copy').addEventListener('click',()=>{const tx=cartText();copy(tx,()=>{$('cmsg').textContent='목록을 복사했습니다. 메모장이나 카톡에 붙여 넣으십시오.'},()=>{$('cmsg').textContent=tx})});
-for(const id of ['usd','eur'])$(id).addEventListener('input',render);
+for(const id of ['usd','eur','cny','jpy'])$(id).addEventListener('input',render);
 for(const id of ['ship','labor','duty'])$(id).addEventListener('input',total);$('tax').addEventListener('change',total);
 $('reset').addEventListener('click',()=>{const v=$('vin').value;S={};PICK='';CAT='all';seed();$('vin').value=v;$('ship').value=0;$('labor').value=0;$('tax').checked=false;$('duty').value=8;render()});
 for(const [id,lab] of [['clear','전체 비우기'],['clear2','비우기']]){let c=0;$(id).addEventListener('click',e=>{const b=e.currentTarget;if(!c){c=1;b.textContent='한 번 더 누르면 비웁니다';setTimeout(()=>{c=0;b.textContent=lab},4000);return}c=0;b.textContent=lab;for(const k in S){if(S[k])S[k].on=false}JSEL='';render();toast('장바구니를 비웠습니다.')})}
@@ -601,11 +604,11 @@ let JSEL='';$('jobs').addEventListener('click',e=>{const b=e.target.closest('but
 $('vin').addEventListener('input',()=>{PICK='';total()});$('only').addEventListener('change',render);$('ph').addEventListener('change',render);
 $('vingo').addEventListener('click',()=>{const v=vin();if(v.length!==17){$('vinm').hidden=false;$('vinm').textContent='차대번호 17자리를 먼저 넣어 주십시오. 지금 '+v.length+'자리입니다.';$('vin').focus();return}const mk=wmi(v);if(mk>0){ROAD=false;MAKE=mk;makes();$('soonv').hidden=false;$('soonv').textContent='차대번호 '+v+' 로 본 제조사: '+MAKES[mk][0]+'.';scrollTo(0,0);return}if(mk===0&&/^WDB129/.test(v)){$('vinm').hidden=false;$('vinm').textContent='R129 SL입니다. SL320, SL500, SL600은 아직 준비 중입니다. SL600의 엔진은 S600과 같은 M120이라, 엔진 부품은 S600 묶음을 참고하실 수 있습니다. 하체와 차체 부품은 다릅니다.';return}if(mk<0){$('vinm').hidden=false;$('vinm').textContent='이 차대번호로는 제조사를 알아내지 못했습니다. 앞 세 자리를 다시 확인해 주십시오.';return}PICK='';vin();if(!MY){$('vinm').hidden=false;$('vinm').textContent='이 차대번호로는 차종을 알아내지 못했습니다. 아래 전체 목록에서 고르십시오.';return}$('only').checked=true;CAT='all';render();$('crumb').scrollIntoView({behavior:'smooth',block:'start'})});
 $('vin').addEventListener('keydown',e=>{if(e.key==='Enter')$('vingo').click()});
-if(S._shipw)$('ship').value=S._shipw;if(S._tax)$('tax').checked=true;if(S._duty)$('duty').value=S._duty;if(S._labor)$('labor').value=S._labor;if(S._ph)$('ph').value=S._ph;if(S._vin)$('vin').value=S._vin;if(S._usd)$('usd').value=S._usd;if(S._eur)$('eur').value=S._eur;makes();render();
+if(S._shipw)$('ship').value=S._shipw;if(S._tax)$('tax').checked=true;if(S._duty)$('duty').value=S._duty;if(S._labor)$('labor').value=S._labor;if(S._ph)$('ph').value=S._ph;if(S._vin)$('vin').value=S._vin;if(S._usd)$('usd').value=S._usd;if(S._eur)$('eur').value=S._eur;if(S._cny)$('cny').value=S._cny;if(S._jpy)$('jpy').value=S._jpy;makes();render();
 
 ;(()=>{const b=document.querySelector('.bar');const f=()=>document.documentElement.style.setProperty('--barh',b.offsetHeight+'px');f();addEventListener('resize',f);if(window.ResizeObserver)new ResizeObserver(f).observe(b);document.addEventListener('click',e=>{const d=document.querySelector('.fwd');if(d&&d.open&&!d.contains(e.target))d.open=false})})();
 ;(()=>{const rep=$('rep');let cur=null;
-const mk=()=>cur?['[W140 부품 계산기 제보]'].concat(cur.gen?[]:['부품: '+cur.ko+' ('+cur.en+')','지금 번호: '+cur.pn,'맞는 차종 표기: '+cur.fit],['고칠 내용: '+$('repn').value.trim(),'근거: '+$('reps').value.trim()]).join('\n'):'';
+const mk=()=>cur?['['+(window.CAR==='w124'?'W124 300E':'W140')+' 부품 계산기 제보]'].concat(cur.gen?[]:['부품: '+cur.ko+' ('+cur.en+')','지금 번호: '+cur.pn,'맞는 차종 표기: '+cur.fit],['고칠 내용: '+$('repn').value.trim(),'근거: '+$('reps').value.trim()]).join('\n'):'';
 const up=()=>{$('rept').value=mk()};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-rp]');
 if(b){cur=b.dataset.rp==='_'?{gen:1}:D.rows.find(r=>r.id===b.dataset.rp);if(!cur)return;$('repp').textContent=cur.gen?'틀린 부품의 이름과 번호를 함께 적어 주십시오.':cur.ko+' - '+cur.pn;$('repn').value='';$('reps').value='';up();rep.hidden=false;$('repn').focus();return}
@@ -613,7 +616,7 @@ if(e.target.id==='repx'){rep.hidden=true;return}
 if(e.target.id==='repgo'){if(!$('repn').value.trim()){e.preventDefault();toast('고칠 내용을 먼저 적어 주십시오.');$('repn').focus();return}up();copy($('rept').value,()=>toast('제보 내용을 복사했습니다. 트롤파츠 문의에 붙여 넣어 주십시오.'),()=>{$('rept').focus();$('rept').select();toast('복사가 안 됐습니다. 아래 글을 직접 복사해 주십시오.')})}});
 $('repn').addEventListener('input',up);$('reps').addEventListener('input',up)})();
 
-;(()=>{const BUILD=1794780914;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
+;(()=>{const BUILD=1794791400;let busy=false;const bar=()=>{let n=document.getElementById('newv');if(!n){n=document.createElement('button');n.id='newv';n.type='button';n.textContent='\uc0c8 \ud310\uc774 \ub098\uc654\uc2b5\ub2c8\ub2e4. \ub20c\ub7ec\uc11c \uc0c8\ub85c \uace0\uce68';n.onclick=()=>location.reload();document.body.appendChild(n)}};const chk=()=>{if(busy)return;busy=true;fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{busy=false;if(!j||!(j.build>BUILD))return;let tried='';try{tried=sessionStorage.getItem('w140rl')||''}catch(e){}const rp=document.getElementById('rep');if(tried===String(j.build)||(rp&&!rp.hidden)){bar();return}try{sessionStorage.setItem('w140rl',String(j.build))}catch(e){bar();return}location.reload()}).catch(()=>{busy=false})};chk();document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});setInterval(chk,180000)})();
 /* 호스팅 배지(오른쪽 아래)가 아래 막대의 단추를 덮지 않도록, 배지 높이만큼 막대를 키웁니다. 배지는 건드리지 않습니다. */
 ;(()=>{const own=new Set(document.body.children);const mine=e=>{while(e&&e.parentElement&&e.parentElement!==document.body)e=e.parentElement;return !e||e===document.body||e===document.documentElement||own.has(e)||e.id==='newv'||(e.classList&&e.classList.contains('toast'))};
 const f=()=>{const w=innerWidth,h=innerHeight;let top=h;for(const x of [w-12,w-60,w-120])for(let y=h-3;y>h-160;y-=4){const e=document.elementFromPoint(x,y);if(e&&!mine(e))top=Math.min(top,y)}
@@ -621,5 +624,270 @@ const n=top<h?Math.min(h-top+8,160):0;document.documentElement.style.setProperty
 [300,1000,2500,5000,9000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);addEventListener('orientationchange',f);if(window.MutationObserver)new MutationObserver(()=>setTimeout(f,400)).observe(document.body,{childList:true})})();
 </script>
 
-</body>
+<style>
+/* 색: 원래 포레스트 톤 유지. 숫자 자리 맞춤만 적용 */
+body{font-variant-numeric:tabular-nums}
+/* "부품번호 반드시 크로스 체킹 하세요" 문구 빼기 */
+.vlk .xc{display:none!important}
+/* 찾기 버튼: 글씨 작고 부드럽게, 녹색 칸 폭 20% 줄임 (70px→56px) */
+.vbar #vingo,.vbar #findgo{font-size:13px!important;font-weight:450!important;letter-spacing:.02em;padding:0 15px!important;min-width:0!important;width:auto!important}
+/* 지금 고른 코드명(W140)을 녹색으로 켜 둠 */
+.codes b{background:var(--accent)!important;border-color:var(--accent)!important;color:var(--panel)!important;font-weight:600}
+/* 부품 분류 개수: 수량 칸처럼 투명한 상자 안에 */
+.side button>span:not(.sn){display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:24px;padding:0 8px;border:1px solid var(--line);border-radius:4px;background:transparent;font-size:12px;align-self:center}
+.side button[aria-current="true"]>span:not(.sn){border-color:var(--accent)}
+/* 집 모양 HOME 단추 */
+.hbx{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;line-height:1}
+.hbx span{letter-spacing:.04em}
+.top h1 small.hbx{padding:4px 8px!important}
+.hico{display:block}
+/* 검색 사이트 링크: 녹색을 연하게 */
+.vlk a{color:color-mix(in srgb,var(--accent) 60%,var(--ink))!important;border-color:color-mix(in srgb,var(--accent) 35%,transparent)!important;font-weight:500!important}
+.vlk a:hover{color:var(--accent)!important;border-color:var(--accent)!important}
+/* Q&A 단추 가로 15% 줄임 (121px→약 103px) */
+.top .qna{padding-left:5px!important;padding-right:5px!important;font-size:12.5px!important}
+/* 단종률 단추: 빨강 대신 흰색(밝은 화면은 진한 글자)으로 가늘게 */
+.dsc{--dc:var(--ink);border:1px solid color-mix(in srgb,var(--dc) 45%,transparent)!important;color:var(--dc)!important;background:none!important;font-weight:400!important}
+.dsc *{font-weight:400!important}
+.dsc b{color:var(--dc)!important}
+.dsc i{background:none!important;color:var(--dc)!important;border:1px solid color-mix(in srgb,var(--dc) 45%,transparent)}
+.dsc[aria-pressed="true"]{border-color:var(--dc)!important}
+.dsc[aria-pressed="true"] i{border-color:var(--dc)}
+@media all{:root:not([data-theme="light"]) .dsc{--dc:#f2f2ee}}
+:root[data-theme="dark"] .dsc{--dc:#f2f2ee}
+/* 왼쪽 부품 분류 글씨 가늘게 (570→400, 고른 칸은 500) */
+.side button,.side button .sn{font-weight:400!important}
+.side button[aria-current="true"],.side button[aria-current="true"] .sn{font-weight:500!important}
+/* 작업별 부품 줄: 가늘고 투명하게 */
+.crumb,.crumb *{font-weight:400!important}
+.crumb .xls{border:1px solid color-mix(in srgb,var(--accent) 40%,transparent)!important;color:color-mix(in srgb,var(--accent) 70%,var(--ink))!important;background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.crumb .xls b{background:none!important;color:var(--accent)!important;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);font-weight:400!important}
+.crumb .xls:hover{border-color:var(--accent)!important}
+.crumb .upd{border-color:color-mix(in srgb,var(--line) 70%,transparent)!important}
+/* 검색칸: PART 칸을 넓혀 한글 안내가 다 보이게, 안내 글씨는 조금 밝게 */
+.mrow .vin.vbar:not(.fbar){flex:5 1 0!important}
+.mrow .fbar{flex:4 1 0!important}
+.vbar input::placeholder{color:color-mix(in srgb,var(--ink) 75%,transparent)!important;opacity:1}
+/* 왼쪽 위 "부품 분류" 글씨 빼기 */
+.side>b{display:none!important}
+/* 달러 가격 바로 옆에 원화 (넓은 화면) */
+@media(min-width:1121px){.row{grid-template-columns:22px minmax(0,1fr) 78px auto 118px 76px!important}.row .sub{text-align:left!important;padding-left:18px}}
+/* R129 단추를 옆 코드명들과 같은 색 톤으로 */
+.codes button{border-color:var(--band-mute)!important;color:var(--band-mute)!important}
+.codes button:hover{color:var(--band-fg)!important;border-color:var(--band-fg)!important}
+/* 달러 통화 칸 작게 */
+.row select.c{font-size:12px!important;padding:2px 2px 2px 5px!important;height:26px!important;min-height:0!important;width:auto!important;border-color:color-mix(in srgb,var(--line) 80%,transparent)!important;color:var(--mute)!important;align-self:center}
+/* 달러 가격 칸 20% 작게 (100×36 → 80×29), 수량 칸도 높이 맞춤 */
+.row input.p::-webkit-inner-spin-button,.row input.p::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.row input.p{-moz-appearance:textfield;appearance:textfield;width:80px!important;height:29px!important;padding:3px 7px!important;font-size:13px!important;box-sizing:border-box}
+.row input.q{height:29px!important;padding:3px 6px!important;box-sizing:border-box}
+/* 언어 고르기 */
+.lng{position:relative;padding:0!important}
+.lng summary{list-style:none;cursor:pointer;padding:2px 10px}
+.lng summary::-webkit-details-marker{display:none}
+.lng summary::after{content:" ▾";font-size:.8em}
+.lngm{position:absolute;right:0;top:calc(100% + 6px);z-index:50;min-width:170px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 0;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.lngm a{padding:7px 14px;color:var(--ink)!important;text-decoration:none;white-space:nowrap;font-size:14px}
+.lngm a:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.lngm small{color:var(--mute);font-size:11px;margin-left:4px}
+/* 왼쪽 메뉴: 따라 내려오되 위 띠를 덮지 않고, 화면보다 길면 메뉴 안에서 스크롤 */
+.side{top:12px!important;max-height:calc(100vh - 24px - var(--barh,60px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+/* 작업별 부품 줄: 장바구니 띠 바로 위에 붙어 다님 */
+#crumb{position:sticky;bottom:var(--barh,60px);z-index:6;background:var(--bg);padding:8px 0;margin-top:0;border-top:1px solid var(--line)}
+/* 코드명 옆 모델 이름은 작게 */
+.codes b,.codes i,.codes button{padding:2px 8px!important}
+@media(max-width:1300px){.codes .in{flex-wrap:wrap!important;justify-content:flex-start!important;gap:6px!important}}
+.codes b small,.codes button small{font-family:var(--sans);font-size:11px;margin-left:3px;font-weight:400}
+/* 새 분류(준비 중): 흐리게, 누르면 안내만 */
+.side .soonc{opacity:.6;cursor:default}
+.side .soonc>span:not(.sn){font-family:var(--sans)!important;font-size:11px!important;min-width:48px!important;color:var(--mute)}
+.side .soonc .sn small{display:block}
+/* 차대번호·부품 검색 칸 높이 15% 줄임 (45→38px) */
+.pmv .vbar{height:38px!important;min-height:0!important}
+.pmv .vbar input,.pmv .vbar label,.pmv .vbar #vingo,.pmv .vbar #findgo{height:36px!important;min-height:0!important;padding-top:0!important;padding-bottom:0!important;line-height:36px!important}
+/* 컬러코드 고르면 사이트 색이 그 도장색으로 바뀜 */
+.ctm tr{cursor:pointer}.ctm tr:hover td{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.ctm tr.on td{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.ctm .rst{display:block;margin:6px 0 2px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+/* 줄 간격 고르게: 검색 사이트 줄과 모델명 줄 사이(32px)를 다른 줄과 같은 18px로 */
+.main>.mrow2{margin-top:-14px!important}
+/* 작업별 담기 줄: 이름 칸이 눌려 단추와 겹치던 문제. 이름은 줄지 않게, 넘치면 다음 줄로, 해당 없는 작업은 숨김 */
+.jobs{flex-wrap:wrap!important;row-gap:8px;justify-content:flex-start!important;column-gap:6px}
+#jobl{margin-right:2px}
+#jobl{flex:none!important;white-space:nowrap}
+.jobs button:disabled{display:none!important}
+/* 수량 칸 위아래 화살표 숨김 (숫자를 가림) */
+.row input.q::-webkit-inner-spin-button,.row input.q::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.row input.q{-moz-appearance:textfield;appearance:textfield;text-align:center}
+/* 아래 줄 전체: "가격 갱신 매월 30일"과 같은 차분한 회색 톤 */
+#crumb,#crumb *{color:var(--mute)!important}
+#crumb>span{opacity:1}
+#crumb a.xls,#crumb .upd,#crumb .dsc,#crumb .dsc i,#crumb a.xls b{background:transparent!important;border:1px solid color-mix(in srgb,var(--mute) 45%,transparent)!important}
+#crumb>button:first-child{text-decoration-color:color-mix(in srgb,var(--mute) 60%,transparent)!important}
+#crumb .dsc b{border:0!important}
+/* HOME 단추: 오른쪽 Mobile 단추와 같은 크기·톤 (가는 테두리, 작은 글씨) */
+.top h1 small.hbx,.top h1 b.hbx{font-size:13.5px!important;padding:2px 10px!important;border:1px solid currentColor!important;border-radius:4px!important;height:27px;box-sizing:border-box;gap:5px!important;font-weight:400!important;letter-spacing:0!important;vertical-align:middle}
+.top h1 .hbx .hico{width:15px!important;height:15px!important}
+.top h1 .hbx span{font-size:13.5px!important;letter-spacing:.02em!important}
+/* 왼쪽 메뉴 글씨: 투명하면서도 선명하게 (가는 글씨 + 밝은 색을 살짝 비침, 고른 메뉴는 더 또렷) */
+#side{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+#side button,#side button .sn,#side a{color:rgba(226,232,228,.78)!important;font-weight:400!important;letter-spacing:.01em}
+#side button>span:not(.sn){color:rgba(226,232,228,.62)!important;border-color:rgba(226,232,228,.18)!important}
+#side button:hover,#side button:hover .sn,#side a:hover{color:rgba(240,244,241,.95)!important}
+#side button[aria-current="true"],#side button[aria-current="true"] .sn,#side button[aria-current="true"]>span:not(.sn){color:#f0f4f1!important;font-weight:400!important}
+html[data-theme="light"] #side button,html[data-theme="light"] #side button .sn,html[data-theme="light"] #side a{color:rgba(30,40,34,.72)!important}
+html[data-theme="light"] #side button>span:not(.sn){color:rgba(30,40,34,.55)!important;border-color:rgba(30,40,34,.18)!important}
+html[data-theme="light"] #side button[aria-current="true"],html[data-theme="light"] #side button[aria-current="true"] .sn{color:#1b2420!important}
+/* 스킨: 고른 메뉴 바탕·막대도 도장색을 따라감 */
+#side button[aria-current="true"]{background:var(--accent-bg)!important;border-left-color:var(--accent)!important}
+/* 원화 금액: "원" 끝자리 기준으로 오른쪽 정렬 (자릿수가 세로로 맞음) */
+#list .row .sub{text-align:right!important;padding-left:0!important;padding-right:8px!important;font-variant-numeric:tabular-nums}
+/* 글씨: 살짝 키우고(약 1px), 어두운 화면 글씨색을 밝혀서 가늘지만 또렷하게 */
+@media all{:root:not([data-theme="light"]){--ink:#c9cfca;--mute:#98a39c;--band-fg:#c4cac5}}
+:root[data-theme="dark"]{--ink:#c9cfca;--mute:#98a39c;--band-fg:#c4cac5}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+#list .row .nm b{font-size:15px!important}
+#list .row .en,#list .row .tl{font-size:13.5px!important}
+#list .row .pn{font-size:15px!important}
+#list .row .tg{font-size:12.5px!important}
+#list .row .sub{font-size:15px!important}
+#list .row input.p,#list .row input.q{font-size:14px!important}
+#list .row .buy summary{font-size:13.5px!important}
+#side button .sn{font-size:15px!important}
+#side button>span:not(.sn){font-size:12.5px!important}
+.jobs button,#jobl{font-size:13.5px!important}
+.vlk a{font-size:12.5px!important}
+.vlk>span,.vlk{font-size:12.5px}
+#crumb{font-size:13px!important}
+.bar{font-size:14.5px}
+.top nav a,.top .mk a,.top .makes a{font-size:14.5px}
+/* 장바구니가 열리면 아래 단종률 줄은 숨겨 겹치지 않게 */
+body:has(#cart:not([hidden])) #crumb{display:none!important}
+/* 제목 옆 자동차 캐리커처 */
+.top h1 .carc{display:inline-block;vertical-align:-6px;width:52px!important;height:24px!important;margin-left:4px;margin-right:8px;color:var(--accent);opacity:.9}
+/* 연식 칸 숨김(자료는 그대로) */
+.phl{display:none!important}
+/* 순정/애프터 선택 버튼 숨김 */
+.price .seg{display:none!important}
+/* 부품 분류를 두 칸 위로: 검색 줄과 링크 줄을 오른쪽 칸 안으로 */
+#pm{display:none!important}
+.pmv{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.pmv .vlk{flex-wrap:wrap!important;justify-content:flex-start!important;gap:6px 10px!important}
+.pmv .vlk>*{white-space:nowrap}
+/* 컬러코드·스킨 탭: 내 차 고르기 줄 오른쪽 끝 */
+.mrow2 .ctab{margin-left:auto;align-self:center}
+.mrow2 .ctab summary{border:1px solid var(--accent);border-radius:4px;padding:4px 10px;font-size:13px;font-weight:400;color:var(--accent);background:none}
+.mrow2 .ctab summary::after{color:var(--accent)!important}
+.mrow2 .ctab[open] summary{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.ctab{position:relative;display:inline-block}
+.ctab summary{list-style:none;cursor:pointer;border:1px solid var(--line);border-radius:4px;padding:1px 10px;color:var(--ink);background:var(--panel);white-space:nowrap}
+.ctab summary::-webkit-details-marker{display:none}
+.ctab summary::after{content:" ▾";color:var(--mute)}
+.ctab[open] summary{border-color:var(--ink)}
+.ctm{position:absolute;z-index:30;top:calc(100% + 4px);right:0;left:auto;width:min(460px,90vw);max-height:60vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:10px 12px;box-shadow:0 6px 18px rgba(0,0,0,.12);white-space:normal}
+.ctm b{display:block;margin-bottom:6px;color:var(--ink)}
+.ctm table{width:100%;border-collapse:collapse;font-size:13px}
+.ctm td{border-top:1px solid var(--line);padding:5px 6px;vertical-align:middle;color:var(--ink)}
+.ctm td i{display:inline-block;width:22px;height:14px;border:1px solid var(--line);border-radius:2px}
+.ctm .cc{font-family:var(--mono);font-weight:570;white-space:nowrap}
+.ctm td small{display:block;color:var(--mute);font-size:11px}
+.ctm p{margin:8px 0 0;font-size:12px;color:var(--mute);line-height:1.5}
+.pvtag{position:fixed;left:8px;bottom:8px;z-index:99;background:#8a6a2f;color:#fff;font-size:12px;padding:3px 8px;border-radius:4px;opacity:.9;pointer-events:none}
+
+/* ===== 사이트 전체: 가늘고 투명하고 산뜻하게 ===== */
+body,body *{font-weight:400!important}
+/* 형이 고른 톤: 차종 버튼처럼 모두 가는 글씨(300). 제목·부품 이름도 같은 굵기 */
+.side button[aria-current="true"] .sn,.mods button[aria-pressed="true"],.jobs button[aria-pressed="true"],.codes b{font-weight:400!important}
+/* 꽉 찬 녹색 칸 → 투명한 녹색 칸 */
+#vingo,#findgo,.mods button[aria-pressed="true"],.jobs button[aria-pressed="true"],.soonp button,.repb a,.codes b{background:color-mix(in srgb,var(--accent) 16%,transparent)!important;color:var(--accent)!important;border-color:color-mix(in srgb,var(--accent) 60%,transparent)!important}
+.vbar #vingo,.vbar #findgo{border-left:1px solid color-mix(in srgb,var(--accent) 45%,transparent)!important}
+.vbar{border-width:1px!important;border-color:color-mix(in srgb,var(--accent) 55%,transparent)!important}
+.steps li::before{background:color-mix(in srgb,var(--accent) 16%,transparent)!important;color:var(--accent)!important;border:1px solid color-mix(in srgb,var(--accent) 60%,transparent)}
+.sa[aria-pressed="true"] i{background:color-mix(in srgb,var(--accent) 30%,transparent)!important}
+</style>
+<script>
+(()=>{const pm=document.getElementById('pm'),pc=document.getElementById('pc');if(!pm||!pc)return;const main=pc.querySelector('.main'),inn=pm.querySelector('.in');if(!main||!inn)return;
+const box=document.createElement('div');box.className='pmv';while(inn.firstChild)box.appendChild(inn.firstChild);main.prepend(box)})();
+</script>
+<script>
+/* 왼쪽 "전체 부품" 칸을 옆 VIN 칸과 위아래 딱 맞춤 (높이·위치 동기화) */
+(()=>{const f=()=>{const v=document.querySelector('.pmv .vbar'),s=document.querySelector('#side>button');if(!v||!s)return;
+s.style.minHeight=v.offsetHeight+'px';s.style.alignItems='center';s.style.boxSizing='border-box';
+};
+[0,300,1200,3000].forEach(t=>setTimeout(f,t));addEventListener('resize',f);if(document.fonts)document.fonts.ready.then(f);
+new MutationObserver(()=>setTimeout(f,0)).observe(document.getElementById('side'),{childList:true})})();
+</script>
+<script>
+/* 작업별 부품 줄(스프레드시트·단종률·가격 갱신)을 장바구니 띠 바로 위에 붙임 */
+(()=>{const c=document.getElementById('crumb'),l=document.getElementById('list');if(c&&l&&l.parentNode)l.parentNode.insertBefore(c,l.nextSibling)})();
+</script>
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.side .soonc');if(b){e.preventDefault();e.stopPropagation();const n=b.querySelector('.sn').firstChild.textContent;if(typeof toast==='function')toast(n+'은(는) 준비 중입니다. 차근차근 채워 갑니다.')}},true);
+</script>
+<script>
+/* 컬러코드 → 스킨: 도장색을 바탕에 살짝 섞고, 강조색은 어두운 바탕에서 읽히게 밝혀서 씀 */
+(()=>{const R=document.documentElement,K='skinPaint',cs0=getComputedStyle(R),base={};['accent','bg','panel','line','band','accent-bg'].forEach(k=>base[k]=cs0.getPropertyValue('--'+k).trim());
+const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),toH=a=>'#'+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+const mix=(a,b,t)=>a.map((v,i)=>v*(1-t)+b[i]*t),lum=a=>{const c=a.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+function apply(code,hex){const s=document.querySelector('.ctm'),sum=document.querySelector('.ctab>summary');
+ if(!hex){Object.entries(base).forEach(([k,v])=>R.style.setProperty('--'+k,v));try{localStorage.removeItem(K)}catch(e){}
+  if(sum)sum.innerHTML='컬러코드';document.querySelectorAll('.ctm tr').forEach(t=>t.classList.remove('on'));return}
+ const p=hx(hex),W=[255,255,255],D=[12,14,16];let a=p.slice(),t=0;while(lum(a)<.32&&t<.9){t+=.05;a=mix(p,W,t)}
+ const f=lum(p)>.3?.45:1;R.style.setProperty('--accent',toH(a));R.style.setProperty('--bg',toH(mix(D,p,.26*f)));R.style.setProperty('--panel',toH(mix([22,25,28],p,.32*f)));R.style.setProperty('--line',toH(mix([42,46,50],p,.45*f)));R.style.setProperty('--band',toH(mix([8,9,10],p,.30*f)));R.style.setProperty('--accent-bg',toH(mix(mix(D,p,.26*f),a,.20)));
+ document.querySelectorAll('.ctm tr').forEach(t=>t.classList.toggle('on',t.querySelector('.cc').textContent===code));
+ if(sum)sum.innerHTML='<i style="display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid #fff4;background:'+hex+'"></i>'+code;
+ try{localStorage.setItem(K,code+'|'+hex)}catch(e){}}
+const m=document.querySelector('.ctm');if(!m)return;
+const b=document.createElement('button');b.type='button';b.className='rst';b.textContent='기본 색(포레스트)으로 되돌리기';m.querySelector('b').after(b);b.onclick=()=>{apply();const d=b.closest('details');if(d)d.open=false};
+m.querySelectorAll('tr').forEach(t=>t.addEventListener('click',()=>{const i=t.querySelector('i'),c=t.querySelector('.cc').textContent;const rgb=getComputedStyle(i).backgroundColor.match(/\d+/g).map(Number);apply(c,toH(rgb));t.closest('details').open=false}));
+try{const v=localStorage.getItem(K);if(v){const[c,h]=v.split('|');apply(c,h)}}catch(e){}})();
+</script>
+
+<style>/* 토론 2: 금액은 또렷하게 */.row .sub,#sum,#items .ci span:last-child{font-weight:500!important}</style>
+<style>/* 위 띠 한 줄 */
+.top .in{flex-wrap:nowrap!important;column-gap:12px!important}
+.top h1{flex:0 0 auto}
+.top .makes{flex:1 1 auto!important;min-width:0;flex-wrap:nowrap!important;justify-content:space-between;column-gap:6px!important}
+.top .makes>*{font-size:13px!important;white-space:nowrap}
+.top .qna,.top .toms{flex:0 0 auto}
+@media (max-width:1500px){.top .makes>*{font-size:12.5px!important}}@media (max-width:1360px){.top h1 .carc{display:none!important}}
+</style>
+<style>.codes .cd{font-size:15px}.codes .in>span:first-child{font-size:15px!important}</style><script>(()=>{const c=document.getElementById('codes');if(!c)return;const f=()=>{c.querySelectorAll('.in>b,.in>i,.in>button').forEach(e=>{const t=e.firstChild;if(!t||t.nodeType!==3||e.querySelector('.cd'))return;const m=/^(W460|[WRC]\d{3})(.*)$/.exec(t.nodeValue);if(!m)return;const s=document.createElement('span');s.className='cd';s.textContent=m[1];t.nodeValue=m[2];e.insertBefore(s,t)})};f();new MutationObserver(f).observe(c,{childList:true,subtree:true})})();</script>
+<style>.in.cols#pc{padding-top:12px!important}</style>
+<style>.sech .phx{margin-left:auto;background:var(--panel);color:var(--ink);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:4px;padding:3px 8px;font:inherit;font-size:13px;cursor:pointer}.sech small{flex:1 1 auto}</style><script>(()=>{const L=document.getElementById('list'),P=document.getElementById('ph');if(!L||!P)return;const O=[['','연식'],['e','전기형 (1991~1994.2)'],['m','중기형 (1994.3~1996.5)'],['l','후기형 (1996.6~1998)']];const f=()=>{L.querySelectorAll('.sech').forEach(h=>{let x=h.querySelector('.phx');if(!x){x=document.createElement('select');x.className='phx';x.setAttribute('aria-label','연식');x.innerHTML=O.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('');h.appendChild(x)}if(x.value!==P.value)x.value=P.value})};L.addEventListener('change',e=>{const x=e.target.closest&&e.target.closest('.phx');if(!x)return;P.value=x.value;P.dispatchEvent(new Event('change',{bubbles:true}));P.dispatchEvent(new Event('input',{bubbles:true}));if(typeof render==='function')render();f()});f();new MutationObserver(f).observe(L,{childList:true,subtree:true})})();</script>
+<style>/* 아이폰(iOS) 다크 디자인 + 클래식: 시스템 글꼴, 회색 계열 그룹 카드, 흐린 유리 띠, 세리프 제목, 샴페인 포인트 */
+:root:not([data-theme="light"]){--bg:#0a0c0b;--panel:#1c1e1d;--line:rgba(120,124,122,.28);--ink:#d9dcda;--mute:#8e938f;--band:rgba(16,18,17,.78)}
+:root{--sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;--serif:ui-serif,'New York','Noto Serif KR','Noto Serif CJK KR','Noto Serif JP','Noto Serif SC',Georgia,serif;--ivory:#f2efe6;--champ:#c9b27c;--hair:rgba(120,124,122,.28);--fill:rgba(118,118,128,.20)}
+body{font-family:var(--sans)!important;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid color-mix(in srgb,var(--champ) 40%,transparent)!important}
+.top h1>button{font-family:var(--serif)!important;font-weight:500!important;letter-spacing:.01em;color:var(--ivory)!important}
+.top h1 .hbx,.top h1 .hbx *{font-family:var(--sans)!important}
+.top .tom,.top .qna,.top summary,.top h1 .hbx{border-radius:8px!important}
+.codes{border-top:0!important;border-bottom:.5px solid var(--hair)}
+.codes .in>b,.codes .in>i,.codes .in>button{border-radius:8px!important}
+.sec{border:0!important;border-radius:12px!important;background:var(--panel)!important;overflow:hidden}
+.sech{border-bottom:.5px solid var(--hair)!important}
+.sech h3{font-family:var(--serif)!important;font-weight:500!important;color:var(--ivory)!important;letter-spacing:.01em;font-size:17px!important}
+#list .row{border-bottom:.5px solid var(--hair)!important}
+#list .row .nm b{color:var(--ivory)!important;font-weight:500!important;letter-spacing:-.01em}
+#side{border-right:0!important}
+#side button{border-radius:10px!important}
+#side button[aria-current="true"]{border-left-color:transparent!important}
+#side button[aria-current="true"] .sn{color:var(--ivory)!important}
+#side button>span:not(.sn){border-radius:6px!important;background:var(--fill)!important;border:0!important}
+.vbar,.vin{border:0!important;border-radius:10px!important;background:var(--fill)!important;overflow:hidden}
+#vingo,#findgo{border-radius:0!important}
+input:not([type=checkbox]),select{background:var(--fill)!important;border:0!important;border-radius:8px!important}
+.mods button,.jobs button,.vlk a,.ctab summary,.sech .phx{border-radius:8px!important}
+.mods button:not([aria-pressed="true"]),.jobs button:not([aria-pressed="true"]){background:var(--fill)!important;border-color:transparent!important}
+#list .row .buy summary{border-radius:7px!important}
+.bar{backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(16,18,17,.78)!important;border-top:.5px solid color-mix(in srgb,var(--champ) 35%,transparent)!important}
+.bar button,.bar .txl,.fwg summary{border-radius:10px!important}
+.bar #sum{color:var(--ivory)!important;font-family:var(--sans)!important;font-weight:600!important;letter-spacing:-.01em}
+.fwg summary,.fwg>summary{border-color:color-mix(in srgb,var(--champ) 70%,transparent)!important;color:var(--champ)!important}
+#crumb{background:rgba(10,12,11,.82)!important;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+</style>
+<script id="jobgclose">document.addEventListener("click",e=>{document.querySelectorAll("#jobs details.jobg[open]").forEach(d=>{if(!d.contains(e.target)||e.target.closest(".jgm button"))d.open=false})});</script><script id="jobfit">(function(){const J=document.getElementById('jobs');if(!J)return;const P=J.parentElement;let busy=false;function fit(){if(busy)return;busy=true;try{const old=J.querySelector(':scope>details.jmore');if(old){[...old.querySelector('.jgm').children].forEach(c=>J.appendChild(c));old.remove()}const R=()=>P.getBoundingClientRect().right-2;const kids=()=>[...J.children];const over=()=>{const k=kids();return k.length&&Math.max(...k.map(e=>e.getBoundingClientRect().right))>R()};if(!over())return;const d=document.createElement('details');d.className='jobg jmore';d.innerHTML='<summary>더보기</summary><div class="jgm" style="left:auto;right:0"></div>';J.appendChild(d);const m=d.querySelector('.jgm');let guard=0;while(over()&&guard++<20){const k=kids().filter(e=>e!==d);if(!k.length)break;m.insertBefore(k[k.length-1],m.firstChild)}}finally{setTimeout(()=>busy=false,0)}}new MutationObserver(()=>{if(!busy)fit()}).observe(J,{childList:true});addEventListener('resize',fit);setTimeout(fit,300)})();</script><script id="rowfit">(function(){const LAB="더보기";function mk(id,bound){const C=document.getElementById(id);if(!C)return;let busy=false;function fit(){if(busy)return;busy=true;try{const old=C.querySelector(':scope>details.rmore');if(old){[...old.querySelector('.rmm').children].forEach(c=>C.appendChild(c));old.remove()}const kids=()=>[...C.children].filter(e=>e.offsetParent!==null&&e.tagName!=='SPAN'||e.classList&&e.classList.contains('upd'));const R=bound;const over=()=>{const k=[...C.children].filter(e=>e.getBoundingClientRect().width>0);return k.length&&Math.max(...k.map(e=>e.getBoundingClientRect().right))>R()};if(!over())return;const d=document.createElement('details');d.className='rmore';d.innerHTML='<summary>'+LAB+'</summary><div class="rmm"></div>';C.appendChild(d);const m=d.querySelector('.rmm');let g=0;while(over()&&g++<30){const k=[...C.children].filter(e=>e!==d&&!(e.tagName==='SPAN'&&!e.classList.contains('upd'))&&e.getBoundingClientRect().width>0);if(k.length<2)break;m.insertBefore(k[k.length-1],m.firstChild)}}finally{setTimeout(()=>busy=false,0)}}new MutationObserver(()=>{if(!busy)fit()}).observe(C,{childList:true});addEventListener('resize',fit);setTimeout(fit,350);document.addEventListener('click',e=>{C.querySelectorAll('details.rmore[open]').forEach(d=>{if(!d.contains(e.target)||e.target.closest('.rmm button,.rmm a'))d.open=false})})}
+const q=()=>{const a=document.querySelector('.top a.qna');return a?a.getBoundingClientRect().left-4:innerWidth};
+mk('makes',q);mk('codes',()=>document.getElementById('codes').getBoundingClientRect().right+1);mk('crumb',()=>document.getElementById('crumb').getBoundingClientRect().right+1);})();</script><style id="w124css">.codes a.cw{text-decoration:none;color:var(--band-fg);border:1px solid var(--band-fg);border-radius:4px;padding:2px 10px;font-family:var(--mono);white-space:nowrap}.codes a.cw:hover{background:var(--band-fg);color:var(--panel)}.pl a.w124l{text-decoration:none;color:inherit;display:block}.pl a.w124l small{color:var(--accent)}html.w124 #mods,html.w124 .ctab,html.w124 .mct,html.w124 .jobs,html.w124 .phl,html.w124 .srcs,html.w124 a.xls,html.w124 #side [data-cat=home],html.w124 .phx,html.w124 .dsc{display:none!important}#w124n{margin:8px 0 10px;font-size:12.5px;line-height:1.5;opacity:.8}</style><script id="w124js">(function(){if(window.CAR!=='w124')return;var d=document,h=d.documentElement;h.classList.add('w124');var N="W124 300E 1차 · 계속 추가 중. 제조국은 구매 전 판매처에 전화하거나 박스 사진을 요청해 확인하세요.";var p=d.createElement('p');p.id='w124n';p.textContent=N;if(/\/m\//.test(location.pathname))p.style.padding='0 16px';var a=d.getElementById('list')||d.getElementById('cnt');if(a&&a.parentNode)a.parentNode.insertBefore(p,a);var b=d.querySelector('#pick b');if(b)b.textContent='W124';var m=d.querySelector('#pick .mdl');if(m)m.textContent='300E';var w=d.getElementById('pkw');if(w){w.classList.remove('now');w.addEventListener('click',function(e){e.stopImmediatePropagation();location.href='?'},true)}var l=d.querySelector('.pl .w124l');if(l)l.classList.add('now');function fx(el){if(!el)return;new MutationObserver(function(){var t=el.innerHTML;if(t.indexOf('W140')>=0)el.innerHTML=t.split('W140').join('W124 300E')}).observe(el,{childList:true,subtree:true,characterData:true});el.innerHTML=el.innerHTML.split('W140').join('W124 300E')}fx(d.getElementById('crumb'));})();</script></body>
 </html>
