@@ -1,0 +1,35 @@
+{
+ "name": "클래식카",
+ "short_name": "클래식카",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#2aa84b",
+ "theme_color": "#2aa84b",
+ "lang": "ko",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "description": "클래식카 부품 계산기. 벤츠 W124 E클래스(300E, E320, 500E, 300TE)와 W140 S클래스(S320, S500, S600) 순정 부품 번호, 기준 가격, 리퍼비시 부품을 한 번에 찾고 원화로 계산합니다.",
+ "categories": [
+  "shopping",
+  "utilities",
+  "lifestyle"
+ ],
+ "id": "./?app=pc"
+}

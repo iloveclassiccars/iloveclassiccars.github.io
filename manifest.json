@@ -1,11 +1,11 @@
 {
- "name": "클래식카 부품 계산기",
- "short_name": "부품 계산기",
+ "name": "클래식카",
+ "short_name": "클래식카",
  "start_url": "./m/",
  "scope": "./",
  "display": "standalone",
- "background_color": "#101613",
- "theme_color": "#12241a",
+ "background_color": "#2aa84b",
+ "theme_color": "#2aa84b",
  "lang": "ko",
  "icons": [
   {
