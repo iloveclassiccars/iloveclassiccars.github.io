@@ -7,7 +7,7 @@
   var KO=(document.documentElement.lang||'ko').indexOf('ko')===0;
   var T=KO?{btn:'내차고',title:'내차고',addCar:'+ 차 추가',ledger:'차계부',year:'올해',parts:'부품',labor:'공임',add:'+ 기록 추가',
     rec:'기록 추가',edit:'기록 고치기',save:'저장',del:'지우기',close:'닫기',date:'날짜',km:'주행거리',job:'작업',shop:'정비소',memo:'메모',photo:'영수증 사진',
-    carName:'차 이름',vin:'차대번호',yr:'연식',odo:'지금 주행거리',oil:'엔진오일 주기',oilkm:'km마다',oilmo:'개월마다',
+    carName:'차 이름',vin:'차대번호',yr:'연식',odo:'지금 주행거리',oil:'엔진오일 주기',ins:'보험사',snap:'📷 찍기',snapT:'찍어서 넣기',sAcc:'🚨 사고 났어요',sAccD:'현장 사진과 기록을 바로 남겨요',sEst:'🧾 견적서·영수증',sEstD:'찍으면 금액이 들어가요 (앱)',sDoc:'📄 보험증서·등록증',sDocD:'찍으면 보험사·만기일·차대번호가 들어가요 (앱)',sVin:'🔎 차대번호',sVinD:'찍으면 내 차 부품을 찾아요',accT:'사고 기록',accChk:'먼저: 다친 사람 확인 → 비상등·삼각대 → 119·112 · 보험사 긴급출동',accShots:'이렇게 찍어 두세요: ① 차 전체 (4방향) ② 상대 차 번호판 ③ 부서진 곳 가까이 ④ 도로·신호·차선 ⑤ 블랙박스 영상 저장',accPh:'현장 사진 (여러 장)',accPlace:'장소',accOther:'상대 차 번호·보험사',accMemo:'어떻게 됐는지',accN:'장 저장됨',accJob:'사고',accMax:'사진은 한 번에 12장까지 저장돼요',fuel:'⛽ 주유',fTitle:'주유 기록',fL:'넣은 양 (L)',fPpl:'리터당 가격',fAmt:'낸 금액',fFull:'가득 넣었어요',fCalc:'세 칸 중 두 칸만 넣으면 나머지는 저절로 계산돼요',fEco:'연비',fCostKm:'1km당 기름값',fMon:'이번 달 기름값',fNeed:'가득 주유를 두 번 기록하면 연비가 나와요',fDrop:'연비가 평소보다 {p}% 나빠졌어요 · 타이어 공기압·점화·센서를 점검해 보세요',fJob:'주유',fKmReq:'주행거리를 넣어야 연비를 계산할 수 있어요',docs:'서류 사진 (찍으면 자동 입력)',dReg:'자동차 등록증',dIns:'보험증권',dOk:'읽은 내용을 칸에 넣었어요. 맞는지 확인하고 저장하세요.',dWeb:'사진은 저장했어요. 앱에서는 찍으면 칸이 자동으로 채워져요. 지금은 직접 넣어 주세요.',dNone:'글자를 못 읽었어요. 직접 넣어 주세요.',insEnd:'보험 만기일',insDue:'보험 만기',insLeft:'일 남음',insPast:'만기 지났어요',oilkm:'km마다',oilmo:'개월마다',
     nextOil:'다음 엔진오일',or:'또는',none:'아직 기록이 없어요. 공임 계산에서 "차계부에 저장"을 누르거나 + 기록 추가를 눌러요.',
     nocar:'내 차를 먼저 넣어 주세요.',byYear:'연도별',total:'누적',exp:'내보내기',imp:'가져오기',
     note:'가입 없이 이 기기에만 저장돼요. 내보내기로 백업하고 새 폰으로 옮길 수 있어요. 차 팔 때 정비 기록으로 그대로 쓸 수 있어요.',
@@ -15,12 +15,13 @@
     tagOk:'국제 표준 안',tagHi:'비쌈',tagLo:'쌈',tagRip:'바가지 의심',cnt:'건',impOk:'가져왔어요',impNo:'파일을 읽지 못했어요',beta:'시험판(베타)이에요. 기록을 지키려면 가끔 백업 파일 저장을 눌러 주세요.',bk:'백업 파일 저장',paid:'실제로 낸 금액',more:'더 적기',menu:'메뉴',betaTag:'시험판',bkLast:'마지막 백업',bkNever:'아직 백업 안 함',bkNow:'백업할 때가 됐어요',fb:'의견 보내기',futq:'정비 날짜가 오늘보다 뒤예요. 맞나요?',kmq:'앞선 기록보다 주행거리가 적어요 ({a} → {b} km). 계기판을 바꿨다면 메모에 적어 주세요. 이대로 저장할까요?',dupImp:'같은 기록은 건너뛰었어요',newer:'더 새 버전에서 만든 파일이에요. 사이트를 새로고침한 뒤 다시 가져와 주세요.'}
    :{btn:'Garage',title:'My Garage',addCar:'+ Add car',ledger:'Logbook',year:'This year',parts:'Parts',labor:'Labor',add:'+ Add record',
     rec:'Add record',edit:'Edit record',save:'Save',del:'Delete',close:'Close',date:'Date',km:'Mileage',job:'Work',shop:'Shop',memo:'Note',photo:'Receipt photo',
-    carName:'Car name',vin:'VIN',yr:'Year',odo:'Current mileage',oil:'Oil interval',oilkm:'km',oilmo:'months',
+    carName:'Car name',vin:'VIN',yr:'Year',odo:'Current mileage',oil:'Oil interval',ins:'Insurer',snap:'📷 Snap',snapT:'Snap to add',sAcc:'🚨 I had an accident',sAccD:'Save scene photos and notes now',sEst:'🧾 Quote or receipt',sEstD:'Amounts fill in from the photo (app)',sDoc:'📄 Insurance or registration',sDocD:'Insurer, renewal date and VIN fill in (app)',sVin:'🔎 VIN',sVinD:'Find parts for your car',accT:'Accident record',accChk:'First: check for injuries → hazard lights and warning triangle → emergency services · insurer roadside help',accShots:'Take these photos: ① whole car (4 sides) ② other car plate ③ damage close-up ④ road, signals, lanes ⑤ save dashcam video',accPh:'Scene photos (several)',accPlace:'Place',accOther:'Other car plate · insurer',accMemo:'What happened',accN:' photos saved',accJob:'Accident',accMax:'Up to 12 photos at a time',fuel:'⛽ Fuel',fTitle:'Fuel log',fL:'Litres',fPpl:'Price per litre',fAmt:'Amount paid',fFull:'Filled to full',fCalc:'Fill any two of the three boxes and the third is calculated',fEco:'Fuel economy',fCostKm:'Fuel cost per km',fMon:'Fuel this month',fNeed:'Log two full fill-ups to see fuel economy',fDrop:'Fuel economy is {p}% worse than usual · check tyre pressure, ignition and sensors',fJob:'Fuel',fKmReq:'Enter the mileage so fuel economy can be calculated',docs:'Document photos (auto-fill)',dReg:'Registration',dIns:'Insurance policy',dOk:'Filled from the photo. Check and save.',dWeb:'Photo saved. In the app, fields fill in automatically. For now, please type them.',dNone:'Could not read text. Please type it.',insEnd:'Insurance renewal',insDue:'Insurance renewal',insLeft:' days left',insPast:'expired',oilkm:'km',oilmo:'months',
     nextOil:'Next oil change',or:'or',none:'No records yet. Press "Save to logbook" in Labor, or + Add record.',
     nocar:'Add your car first.',byYear:'By year',total:'Total',exp:'Export',imp:'Import',
     note:'No sign-up. Saved only on this device. Export to back up or move to a new phone. Handy as a service record when you sell.',
     toLedger:'Save to logbook',saved:'Saved to logbook',self:'DIY',delq:'Delete this record?',delcar:'Delete this car and all its records?',editCar:'Car details',main:'Main',
     tagOk:'Within standard',tagHi:'Pricey',tagLo:'Cheap',tagRip:'Possible rip-off',cnt:'',impOk:'Imported',impNo:'Could not read the file',beta:'This is a beta. Press Save backup file now and then to keep your records safe.',bk:'Save backup file',paid:'Amount paid',more:'More details',menu:'Menu',betaTag:'Beta',bkLast:'Last backup',bkNever:'No backup yet',bkNow:'Time to back up',fb:'Send feedback',futq:'The service date is after today. Is that right?',kmq:'Mileage is lower than an earlier record ({a} → {b} km). If the odometer was replaced, add a note. Save anyway?',dupImp:'Duplicate records were skipped',newer:'This file comes from a newer version. Reload the site and import again.'};
+  (function(){var L=(document.documentElement.lang||'').slice(0,2),X=window.ICC_I18N&&window.ICC_I18N[L];if(X&&X.g)for(var k in X.g)T[k]=X.g[k]})();
   var KEY='icc_garage';
   /* 의견 보내기: 형 결정 — 이메일 대신 페이스북·인스타그램 (계정명 iloveclassiccars.official) */
   var FB='https://www.facebook.com/iloveclassiccars.official',IG='https://www.instagram.com/iloveclassiccars.official';
@@ -49,9 +50,9 @@
   var TAG={ok:['ok',T.tagOk],hi:['hi',T.tagHi],lo:['lo',T.tagLo],rip:['hi',T.tagRip],self:['lo',T.self]};
 
   var css=document.createElement('style');css.textContent=
-  '#garb{display:inline-flex;align-items:center;gap:4px}#garb .gtx{display:inline-flex;flex-direction:column;line-height:1.05;text-align:left}#garb .gen{font-style:normal;font-size:8.5px;opacity:.85;letter-spacing:.02em;white-space:nowrap}@media(min-width:601px){#garb .gtx{flex-direction:row;align-items:baseline;gap:5px}#garb .gen{font-size:.82em}}#garb .gic{display:none}@media(max-width:600px){#garb .gic{display:block}}'+
+  '#garb{display:inline-flex;align-items:center;gap:4px}#garb .gtx{white-space:nowrap}#garb .gen{font-style:normal;font-size:8.5px;opacity:.85;letter-spacing:.02em;white-space:nowrap}@media(min-width:601px){#garb .gtx{flex-direction:row;align-items:baseline;gap:5px}#garb .gen{font-size:.82em}}#garb .gic{display:none}@media(max-width:600px){#garb .gic{display:block}}'+
   '#gsh{position:fixed;inset:0;z-index:99998;background:#171B26;color:#E8EAEE;display:none;flex-direction:column;font:14px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}#gsh.on{display:flex}'+
-  '#gsh .gt{background:#1F4D36;padding:calc(env(safe-area-inset-top) + 12px) 14px 10px;display:flex;justify-content:space-between;align-items:center;font-weight:700;gap:8px}'+
+  '#gsh .gt{background:#1F4D36;padding:calc(env(safe-area-inset-top) + 12px) 14px 10px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-weight:700;gap:8px}.gt .gl{display:flex;justify-content:flex-start}.gt .gr{display:flex;justify-content:flex-end;gap:8px}.gt .gtt{text-align:center;white-space:nowrap}'+
   '#gsh button{font:inherit;color:#fff;background:transparent;border:1px solid #ffffff99;border-radius:0;padding:3px 9px;cursor:pointer;white-space:nowrap}'+
   '#gsh .gt .x{border:0;padding:0;font-weight:400}'+
   '#gsh .gb{flex:1;overflow:auto;padding:10px 12px 90px;max-width:640px;width:100%;margin:0 auto}'+
@@ -80,7 +81,8 @@
   var S=document.createElement('div');S.id='gsh';
   function open(v,arg){S.classList.add('on');document.body.style.overflow='hidden';(V[v]||V.home)(arg)}
   function close(){S.classList.remove('on');document.body.style.overflow=''}
-  function frame(title,right,body,back){S.innerHTML='<div class="gt"><button class="x" data-a="'+(back||'close')+'">'+(back?'‹ ':'✕ ')+(back?T.title:T.close)+'</button><span>'+title+'</span>'+(right||'<span style="min-width:40px"></span>')+'</div><div class="gb">'+body+'</div>'}
+  function frame(title,right,body,back){var L=back?'<button class="x" data-a="'+back+'">‹ '+T.title+'</button>':(right||'');var Rt=(back&&right?right:'')+'<button class="x" data-a="close">'+T.close+' ✕</button>';
+    S.innerHTML='<div class="gt"><div class="gl">'+L+'</div><span class="gtt">'+title+'</span><div class="gr">'+Rt+'</div></div><div class="gb">'+body+'</div>'}
   var V={};
   V.home=function(){var c=car();
     if(!c){frame(T.title,'',' <div class="em">'+T.nocar+'</div>');V.car();return}
@@ -89,24 +91,32 @@
     var h='';
     if(needBk())h+='<div class="nx" data-a="exp" style="cursor:pointer">⚠ '+T.bkNow+' · <b>'+T.bk+'</b></div>';
     if(G.cars.length>1)h+='<div class="cars">'+G.cars.map(function(x){return '<button data-car="'+x.id+'" class="'+(x.id===c.id?'on':'')+'">'+esc(x.name)+'</button>'}).join('')+'</div>';
-    h+='<div class="car" data-a="editcar"><b>'+esc(c.name)+'</b><div class="m">'+[c.yr,c.km?(+c.km).toLocaleString()+' km':''].filter(Boolean).map(esc).join(' · ')+'</div>'+(c.vin?'<div class="mono">'+esc(c.vin)+'</div>':'')+'</div>';
-    h+='<button class="addin" data-a="rec">'+T.add+'</button>';
-    h+=R.length?R.map(function(r){var tg=TAG[r.tag];return '<div class="e" data-rec="'+r.id+'"><div class="h"><b>'+esc(r.job||'-')+'</b><span>'+money(tot(r),r.cur||cur)+'</span></div><div class="d"><span>'+[r.date,r.km?(+r.km).toLocaleString()+' km':'',r.shop].filter(Boolean).map(esc).join(' · ')+'</span>'+(tg?'<span class="tag '+tg[0]+'">'+tg[1]+(r.tagp?' '+esc(r.tagp):'')+'</span>':'')+'</div></div>'}).join(''):'<div class="em">'+T.none+'</div>';
+    h+='<div class="car" data-a="editcar"><b>'+esc(c.name)+'</b><div class="m">'+[c.yr,c.km?(+c.km).toLocaleString()+' km':'',c.ins?'🛡 '+c.ins+(c.insEnd?' ~'+c.insEnd:''):''].filter(Boolean).map(esc).join(' · ')+'</div>'+(c.vin?'<div class="mono">'+esc(c.vin)+'</div>':'')+'</div>';
+    h+='<div style="display:flex;gap:8px"><button class="addin" data-a="rec" style="flex:2">'+T.add+'</button><button class="addin" data-a="fuel" style="flex:1;background:#1F4D36">'+T.fuel+'</button><button class="addin" data-a="snap" style="flex:1;background:#1F4D36">'+T.snap+'</button></div>';
+    var fs=fuelStats(R,cur);if(fs)h+=fs;
+    h+=R.length?R.map(function(r){var tg=TAG[r.tag];return '<div class="e" data-rec="'+r.id+'"><div class="h"><b>'+esc(r.acc?'🚨 '+T.accJob+(r.place?' · '+r.place:'')+(r.photos&&r.photos.length?' · 📷'+r.photos.length:''):r.fuel?'⛽ '+T.fJob+(r.L?' '+(+r.L).toFixed(1)+' L':''):(r.job||'-'))+'</b><span>'+money(tot(r),r.cur||cur)+'</span></div><div class="d"><span>'+[r.date,r.km?(+r.km).toLocaleString()+' km':'',r.shop].filter(Boolean).map(esc).join(' · ')+'</span>'+(tg?'<span class="tag '+tg[0]+'">'+tg[1]+(r.tagp?' '+esc(r.tagp):'')+'</span>':'')+'</div></div>'}).join(''):'<div class="em">'+T.none+'</div>';
     h+='<div class="sum"><div><small>'+T.year+' ('+y+')</small>'+money(t,cur)+'</div><div><small>'+T.parts+'</small>'+(p||!un?money(p,cur):'–')+'</div><div><small>'+T.labor+'</small>'+(l||!un?money(l,cur):'–')+'</div></div>';
     if(c.oilkm||c.oilmo){var o=R.filter(function(r){return /엔진\s*오일|engine oil|oil change/i.test(r.job||'')})[0];
       if(o){var tt=[];if(c.oilkm&&o.km)tt.push((+o.km+ +c.oilkm).toLocaleString()+' km');if(c.oilmo&&o.date){var d=new Date(o.date);d.setMonth(d.getMonth()+ +c.oilmo);tt.push(d.toISOString().slice(0,7))}
         if(tt.length)h+='<div class="nx">⏰ '+T.nextOil+' · '+tt.join(' '+T.or+' ')+'</div>'}}
-    frame(T.title+(KO?' <small style="font-weight:400;opacity:.8">My Garage</small>':'')+' <i class="btag">'+T.betaTag+'</i>','<button data-a="menu">☰ '+T.menu+'</button>',h)};
+    if(c.insEnd){var dl=Math.ceil((new Date(c.insEnd+'T00:00:00')-new Date(new Date().toDateString()))/864e5);
+      if(dl<=30)h+='<div class="nx" data-a="editcar" style="cursor:pointer">🛡 '+T.insDue+(c.ins?' ('+esc(c.ins)+')':'')+' · '+esc(c.insEnd)+' · '+(dl<0?T.insPast:(KO?dl+T.insLeft:dl+T.insLeft))+'</div>'}
+    frame('My Garage <i class="btag">'+T.betaTag+'</i>','<button data-a="menu">☰ '+T.menu+'</button>',h)};
   V.menu=function(){var h='<div class="nx" style="border-style:solid;border-color:#2AA84B">'+T.beta+'<br><small style="color:#9aa3a0">'+(G.bkAt?T.bkLast+' '+new Date(G.bkAt).toISOString().slice(0,10):T.bkNever)+'</small></div>'+
      '<div class="mlist"><button data-a="exp">'+T.bk+'</button><button data-a="imp">'+T.imp+'</button><button data-a="newcar">'+T.addCar+'</button><button data-a="years">'+T.byYear+'</button>'+
      '<button data-a="fbk">'+T.fb+' · Facebook</button><button data-a="igm">'+T.fb+' · Instagram</button></div><div class="nt">'+T.note+'</div>';
     frame(T.menu,'',h,'home')};
-  V.car=function(isNew){var c=isNew?null:car();var lv='';try{lv=localStorage.getItem('icc_lastvin')||''}catch(e){}
+  V.car=function(isNew){window.__gDoc=null;var c=isNew?null:car();var lv='';try{lv=localStorage.getItem('icc_lastvin')||''}catch(e){}
     var nm=c?c.name:('Benz '+String(window.CAR||'w140').toUpperCase());
     var h='<div class="f"><i>'+T.carName+'</i><input id="g_nm" value="'+esc(nm)+'"></div>'+
      '<div class="f"><i>'+T.vin+'</i><input id="g_vin" maxlength="20" style="text-transform:uppercase" value="'+esc(c?c.vin:lv)+'"></div>'+
      '<div class="f"><i>'+T.yr+'</i><input id="g_yr" inputmode="numeric" maxlength="4" value="'+esc(c?c.yr:'')+'"></div>'+
      '<div class="f"><i>'+T.odo+'</i><input id="g_km" type="number" inputmode="numeric" value="'+esc(c?c.km:'')+'"></div>'+
+     '<div class="f"><i>'+T.docs+'</i><div style="display:flex;gap:8px">'+
+       ['reg','ins'].map(function(k){var has=c&&c['doc_'+k];return '<label class="dcb" style="flex:1;border:1px solid #3a4150;border-radius:8px;padding:8px;text-align:center;cursor:pointer;font-size:13px">'+(has?'✓ ':'📷 ')+(k==='reg'?T.dReg:T.dIns)+'<input type="file" accept="image/*" capture="environment" data-doc="'+k+'" style="display:none"></label>'}).join('')+
+       '</div><small id="g_dmsg" style="color:#9aa3a0;font-size:12px"></small></div>'+
+     '<div class="f"><i>'+T.ins+'</i><input id="g_ins" value="'+esc(c&&c.ins||'')+'"></div>'+
+     '<div class="f"><i>'+T.insEnd+'</i><input id="g_ie" type="date" value="'+esc(c&&c.insEnd||'')+'"></div>'+
      '<div class="f"><i>'+T.oil+' ('+T.oilkm+')</i><input id="g_ok" type="number" inputmode="numeric" value="'+esc(c?c.oilkm:'')+'"></div>'+
      '<div class="f"><i>'+T.oil+' ('+T.oilmo+')</i><input id="g_om" type="number" inputmode="numeric" value="'+esc(c?c.oilmo:'')+'"></div>'+
      '<div class="row2">'+(c?'<button data-a="delcar">'+T.del+'</button>':'')+'<button class="go" data-a="savecar" data-id="'+(c?c.id:'')+'">'+T.save+'</button></div>';
@@ -135,15 +145,82 @@
     h+=ys.map(function(y){return '<div class="e"><div class="h"><b>'+y+'</b><span>'+money(Y[y],cur)+'</span></div></div>'}).join('');
     var tk=Object.keys(tg);if(tk.length)h+='<div class="nx" style="border-style:solid;border-color:#2a3142">'+T.labor+' · '+tk.map(function(k){return '<span class="tag '+TAG[k][0]+'">'+TAG[k][1]+'</span> '+tg[k]+T.cnt}).join(' &nbsp;')+'</div>';
     frame(T.byYear,'',h,'home')};
+
+  /* 서류 사진 → 자동 입력: 앱(IccOcr.readText)이 있으면 글자를 읽어 칸을 채운다. 차주가 확인 후 저장. 주민번호·주소는 읽지 않는다. */
+  function docParse(k,t){var o={},u=t.toUpperCase().replace(/[OQ](?=[A-Z0-9]{0,16}$)/g,'0'),m;
+    m=t.toUpperCase().replace(/\s/g,'').match(/[A-HJ-NPR-Z0-9]{17}/);if(m)o.vin=m[0];
+    var ds=(t.match(/(19|20)\d{2}\s*[.\-\/년]\s*\d{1,2}\s*[.\-\/월]\s*\d{1,2}/g)||[]).map(function(x){var n=x.match(/\d+/g);return n[0]+'-'+('0'+n[1]).slice(-2)+'-'+('0'+n[2]).slice(-2)});
+    if(k==='reg'){m=t.match(/(형식|모델)\s*연도\s*[:：]?\s*((19|20)\d{2})/);if(m)o.yr=m[2];else if(ds[0])o.yr=ds[0].slice(0,4);
+      m=t.match(/차\s*명\s*[:：]?\s*([^\n]{2,30})/);if(m)o.name=m[1].trim();}
+    else{var IN=['삼성화재','현대해상','DB손해보험','KB손해보험','메리츠화재','한화손해보험','롯데손해보험','흥국화재','MG손해보험','AXA','악사','캐롯','하나손해보험','GEICO','Progressive','State Farm','Allianz','Hagerty','Tokio Marine'];
+      for(var i=0;i<IN.length;i++)if(t.toUpperCase().indexOf(IN[i].toUpperCase())>=0){o.ins=IN[i];break}
+      if(ds.length)o.insEnd=ds.sort().slice(-1)[0]}
+    return o}
+  function docRead(k,d){var msg=S.querySelector('#g_dmsg'),P=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.IccOcr;
+    if(!P||!P.readText){if(msg)msg.textContent=T.dWeb;return}
+    P.readText({image:d}).then(function(r){var o=docParse(k,(r&&r.text)||''),n=0,set=function(id,v){var el=$(id);if(el&&v&&!el.value){el.value=v;el.style.borderColor='#2AA84B';n++}};
+      set('g_vin',o.vin);set('g_yr',o.yr);if(o.name&&/^(Benz |My car)/.test($('g_nm').value))$('g_nm').value=o.name,n++;set('g_ins',o.ins);set('g_ie',o.insEnd);
+      if(msg)msg.textContent=n?T.dOk:T.dNone}).catch(function(){if(msg)msg.textContent=T.dNone})}
+  window.__gDocParse=docParse;
+
+  /* 주유·연비 (형 아이디어): 가득 주유 사이 거리 ÷ 그 사이 넣은 양 */
+  function fuelStats(R,cur){var F=R.filter(function(r){return r.fuel}).slice().sort(function(a,b){return (+a.km||0)-(+b.km||0)||String(a.date).localeCompare(b.date)});if(!F.length)return '';
+    var ec=[],lastFull=null,acc=0,dist=0,cost=0;
+    F.forEach(function(r){if(lastFull!==null){acc+=+r.L||0}
+      if(r.full!==false&&+r.km){if(lastFull!==null&&acc>0&&+r.km>lastFull.km){var d=+r.km-lastFull.km;ec.push(d/acc);dist+=d;cost+=lastFull.span+tot(r)}
+        lastFull={km:+r.km,span:0};acc=0}else if(lastFull){lastFull.span+=tot(r)}});
+    var m=new Date().toISOString().slice(0,7),mon=0;F.forEach(function(r){if((r.date||'').slice(0,7)===m)mon+=tot(r)});
+    var h='<div class="sum"><div><small>'+T.fEco+'</small>'+(ec.length?ec[ec.length-1].toFixed(1)+' km/L':'–')+'</div><div><small>'+T.fCostKm+'</small>'+(dist?money(cost/dist,cur).replace(/(\.\d+)?$/,''):'–')+'</div><div><small>'+T.fMon+'</small>'+money(mon,cur)+'</div></div>';
+    if(!ec.length)h+='<div class="nt">'+T.fNeed+'</div>';
+    else if(ec.length>=3){var prev=ec.slice(0,-1),avg=prev.reduce(function(a,b){return a+b},0)/prev.length,last=ec[ec.length-1];if(last<avg*0.85)h+='<div class="nx">⚠ '+T.fDrop.replace('{p}',Math.round((1-last/avg)*100))+'</div>'}
+    return h}
+  V.fuel=function(id){var r=G.recs.filter(function(x){return x.id===id})[0]||null;var c=car();var cur=(r&&r.cur)||(c&&c.cur)||(isKRW()?'KRW':'USD');S._r=r||{cur:cur};
+    var h='<div class="frm"><div class="f"><i>'+T.date+'</i><input id="f_dt" type="date" value="'+esc(r&&r.date||today())+'"></div>'+
+     '<div class="f"><i>'+T.km+'</i><input id="f_km" type="number" inputmode="numeric" value="'+esc(r&&r.km?r.km:(c&&c.km||''))+'"></div>'+
+     '<div class="f"><i>'+T.fL+'</i><input id="f_l" type="number" inputmode="decimal" step="0.01" value="'+esc(r?r.L:'')+'"></div>'+
+     '<div class="f"><i>'+T.fPpl+' ('+cur+')</i><input id="f_p" type="number" inputmode="decimal" step="0.01" value="'+esc(r?r.ppl:'')+'"></div>'+
+     '<div class="f"><i>'+T.fAmt+' ('+cur+')</i><input id="f_a" type="number" inputmode="numeric" value="'+esc(r?r.paid:'')+'"></div>'+
+     '<label class="f" style="cursor:pointer"><i>'+T.fFull+'</i><input id="f_full" type="checkbox" '+(!r||r.full!==false?'checked':'')+' style="width:22px;height:22px"></label>'+
+     '<div class="nt" id="f_msg">'+T.fCalc+'</div></div>'+
+     '<div class="row2">'+(r?'<button data-a="delrec" data-id="'+r.id+'">'+T.del+'</button>':'')+'<button class="go" data-a="savefuel">'+T.save+'</button></div>';
+    frame(T.fTitle,'',h,'home');S._fl=[]};
+  S.addEventListener('input',function(e){var id=e.target.id;if(['f_l','f_p','f_a'].indexOf(id)<0)return;var q=function(i){return S.querySelector('#'+i)};
+    S._fl=(S._fl||[]).filter(function(x){return x!==id});S._fl.push(id);
+    var L=+q('f_l').value,P=+q('f_p').value,A=+q('f_a').value,keep=S._fl.slice(-2),tgt=['f_l','f_p','f_a'].filter(function(x){return keep.indexOf(x)<0})[0];
+    if(keep.length<2)return;var r2=function(n,d){var m=Math.pow(10,d);return Math.round(n*m)/m};
+    if(tgt==='f_a'&&L&&P)q('f_a').value=r2(L*P,cur0()==='KRW'?0:2);
+    else if(tgt==='f_p'&&L&&A)q('f_p').value=r2(A/L,cur0()==='KRW'?0:3);
+    else if(tgt==='f_l'&&P&&A)q('f_l').value=r2(A/P,2)});
+  function cur0(){var c=car();return (S._r&&S._r.cur)||(c&&c.cur)||(isKRW()?'KRW':'USD')}
+
+  /* 찍어서 넣기 허브 + 사고 기록 (형 지시: 차대번호·보험증서·견적서 찍으면 자동 입력, 사고 때도 바로 찍기) */
+  V.snap=function(){var it=function(a,t,d,red){return '<button data-a="'+a+'" style="display:block;width:100%;text-align:left;margin:0 0 10px;padding:14px;border:1px solid '+(red?'#c0392b':'#3a4150')+';background:'+(red?'#3a1717':'transparent')+';color:inherit;border-radius:10px;font-size:16px;font-weight:700">'+t+'<small style="display:block;font-weight:400;color:#9aa3a0;font-size:12.5px;margin-top:3px">'+d+'</small></button>'};
+    frame(T.snapT,'',it('acc',T.sAcc,T.sAccD,1)+it('sest',T.sEst,T.sEstD)+it('editcar',T.sDoc,T.sDocD)+it('svin',T.sVin,T.sVinD),'home')};
+  V.acc=function(id){var r=G.recs.filter(function(x){return x.id===id})[0]||null;S._r=r||{};S._ap=(r&&r.photos||[]).slice();
+    var now=new Date(),loc=new Date(now-now.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+    var h='<div class="nx" style="border-style:solid;border-color:#c0392b">'+T.accChk+'</div><div class="nt" style="margin:6px 0 10px">'+T.accShots+'</div><div class="frm">'+
+     '<div class="f"><i>'+T.accPh+'</i><label style="cursor:pointer;border:1px solid #c0392b;padding:8px 12px;border-radius:8px;white-space:nowrap">📷 '+T.snap.replace('📷 ','')+'<input id="a_ph" type="file" accept="image/*" capture="environment" multiple style="display:none"></label></div>'+
+     '<div id="a_th" style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px"></div><small id="a_n" style="color:#9aa3a0"></small>'+
+     '<div class="f"><i>'+T.date+'</i><input id="a_dt" type="date" value="'+esc(r&&r.date||loc)+'"></div>'+
+     '<div class="f"><i>'+T.km+'</i><input id="a_km" type="number" inputmode="numeric" value="'+esc(r&&r.km||(car()&&car().km)||'')+'"></div>'+
+     '<div class="f"><i>'+T.accPlace+'</i><input id="a_pl" style="text-align:left" value="'+esc(r&&r.place||'')+'"></div>'+
+     '<div class="f"><i>'+T.accOther+'</i><input id="a_ot" style="text-align:left" value="'+esc(r&&r.other||'')+'"></div>'+
+     '<div class="f"><i>'+T.accMemo+'</i><input id="a_m" style="text-align:left" value="'+esc(r&&r.memo||'')+'"></div></div>'+
+     '<div class="row2">'+(r?'<button data-a="delrec" data-id="'+r.id+'">'+T.del+'</button>':'')+'<button class="go" data-a="saveacc">'+T.save+'</button></div>';
+    frame(T.accT,'',h,'home');accTh()};
+  function accTh(){var t=S.querySelector('#a_th'),n=S.querySelector('#a_n');if(!t)return;t.innerHTML=(S._ap||[]).map(function(d){return '<img src="'+d+'" style="width:64px;height:64px;object-fit:cover;border:1px solid #3a4150">'}).join('');if(n)n.textContent=(S._ap||[]).length?(S._ap.length+(KO?T.accN:T.accN)):''}
+  S.addEventListener('change',function(e){if(e.target.id==='a_ph'){var fs=[].slice.call(e.target.files||[]);if((S._ap||[]).length+fs.length>12){alert(T.accMax);fs=fs.slice(0,Math.max(0,12-(S._ap||[]).length))}
+      var i=0;(function nx(){if(i>=fs.length){accTh();return}shrink(fs[i++],function(d){S._ap.push(d);accTh();nx()})})()}
+    if(e.target.id==='s_est'&&e.target.files[0]){shrink(e.target.files[0],function(d){V.rec({photo:d,cur:(car()&&car().cur)||(isKRW()?'KRW':'USD')});var m=S.querySelector('.frm');if(m)m.classList.add('open')})}});
   function shrink(file,cb){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var w=Math.min(700,im.width),h=Math.round(im.height*w/im.width);var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);cb(c.toDataURL('image/jpeg',.6))};im.src=fr.result};fr.readAsDataURL(file)}
-  S.addEventListener('change',function(e){if(e.target.id==='r_ph'){var n=S.querySelector('#r_phn');if(n)n.textContent=e.target.files[0]?e.target.files[0].name:''}});
+  S.addEventListener('change',function(e){var dk=e.target.getAttribute&&e.target.getAttribute('data-doc');if(dk&&e.target.files[0]){var fl=e.target.files[0];shrink(fl,function(d){window.__gDoc=window.__gDoc||{};window.__gDoc[dk]=d;var lb=e.target.parentNode;if(lb.firstChild&&lb.firstChild.nodeType===3)lb.firstChild.nodeValue='✓ ';docRead(dk,d)});return}if(e.target.id==='r_ph'){var n=S.querySelector('#r_phn');if(n)n.textContent=e.target.files[0]?e.target.files[0].name:''}});
   S.addEventListener('click',function(e){var b=e.target.closest('[data-a],[data-rec],[data-car]');if(!b)return;
     if(b.dataset.car){G.cur=b.dataset.car;save();return V.home()}
-    if(b.dataset.rec)return V.rec(b.dataset.rec);
+    if(b.dataset.rec){var rr=G.recs.filter(function(x){return x.id===b.dataset.rec})[0];return rr&&rr.acc?V.acc(rr.id):rr&&rr.fuel?V.fuel(rr.id):V.rec(b.dataset.rec)}
     var a=b.dataset.a,$=function(i){return S.querySelector('#'+i)};
-    if(a==='close')close();else if(a==='home')V.home();else if(a==='menu')V.menu();else if(a==='more'){S.querySelector('.frm').classList.toggle('open')}else if(a==='newcar')V.car(true);else if(a==='editcar')V.car();else if(a==='rec')V.rec();else if(a==='years')V.years();
+    if(a==='close')close();else if(a==='home')V.home();else if(a==='menu')V.menu();else if(a==='more'){S.querySelector('.frm').classList.toggle('open')}else if(a==='newcar')V.car(true);else if(a==='editcar')V.car();else if(a==='rec')V.rec();else if(a==='fuel')V.fuel();else if(a==='snap')V.snap();else if(a==='acc')V.acc();else if(a==='sest'){var fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.setAttribute('capture','environment');fi.id='s_est';fi.style.display='none';S.appendChild(fi);fi.click()}else if(a==='svin'){close();var vb=document.getElementById('vbtn');if(vb)vb.click()}else if(a==='years')V.years();
     else if(a==='savecar'){var id=b.dataset.id,c=G.cars.filter(function(x){return x.id===id})[0];if(!c){c={id:uid(),cur:isKRW()?'KRW':'USD'};G.cars.push(c)}
-      c.name=$('g_nm').value.trim()||'My car';c.vin=$('g_vin').value.toUpperCase().replace(/[^A-Z0-9]/g,'');c.yr=$('g_yr').value.trim();c.km=$('g_km').value;c.oilkm=$('g_ok').value;c.oilmo=$('g_om').value;G.cur=c.id;save();
+      c.name=$('g_nm').value.trim()||'My car';c.vin=$('g_vin').value.toUpperCase().replace(/[^A-Z0-9]/g,'');c.yr=$('g_yr').value.trim();c.km=$('g_km').value;c.oilkm=$('g_ok').value;c.oilmo=$('g_om').value;c.ins=$('g_ins').value.trim();if(window.__gDoc){if(window.__gDoc.reg)c.doc_reg=window.__gDoc.reg;if(window.__gDoc.ins)c.doc_ins=window.__gDoc.ins;window.__gDoc=null}c.insEnd=$('g_ie').value;G.cur=c.id;save();
       if(S._pending){var p=S._pending;S._pending=null;V.rec(p)}else V.home()}
     else if(a==='delcar'){var c2=car();if(c2&&confirm(T.delcar)){G.recs=G.recs.filter(function(r){return r.car!==c2.id});G.cars=G.cars.filter(function(x){return x.id!==c2.id});G.cur=G.cars[0]?G.cars[0].id:null;save();V.home()}}
     else if(a==='saverec'){var c3=car();if(!c3)return;var r=S._r||{},ex=G.recs.filter(function(x){return x.id===r.id})[0];var o=ex||Object.assign({},r,{id:uid(),car:c3.id});
@@ -155,6 +232,16 @@
       var f=$('r_ph').files&&$('r_ph').files[0];
       function fin(){if(save())V.home();else G=JSON.parse(snap)}
       if(f){shrink(f,function(d){o.photo=d;fin()})}else fin()}
+    else if(a==='savefuel'){var c4=car();if(!c4)return;var r4=S._r||{},ex4=G.recs.filter(function(x){return x.id===r4.id})[0];var o4=ex4||{id:uid(),car:c4.id,cur:r4.cur};
+      var d4=$('f_dt').value,k4=+$('f_km').value||0;if(d4&&d4>today()&&!confirm(T.futq))return;
+      if(k4){var pr4=G.recs.filter(function(x){return x.car===c4.id&&x.id!==o4.id&&x.date&&x.date<=d4&&+x.km>k4}).sort(function(a,b){return +b.km-+a.km})[0];if(pr4&&!confirm(T.kmq.replace('{a}',(+pr4.km).toLocaleString()).replace('{b}',k4.toLocaleString())))return}
+      var L4=$('f_l').value,P4=$('f_p').value,A4=$('f_a').value;if(!A4&&L4&&P4)A4=String(Math.round(+L4*+P4));
+      if(!k4){var m4=$('f_msg');if(m4){m4.textContent=T.fKmReq;m4.style.color='#d9a441'}}
+      o4.fuel=1;o4.job=T.fJob;o4.date=d4;o4.km=$('f_km').value;o4.L=L4;o4.ppl=P4;o4.paid=A4;o4.full=$('f_full').checked;o4.parts='';o4.labor='';
+      var sn4=JSON.stringify(G);if(!ex4)G.recs.push(o4);if(o4.km&&+o4.km>(+c4.km||0))c4.km=o4.km;if(save())V.home();else G=JSON.parse(sn4)}
+    else if(a==='saveacc'){var c5=car();if(!c5)return;var r5=S._r||{},ex5=G.recs.filter(function(x){return x.id===r5.id})[0];var o5=ex5||{id:uid(),car:c5.id,cur:c5.cur||(isKRW()?'KRW':'USD')};
+      o5.acc=1;o5.job=T.accJob;o5.date=$('a_dt').value;o5.km=$('a_km').value;o5.place=$('a_pl').value.trim();o5.other=$('a_ot').value.trim();o5.memo=$('a_m').value.trim();o5.photos=(S._ap||[]).slice();o5.paid='';o5.parts='';o5.labor='';
+      var sn5=JSON.stringify(G);if(!ex5)G.recs.push(o5);if(save())V.home();else G=JSON.parse(sn5)}
     else if(a==='delrec'){if(confirm(T.delq)){G.recs=G.recs.filter(function(x){return x.id!==b.dataset.id});save();V.home()}}
     else if(a==='exp')backup();
     else if(a==='fbk')window.open(FB,'_blank','noopener');else if(a==='igm')window.open(IG,'_blank','noopener');
@@ -182,7 +269,7 @@
   /* 카메라로 찍은 차대번호를 기억해 두었다가 차 추가에 채움 */
   document.addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('#vsheet .go');if(g){var v=document.querySelector('#vsheet .vv');var t=(v&&v.textContent||'').replace(/[^A-Z0-9]/g,'');if(t)try{localStorage.setItem('icc_lastvin',t)}catch(x){}}},true);
   function mount(){var ab=document.getElementById('appb');if(!ab||document.getElementById('garb'))return!!ab;
-    var b=ab.cloneNode(false);b.id='garb';b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">'+T.btn+(KO?'<i class="gen">My Garage</i>':'')+'</span>';b.setAttribute('aria-label',T.btn);b.title=T.btn;b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
+    var b=ab.cloneNode(false);b.id='garb';b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">My Garage</span>';b.setAttribute('aria-label','My Garage');b.title='My Garage';b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
     ab.parentNode.insertBefore(b,ab);document.body.appendChild(S);capH();addEventListener('resize',function(){if(!busy)capH()});return true}
   var busy=false;function capH(){var h=document.querySelector('.top h1'),tl=document.querySelector('.top .tl');if(!h||!tl)return;
     h.style.removeProperty('max-width');var hr=h.getBoundingClientRect(),tr=tl.getBoundingClientRect();
@@ -190,12 +277,24 @@
     var fs=parseFloat(getComputedStyle(h).fontSize),n=0;while(h.scrollWidth>h.clientWidth+1&&fs>11&&n<30){fs-=.5;h.style.setProperty('font-size',fs+'px','important');n++}}
   addEventListener('load',function(){setTimeout(capH,100);setTimeout(capH,1200)});if(document.fonts)document.fonts.ready.then(function(){setTimeout(capH,50)});
   if(!mount()){var n=0,t=setInterval(function(){if(mount()||++n>40)clearInterval(t)},150)}
+
+  /* 오와열: 위 줄(홈·EN·앱)과 아래 줄(홈·메뉴) 끝선을 맞춘다 */
+  function alignBars(){var ap=document.getElementById('appb'),sm=document.querySelector('.top .lng summary');
+    if(ap&&sm){var ar=ap.getBoundingClientRect();sm.style.setProperty('box-sizing','border-box','important');sm.style.setProperty('height',ar.height+'px','important');sm.style.setProperty('display','flex','important');sm.style.setProperty('align-items','center','important');sm.style.setProperty('justify-content','center','important')}
+    var cb=document.querySelector('.cbmn'),th=document.querySelector('header.top a, header.top svg'),bh=document.querySelector('#cbar2 a, #cbar2 svg, .cbar a');
+    [cb,bh].forEach(function(e){if(e)e.style.removeProperty('transform')});
+    if(innerWidth>760)return;
+    if(cb&&ap&&cb.getBoundingClientRect().width){var d=ap.getBoundingClientRect().right-cb.getBoundingClientRect().right;if(Math.abs(d)>0.5&&Math.abs(d)<20)cb.style.setProperty('transform','translateX('+d+'px)','important')}
+    if(bh&&th){var d2=th.getBoundingClientRect().left-bh.getBoundingClientRect().left;if(Math.abs(d2)>0.5&&Math.abs(d2)<20)bh.style.setProperty('transform','translateX('+d2+'px)','important')}}
+  addEventListener('resize',function(){setTimeout(alignBars,50)});addEventListener('load',function(){setTimeout(alignBars,300);setTimeout(alignBars,1500)});
   function narrowOS(){var o=document.getElementById('osb'),sh=document.getElementById('apsh');if(!o)return;var n=innerWidth<=430;
     o.style.setProperty('display',n?'none':'','important');
     if(sh&&!document.getElementById('osb2')){var b2=document.createElement('button');b2.type='button';b2.id='osb2';b2.className='appb';b2.style.cssText='display:block;margin:10px auto 0;padding:6px 14px';
       b2.onclick=function(e){e.preventDefault();o.click();b2.textContent=(KO?'화면 모양 바꾸기: ':'Switch look: ')+o.textContent};b2.textContent=(KO?'화면 모양 바꾸기: ':'Switch look: ')+o.textContent;sh.appendChild(b2)}
     var b3=document.getElementById('osb2');if(b3)b3.style.display=n?'block':'none';
-    var lg=document.querySelector('.top .lng');if(lg){lg.style.setProperty('display',n?'none':'','important');
+    var lg=document.querySelector('.top .lng');if(lg){lg.style.removeProperty('display');var sm=lg.querySelector('summary');if(sm){if(!sm.dataset.full)sm.dataset.full=sm.textContent.trim();var fl=sm.dataset.full,ab=fl==='ENGLISH'?'EN':'🌐';sm.textContent=ab;sm.title=fl}
+      var apb=document.getElementById('appb'),gb=document.getElementById('garb');if(apb&&gb&&apb.parentNode===gb.parentNode&&lg.parentNode===apb.parentNode&&lg.nextElementSibling!==apb)apb.parentNode.insertBefore(lg,apb);
+      n=false;setTimeout(alignBars,30);
       if(sh&&!document.getElementById('lng2')){var lm=lg.querySelector('.lngm');if(lm){var d=document.createElement('div');d.id='lng2';d.style.cssText='display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 0';
         [].slice.call(lm.querySelectorAll('a')).forEach(function(a){var c=a.cloneNode(true);c.style.cssText='border:1px solid currentColor;padding:4px 9px;color:inherit;text-decoration:none;font-size:13px';d.appendChild(c)});sh.appendChild(d)}}
       var l2=document.getElementById('lng2');if(l2)l2.style.display=n?'flex':'none'}

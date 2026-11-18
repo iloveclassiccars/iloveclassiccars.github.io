@@ -37,6 +37,9 @@
       std:'Fill standard hours (W140 S600 reference)',rng:'International standard labor for this job',nofx:'No exchange rate, shown in local currency',
       yl:'Labor inside your quote',cheap:'Cheap · below the international standard',fair:'Within the international standard',high:'Pricey · {p}% above the international standard · ask if extra work was done',rip:'Possible rip-off · {p}% above the international standard · ask if extra work was done',
       src:'Hourly rates: national repair-trade surveys (2023-2025). Hours: public reference values (not official Mercedes). Estimate only.',ql:'Labor on your quote',more:'Show comparison basis',less:'Simple view',above:'{d} above the comparison range',below:'{d} below the comparison range',inr:'Within the comparison range',cmp:'Comparison range',nodata:'No comparison data · no labor hours for these parts yet',kr:'Korea has no labor standard',enter:'Enter the labor amount on your quote',v_hi:'Pricey',v_rip:'Possible rip-off',v_lo:'Cheap',v_ok:'Fair',ask:'ask if extra work was done'};
+  (function(){var L=(document.documentElement.lang||'').slice(0,2),X=window.ICC_I18N&&window.ICC_I18N[L];if(X&&X.l)for(var k in X.l)T[k]=X.l[k]})();
+  if(!T.hr)T.hr=KO?'시간당 공임':'Hourly rate';if(!T.nostd)T.nostd=KO?'기준 없음 · 엿장수 맘대로':'No standard';if(!T.stdh)T.stdh=KO?'표준 작업시간 (참고값)':'Standard hours (reference)';
+  R.forEach(function(c){if(T['c_'+c[0]])c[1]=c[1].split(' ')[0]+' '+T['c_'+c[0]]});
   function fx(){var s={usd:1400,eur:1600,jpy:850};try{var v=JSON.parse(localStorage.getItem('w140m')||'null');if(v){s.usd=+v.usd||s.usd;s.eur=+v.eur||s.eur;s.jpy=+v.jpy||s.jpy}}catch(e){}
     return {USD:s.usd,EUR:s.eur,JPY:s.jpy/100,KRW:1,GBP:0}}
   function num(t){return parseFloat(String(t||'').replace(/[^0-9.]/g,''))||0}
@@ -72,7 +75,7 @@
     var car=(window.CAR||'w140');
     P.querySelectorAll('.hj').forEach(function(x){if(car==='w140'&&STD[x.dataset.j]!=null)x.placeholder=STD[x.dataset.j]});
     if(car==='w140'&&!P.classList.contains('rcv'))P.querySelectorAll('.hh').forEach(function(x){var v=partStd(x.dataset.k);if(v==null)return;x.placeholder=v;
-      if(x.value===''){x.value=v;x.title=KO?'표준 작업시간 (참고값)':'Standard hours (reference)';x.dispatchEvent(new Event('input',{bubbles:true}))}});
+      if(x.value===''){x.value=v;x.title=T.stdh;x.dispatchEvent(new Event('input',{bubbles:true}))}});
     var bstd=box.querySelector('#ilstd');if(car!=='w140')bstd.style.display='none';
     bstd.onclick=function(){P.querySelectorAll('.hj').forEach(function(x){if(x.value===''&&x.placeholder){x.value=x.placeholder;x.dispatchEvent(new Event('input',{bubbles:true}))}});upd()};
     box.querySelector('#ilsel').onchange=function(){sel=this.value;try{localStorage.setItem('icc_labor_c',sel)}catch(e){}
@@ -82,9 +85,9 @@
     function cur(){return R.filter(function(x){return x[0]===sel})[0]||R[0]}
     function hours(){var h=0;P.querySelectorAll('.hh,.hj').forEach(function(x){if(x.value!=='')h+=+x.value});return h}
     function upd(){var c=cur(),F=fx()[c[2]],h=hours();
-      if(!c[3]){box.querySelector('#ilhr').textContent=KO?'시간당 공임':'Hourly rate';box.querySelector('#ilhv').textContent=KO?'기준 없음 · 엿장수 맘대로':'No standard';
+      if(!c[3]){box.querySelector('#ilhr').textContent=T.hr;box.querySelector('#ilhv').textContent=T.nostd;
         box.querySelector('#ilrg').textContent='–';var z=box.querySelector('#ilvd');z.style.display='none';z.textContent='';delete z.dataset.labor;var bg=box.querySelector('#ilbig');bg.className='nod';bg.textContent=T.kr;box.querySelector('#ilrg2').textContent='';return}
-      box.querySelector('#ilhr').textContent=KO?'시간당 공임 ('+c[5]+')':'Hourly rate ('+c[5]+')';
+      box.querySelector('#ilhr').textContent=T.hr+' ('+c[5]+')';
       box.querySelector('#ilhv').textContent=(c[3]===c[4]?loc(c[3],c[2]):loc(c[3],c[2])+'–'+loc(c[4],c[2]))+(F&&c[2]!=='KRW'&&!(c[2]==='USD'&&!isKRW())?' ≈ '+won(c[3]*F)+(c[3]===c[4]?'':'–'+won(c[4]*F)):'')+(!F?' *':'');
       var rg=box.querySelector('#ilrg'),vd=box.querySelector('#ilvd'),big=box.querySelector('#ilbig'),r2=box.querySelector('#ilrg2');
       if(!h){rg.textContent='–';vd.style.display='none';big.className='nod';big.textContent=T.nodata;r2.textContent='';delete vd.dataset.labor;return}

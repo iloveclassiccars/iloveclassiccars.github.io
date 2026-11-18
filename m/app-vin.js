@@ -13,25 +13,26 @@
     shot:'Capture',manual:'Type it',ok:'Search this VIN',check:'Check only the underlined letters. Tap to choose',
     num:'number',let:'letter',len:function(n){return n+' / 17'},nocam:'Camera not available. Please type the VIN',
     old:'You can search even if it is not 17 characters (older VIN)'};
+  (function(){var L=(document.documentElement.lang||'').slice(0,2),X=window.ICC_I18N&&window.ICC_I18N[L];if(X&&X.v)for(var k in X.v)T[k]=X.v[k]})();
   var PAIR={'8':'B','B':'8','5':'S','S':'5','2':'Z','Z':'2','6':'G','G':'6'};
   function clean(s){s=(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
     if(s.length===17)s=s.replace(/O|Q/g,'0').replace(/I/g,'1');return s}
   var css=document.createElement('style');css.textContent=
   '#vbtn{flex:0 0 auto;margin-left:6px;padding:0 10px;height:auto;align-self:stretch;background:transparent;border:1px solid #2AA84B;color:#fff;font:inherit;border-radius:0;cursor:pointer;white-space:nowrap}'+
-  '#vbtn .vbl{display:none}#vbtn .vbs{display:block}@media(min-width:700px){#vbtn{flex-direction:row!important;gap:6px!important;font-size:13px!important}#vbtn .vbl{display:inline}#vbtn .vbs{display:none}}'+
+  
   '#vsheet{position:fixed;inset:0;z-index:99999;background:#171B26;color:#E8EAEE;display:none;flex-direction:column;font:15px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}'+
   '#vsheet.on{display:flex}'+
   '#vsheet .vt{background:#1F4D36;color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 14px 10px;display:flex;align-items:center;justify-content:space-between;font-weight:600}'+
   '#vsheet .vt button{background:none;border:0;color:#fff;font:inherit;font-weight:400;padding:0;min-width:56px;text-align:left}'+
-  '#vsheet .vc{position:relative;height:38vh;background:#23262d;overflow:hidden}'+
+  '#vsheet .vc{position:relative;height:32vh;background:#23262d;overflow:hidden}'+
   '#vsheet video,#vsheet canvas{width:100%;height:100%;object-fit:cover;display:block}'+
   '#vsheet .vf{position:absolute;left:5%;right:5%;top:40%;height:20%;border:2px solid #2AA84B;box-shadow:0 0 0 999px #0008;pointer-events:none}'+
   '#vsheet .vh{text-align:center;font-size:13px;color:#cfd3da;padding:8px 12px}'+
-  '#vsheet .vv{margin:4px 14px;padding:10px 6px;border:1px solid #2AA84B;font:700 19px Menlo,Consolas,monospace;text-align:center;letter-spacing:1px;white-space:nowrap;overflow-x:auto}'+
-  '#vsheet .vstrip{display:none;margin:10px 14px 0;width:calc(100% - 28px);height:64px;object-fit:cover;border:1px solid #3a4152}#vsheet .vv span{cursor:pointer}#vsheet .vv span.amb{border-bottom:3px solid #d9a441}'+
+  '#vsheet .vv{margin:4px 14px;padding:10px 6px;border:1px solid #2AA84B;font:700 15px Menlo,Consolas,monospace;text-align:center;letter-spacing:.5px;white-space:nowrap;overflow-x:auto}'+
+  '#vsheet .vstrip{display:none;margin:10px 14px 0;width:calc(100% - 28px);height:48px;object-fit:cover;border:1px solid #3a4152}#vsheet .vv span{cursor:pointer}#vsheet .vv span.amb{border-bottom:3px solid #d9a441}'+
   '#vsheet .vi{display:none;margin:4px 14px;width:calc(100% - 28px);box-sizing:border-box;padding:10px;background:transparent;border:1px solid #2AA84B;color:#fff;font:700 18px Menlo,Consolas,monospace;letter-spacing:1px;text-transform:uppercase;border-radius:0}'+
   '#vsheet .vp{display:none;gap:8px;justify-content:center;margin:8px}'+
-  '#vsheet .vp button{background:transparent;border:1px solid #8a93a6;color:#fff;padding:6px 16px;font:600 15px Menlo,monospace;border-radius:0}'+
+  '#vsheet .vp button{background:transparent;border:1px solid #8a93a6;color:#fff;padding:6px 16px;font:600 14px Menlo,monospace;border-radius:0}'+
   '#vsheet .vp button.on{background:#2AA84B33;border-color:#2AA84B}'+
   '#vsheet .vb{display:flex;gap:10px;margin:12px 14px}'+
   '#vsheet .vb button{flex:1;padding:12px 0;background:transparent;border:1px solid #c9ced8;color:#fff;font:inherit;border-radius:0;white-space:nowrap}'+
@@ -71,7 +72,7 @@
     try{frameData()}catch(e){}
     $('.m').onclick();};
   $('.go').onclick=function(){var q=document.getElementById('q'),g=document.getElementById('go');
-    if(q){q.value=V;q.dispatchEvent(new Event('input',{bubbles:true}))}close();if(g)g.click();};
+    if(q){q.value=V;q.dispatchEvent(new Event('input',{bubbles:true}))}close();if(g)g.click();setTimeout(qfit,50);};
   function open(){V='';pos=-1;$('.vp').style.display='none';$('.vi').style.display='none';$('.vv').style.display='';$('.vstrip').style.display='none';$('.vc').style.display='';
     $('video').style.display='block';$('canvas').style.display='none';draw();sh.classList.add('on');
     if(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.IccOcr)return;
@@ -79,9 +80,15 @@
       navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){stream=s;$('video').srcObject=s})
       .catch(function(){$('.h1').textContent=T.nocam;$('.m').onclick()})}
     else{$('.h1').textContent=T.nocam;$('.m').onclick()}}
+  function qfit(){var q=document.getElementById('q');if(!q)return;var vin=/^[A-HJ-NPR-Z0-9]{11,17}$/i.test((q.value||'').replace(/\s/g,''));
+    if(vin&&document.activeElement!==q)q.style.setProperty('font-size','13.5px','important');else q.style.removeProperty('font-size')}
+  document.addEventListener('focusin',function(e){if(e.target.id==='q')qfit()});document.addEventListener('focusout',function(e){if(e.target.id==='q')setTimeout(qfit,0)});document.addEventListener('input',function(e){if(e.target.id==='q')qfit()});
   function mount(){var go=document.getElementById('go');if(!go||document.getElementById('vbtn'))return!!go;
-    var b=document.createElement('button');b.id='vbtn';b.type='button';b.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.6l1.6-2.2h6.6L16.9 7h2.6A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.4"/></svg><span class="vbl">'+(KO?'차대번호 촬영':'Scan VIN')+'</span><span class="vbs">'+T.btn+'</span>';b.setAttribute('aria-label',T.title);
+    var b=document.createElement('button');b.id='vbtn';b.type='button';b.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.6l1.6-2.2h6.6L16.9 7h2.6A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.4"/></svg>';b.setAttribute('aria-label',T.title);
     [['flex','0 0 auto'],['min-width','46px'],['padding','0 8px'],['display','flex'],['flex-direction','column'],['align-items','center'],['justify-content','center'],['gap','1px'],['margin-left','6px'],['background','transparent'],['border','1px solid #2AA84B'],['border-radius','0'],['font-size','10px'],['line-height','1.1'],['color','#fff']].forEach(function(p){b.style.setProperty(p[0],p[1],'important')});b.onclick=open;
-    go.parentNode.insertBefore(b,go);document.body.appendChild(sh);return true}
+    go.parentNode.insertBefore(b,go);document.body.appendChild(sh);fitBan();addEventListener('resize',fitBan);var fi=0,ft=setInterval(function(){fitBan();if(++fi>20)clearInterval(ft)},250);return true}
+  /* 깃발 자동차가 카메라 버튼과 겹치지 않게: 깃발 오른쪽 끝을 카메라 버튼 앞에서 멈춤 */
+  function fitBan(){var bn=document.getElementById('iccban'),vb=document.getElementById('vbtn');if(!bn||!vb)return;bn.style.removeProperty('max-width');
+    var br=bn.getBoundingClientRect(),vr=vb.getBoundingClientRect();if(br.right>vr.left-2)bn.style.setProperty('max-width',Math.max(60,vr.left-br.left-4)+'px','important')}
   if(!mount()){var n=0,t=setInterval(function(){if(mount()||++n>40)clearInterval(t)},150)}
 })();
