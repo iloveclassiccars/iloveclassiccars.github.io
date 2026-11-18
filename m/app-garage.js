@@ -32,7 +32,7 @@
   function save(){var j=JSON.stringify(G);try{var prev=localStorage.getItem(KEY);if(prev&&prev!==j)localStorage.setItem(KEY+'_prev',prev);localStorage.setItem(KEY,j);return true}
     catch(e){alert(KO?'저장 공간이 부족해서 저장하지 못했어요. 기존 기록은 그대로예요. 영수증 사진을 빼고 다시 저장하거나, 백업 보내기 후 정리해 주세요.':'Not enough storage, nothing was saved. Your earlier records are safe. Try again without the photo, or send a backup first.');G=load();return false}}
   try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
-  function needBk(){var n=G.recs.length-(G.bkN||0),d=G.bkAt?(Date.now()-G.bkAt)/864e5:999;return G.recs.length>0&&(n>=5||d>=30)}
+  function needBk(){if(!G.recs.length)return false;if(!G.since){G.since=Date.now();save()}var n=G.recs.length-(G.bkN||0),d=(Date.now()-(G.bkAt||G.since))/864e5;return n>=5||d>=30}
   function backup(){var name='ICC_my_garage_'+today()+'.json',txt=JSON.stringify(G,null,1);
     function done(){G.bkAt=Date.now();G.bkN=G.recs.length;save();V.home()}
     try{var f=new File([txt],name,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:'I♥CC My Garage'}).then(done,function(){});return}}catch(e){}
@@ -49,7 +49,7 @@
   var TAG={ok:['ok',T.tagOk],hi:['hi',T.tagHi],lo:['lo',T.tagLo],rip:['hi',T.tagRip],self:['lo',T.self]};
 
   var css=document.createElement('style');css.textContent=
-  '#garb{display:inline-flex;align-items:center;gap:4px}#garb .gic{display:none}@media(max-width:600px){#garb .gic{display:block}}'+
+  '#garb{display:inline-flex;align-items:center;gap:4px}#garb .gtx{display:inline-flex;flex-direction:column;line-height:1.05;text-align:left}#garb .gen{font-style:normal;font-size:8.5px;opacity:.85;letter-spacing:.02em;white-space:nowrap}@media(min-width:601px){#garb .gtx{flex-direction:row;align-items:baseline;gap:5px}#garb .gen{font-size:.82em}}#garb .gic{display:none}@media(max-width:600px){#garb .gic{display:block}}'+
   '#gsh{position:fixed;inset:0;z-index:99998;background:#171B26;color:#E8EAEE;display:none;flex-direction:column;font:14px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}#gsh.on{display:flex}'+
   '#gsh .gt{background:#1F4D36;padding:calc(env(safe-area-inset-top) + 12px) 14px 10px;display:flex;justify-content:space-between;align-items:center;font-weight:700;gap:8px}'+
   '#gsh button{font:inherit;color:#fff;background:transparent;border:1px solid #ffffff99;border-radius:0;padding:3px 9px;cursor:pointer;white-space:nowrap}'+
@@ -85,18 +85,18 @@
   V.home=function(){var c=car();
     if(!c){frame(T.title,'',' <div class="em">'+T.nocar+'</div>');V.car();return}
     var R=recs(c),y=String(new Date().getFullYear()),cur=c.cur||(isKRW()?'KRW':'USD');
-    var Ry=R.filter(function(r){return (r.date||'').slice(0,4)===y}),p=0,l=0,t=0;Ry.forEach(function(r){p+=+r.parts||0;l+=+r.labor||0;t+=tot(r)});
+    var Ry=R.filter(function(r){return (r.date||'').slice(0,4)===y}),p=0,l=0,t=0;var un=0;Ry.forEach(function(r){p+=+r.parts||0;l+=+r.labor||0;t+=tot(r);if((r.parts===''||r.parts==null)&&(r.labor===''||r.labor==null))un++});
     var h='';
     if(needBk())h+='<div class="nx" data-a="exp" style="cursor:pointer">⚠ '+T.bkNow+' · <b>'+T.bk+'</b></div>';
     if(G.cars.length>1)h+='<div class="cars">'+G.cars.map(function(x){return '<button data-car="'+x.id+'" class="'+(x.id===c.id?'on':'')+'">'+esc(x.name)+'</button>'}).join('')+'</div>';
     h+='<div class="car" data-a="editcar"><b>'+esc(c.name)+'</b><div class="m">'+[c.yr,c.km?(+c.km).toLocaleString()+' km':''].filter(Boolean).map(esc).join(' · ')+'</div>'+(c.vin?'<div class="mono">'+esc(c.vin)+'</div>':'')+'</div>';
     h+='<button class="addin" data-a="rec">'+T.add+'</button>';
     h+=R.length?R.map(function(r){var tg=TAG[r.tag];return '<div class="e" data-rec="'+r.id+'"><div class="h"><b>'+esc(r.job||'-')+'</b><span>'+money(tot(r),r.cur||cur)+'</span></div><div class="d"><span>'+[r.date,r.km?(+r.km).toLocaleString()+' km':'',r.shop].filter(Boolean).map(esc).join(' · ')+'</span>'+(tg?'<span class="tag '+tg[0]+'">'+tg[1]+(r.tagp?' '+esc(r.tagp):'')+'</span>':'')+'</div></div>'}).join(''):'<div class="em">'+T.none+'</div>';
-    h+='<div class="sum"><div><small>'+T.year+' ('+y+')</small>'+money(t,cur)+'</div><div><small>'+T.parts+'</small>'+money(p,cur)+'</div><div><small>'+T.labor+'</small>'+money(l,cur)+'</div></div>';
+    h+='<div class="sum"><div><small>'+T.year+' ('+y+')</small>'+money(t,cur)+'</div><div><small>'+T.parts+'</small>'+(p||!un?money(p,cur):'–')+'</div><div><small>'+T.labor+'</small>'+(l||!un?money(l,cur):'–')+'</div></div>';
     if(c.oilkm||c.oilmo){var o=R.filter(function(r){return /엔진\s*오일|engine oil|oil change/i.test(r.job||'')})[0];
       if(o){var tt=[];if(c.oilkm&&o.km)tt.push((+o.km+ +c.oilkm).toLocaleString()+' km');if(c.oilmo&&o.date){var d=new Date(o.date);d.setMonth(d.getMonth()+ +c.oilmo);tt.push(d.toISOString().slice(0,7))}
         if(tt.length)h+='<div class="nx">⏰ '+T.nextOil+' · '+tt.join(' '+T.or+' ')+'</div>'}}
-    frame(T.title+' <i class="btag">'+T.betaTag+'</i>','<button data-a="menu">☰ '+T.menu+'</button>',h)};
+    frame(T.title+(KO?' <small style="font-weight:400;opacity:.8">My Garage</small>':'')+' <i class="btag">'+T.betaTag+'</i>','<button data-a="menu">☰ '+T.menu+'</button>',h)};
   V.menu=function(){var h='<div class="nx" style="border-style:solid;border-color:#2AA84B">'+T.beta+'<br><small style="color:#9aa3a0">'+(G.bkAt?T.bkLast+' '+new Date(G.bkAt).toISOString().slice(0,10):T.bkNever)+'</small></div>'+
      '<div class="mlist"><button data-a="exp">'+T.bk+'</button><button data-a="imp">'+T.imp+'</button><button data-a="newcar">'+T.addCar+'</button><button data-a="years">'+T.byYear+'</button>'+
      '<button data-a="fbk">'+T.fb+' · Facebook</button><button data-a="igm">'+T.fb+' · Instagram</button></div><div class="nt">'+T.note+'</div>';
@@ -182,7 +182,7 @@
   /* 카메라로 찍은 차대번호를 기억해 두었다가 차 추가에 채움 */
   document.addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('#vsheet .go');if(g){var v=document.querySelector('#vsheet .vv');var t=(v&&v.textContent||'').replace(/[^A-Z0-9]/g,'');if(t)try{localStorage.setItem('icc_lastvin',t)}catch(x){}}},true);
   function mount(){var ab=document.getElementById('appb');if(!ab||document.getElementById('garb'))return!!ab;
-    var b=ab.cloneNode(false);b.id='garb';b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">'+T.btn+'</span>';b.setAttribute('aria-label',T.btn);b.title=T.btn;b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
+    var b=ab.cloneNode(false);b.id='garb';b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">'+T.btn+(KO?'<i class="gen">My Garage</i>':'')+'</span>';b.setAttribute('aria-label',T.btn);b.title=T.btn;b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
     ab.parentNode.insertBefore(b,ab);document.body.appendChild(S);capH();addEventListener('resize',function(){if(!busy)capH()});return true}
   var busy=false;function capH(){var h=document.querySelector('.top h1'),tl=document.querySelector('.top .tl');if(!h||!tl)return;
     h.style.removeProperty('max-width');var hr=h.getBoundingClientRect(),tr=tl.getBoundingClientRect();
