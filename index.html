@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded",function(){sweep()});})();</script>
 <body style="margin:0">
 <script>/* 언어 자동: 한국어가 아닌 브라우저는 처음 들어오면 영어판으로. 메뉴에서 고른 언어는 기억 */(function(){try{var q=location.search,L=localStorage;if(/[?&]lang=ko/.test(q))L.setItem('lang','ko');if(/[?&]lang=en/.test(q))L.setItem('lang','en');var sim=(q.match(/[?&]simlang=([A-Za-z-]+)/)||[])[1];if(!sim&&!/github\.io$/.test(location.hostname))return;var nav=sim||(navigator.languages&&navigator.languages[0])||navigator.language||'ko';if(L.getItem('lang')==='ko')return;{var LG=L.getItem('lang');if(LG&&LG!=='ko'&&/^(en|ja|zh|de|fr|es|ru|th|ar|hi)$/.test(LG)){location.replace('./'+LG+'/');return}}if(!/^ko/i.test(nav))document.addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.id='enbar';d.style.cssText='display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:7px 12px;background:#12241a;color:#c9cfca;font:400 13px system-ui,sans-serif;border-bottom:1px solid rgba(255,255,255,.12)';d.innerHTML='<span>This page is in Korean.</span><a id="enl" href="./en/?lang=en" style="color:#9fd3a6;border:1px solid currentColor;border-radius:4px;padding:2px 9px;text-decoration:none">View in English</a><button type="button" style="background:none;border:1px solid rgba(255,255,255,.25);border-radius:4px;color:inherit;padding:2px 9px;cursor:pointer">한국어 유지</button>';(function(){var c=(nav||'').slice(0,2).toLowerCase(),M={ja:['ja','日本語で見る'],zh:['zh','查看中文版'],de:['de','Auf Deutsch ansehen'],fr:['fr','Voir en français'],es:['es','Ver en español'],ru:['ru','Открыть на русском']};if(M[c]){var a=d.querySelector('#enl');a.href='./'+M[c][0]+'/?lang='+M[c][0];a.textContent=M[c][1]}})();d.querySelector('button').onclick=function(){try{localStorage.setItem('lang','ko')}catch(e){}d.remove()};document.body.prepend(d)})}catch(e){}})();</script>
 <script>(function(){try{if(/[?&]pc=1/.test(location.search))sessionStorage.setItem('w140pc','1');if(sessionStorage.getItem('w140pc')==='1')return;if(/^(?!.*(claude|anthropic|localhost)).+\..+$/.test(location.hostname)&&matchMedia('(max-width:640px)').matches)location.replace('m/')}catch(e){}})();</script>
-<title>클래식카 부품 계산기 · 벤츠 W124 · W140 순정 부품 번호와 가격</title>
+<title>클래식카 부품 계산기</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300..700&family=JetBrains+Mono:wght@300..700&display=swap" media="print" onload="this.media=\'all\'">
 <style>
@@ -426,7 +426,7 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <li>이 계산기로 필요한 부품과 값을 먼저 어림해 보고, 장바구니의 "목록 복사"로 붙여 보내면 이야기가 빨라집니다.</li>
 </ul><ul><li><a href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">트롤파츠</a> - 네이버 스마트스토어</li></ul></details>
 <details class="help"><summary>리퍼비시 안내</summary>
-<p>리퍼비시는 쓰던 부품을 분해해서 닳은 곳을 새로 바꾸고 다시 맞춘 재생품입니다. 신품이 단종됐거나 값이 너무 비쌀 때 가는 길입니다. "리퍼비시이용"과 함께 쓰십시오. 맡기기 전에 내 부품 번호를 받는지 먼저 물어보십시오.</p>
+<p>리퍼비시는 쓰던 부품을 분해해서 닳은 곳을 새로 바꾸고 다시 맞춘 재생품입니다. 신품이 단종됐거나 값이 너무 비쌀 때 가는 길입니다.<br>"리퍼비시이용"과 함께 쓰십시오. 맡기기 전에 내 부품 번호를 받는지 먼저 물어보십시오.</p>
 <div class="core"><b>떼어 낸 헌 부품 (코어)은 절대 버리지 마십시오</b>
 <ul>
 <li>코어는 차에서 떼어 낸 고장 난 헌 부품입니다. 리퍼비시 업체는 이 코어를 받아서 재생합니다.</li>
