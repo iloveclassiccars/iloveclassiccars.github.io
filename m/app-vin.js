@@ -8,11 +8,11 @@
   var T=KO?{btn:'촬영',title:'차대번호 촬영',close:'닫기',hint:'차대번호 한 줄을 틀 안에 맞춰 주세요',
     shot:'찍기',manual:'직접 입력',ok:'이 번호로 검색',check:'밑줄 글자만 확인해 주세요. 누르면 고를 수 있어요',
     num:'숫자',let:'영문',len:function(n){return n+' / 17자리'},nocam:'카메라를 쓸 수 없어요. 직접 입력해 주세요',
-    old:'17자리가 아니어도 검색할 수 있어요 (옛 차대번호)'}
+    old:'17자리가 아니어도 검색할 수 있어요 (옛 차대번호)',reading:'글자를 읽는 중이에요… (처음 한 번은 10초쯤 걸려요)',fail:'글자를 다 읽지 못했어요. 읽은 만큼 보여 드려요 — 고치거나 직접 입력해 주세요',gal:'사진에서 고르기',tip:'잘 안 읽히면 자동차등록증의 \'차대번호\' 줄을 찍어 보세요. 인쇄 글씨라 훨씬 잘 읽혀요'}
    :{btn:'Scan',title:'Scan VIN',close:'Close',hint:'Fit one line of the VIN inside the frame',
     shot:'Capture',manual:'Type it',ok:'Search this VIN',check:'Check only the underlined letters. Tap to choose',
     num:'number',let:'letter',len:function(n){return n+' / 17'},nocam:'Camera not available. Please type the VIN',
-    old:'You can search even if it is not 17 characters (older VIN)'};
+    old:'You can search even if it is not 17 characters (older VIN)',reading:'Reading the characters… (the first time takes about 10 s)',fail:'Could not read all characters. Here is what was read — fix it or type it',gal:'From photo',tip:'If it does not read well, photograph the VIN line on the registration document — printed text reads much better'};
   (function(){var L=(document.documentElement.lang||'').slice(0,2),X=window.ICC_I18N&&window.ICC_I18N[L];if(X&&X.v)for(var k in X.v)T[k]=X.v[k]})();
   var PAIR={'8':'B','B':'8','5':'S','S':'5','2':'Z','Z':'2','6':'G','G':'6'};
   function clean(s){s=(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
@@ -41,10 +41,10 @@
   var sh=document.createElement('div');sh.id='vsheet';sh.innerHTML=
    '<div class="vt"><button class="x">✕ '+T.close+'</button><span>'+T.title+'</span><span style="min-width:56px"></span></div>'+
    '<div class="vc"><video playsinline muted autoplay></video><canvas style="display:none"></canvas><div class="vf"></div></div>'+
-   '<div class="vh h1">'+T.hint+'</div>'+
+   '<div class="vh h1">'+T.hint+'</div><div class="vh h3" style="color:#d9a441;font-size:12.5px;padding-top:0">'+T.tip+'</div>'+
    '<img class="vstrip" alt=""><div class="vv"></div><input class="vi" maxlength="20" autocomplete="off" spellcheck="false">'+
    '<div class="vh h2"></div><div class="vp"></div>'+
-   '<div class="vb"><button class="m">'+T.manual+'</button><button class="s">'+T.shot+'</button><button class="go" style="display:none">'+T.ok+'</button></div>';
+   '<div class="vb"><label class="glb" style="flex:1;padding:12px 0;border:1px solid #c9ced8;text-align:center;cursor:pointer;white-space:nowrap">'+T.gal+'<input class="gl" type="file" accept="image/*" style="display:none"></label><button class="m">'+T.manual+'</button><button class="s">'+T.shot+'</button><button class="go" style="display:none">'+T.ok+'</button></div>';
   var V='',pos=-1,stream=null;
   function $(s){return sh.querySelector(s)}
   function draw(){var h='';for(var i=0;i<V.length;i++){var c=V[i];h+='<span data-i="'+i+'"'+(PAIR[c]?' class="amb"':'')+'>'+c+'</span>'}
@@ -62,6 +62,26 @@
   $('.x').onclick=close;
   $('.m').onclick=function(){var i=$('.vi');i.style.display='block';$('.vv').style.display='none';i.value=V;i.focus()};
   $('.vi').addEventListener('input',function(){V=clean(this.value);draw()});
+
+  /* 웹 글자 인식 (회의 #18): Tesseract.js를 처음 쓸 때만 내려받음, VIN 글자만 허용, 흑백·확대·대비 전처리 */
+  var TS=null;
+  function loadTess(){if(TS)return TS;TS=new Promise(function(ok,no){if(window.Tesseract)return ok(window.Tesseract);var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';s.onload=function(){ok(window.Tesseract)};s.onerror=function(){TS=null;no()};document.head.appendChild(s)});return TS}
+  var WK=null;
+  function worker(){if(WK)return WK;WK=loadTess().then(function(T5){return T5.createWorker('eng')}).then(function(w){return w.setParameters({tessedit_char_whitelist:'ABCDEFGHJKLMNPRSTUVWXYZ0123456789',preserve_interword_spaces:'0'}).then(function(){return w})});WK.catch(function(){WK=null});return WK}
+  function prep(src,inv,full){var W=src.width,H=src.height,sc=Math.min(3,Math.max(1,(full?2400:2000)/W)),c=document.createElement('canvas');c.width=Math.round(W*sc);c.height=Math.round(H*sc);var x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(src,0,0,c.width,c.height);
+    var d=x.getImageData(0,0,c.width,c.height),p=d.data,n=p.length/4,h=new Array(256).fill(0),g=new Uint8Array(n),i;
+    for(i=0;i<n;i++){var v=(p[i*4]*.299+p[i*4+1]*.587+p[i*4+2]*.114)|0;g[i]=v;h[v]++}
+    var sum=0,sB=0,wB=0,mx=0,th=128;for(i=0;i<256;i++)sum+=i*h[i];for(i=0;i<256;i++){wB+=h[i];if(!wB)continue;var wF=n-wB;if(!wF)break;sB+=i*h[i];var mB=sB/wB,mF=(sum-sB)/wF,b=wB*wF*(mB-mF)*(mB-mF);if(b>mx){mx=b;th=i}}
+    for(i=0;i<n;i++){var o=g[i]>th?255:0;if(inv)o=255-o;p[i*4]=p[i*4+1]=p[i*4+2]=o;p[i*4+3]=255}x.putImageData(d,0,0);return c}
+  var YV='ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
+  function fix(t){return(t||'').toUpperCase().replace(/O|Q/g,'0').replace(/I/g,'1').replace(/[^A-HJ-NPR-Z0-9\n ]/g,'')}
+  function pickVin(text){var best='',sc=-1;fix(text).split(/\n/).forEach(function(line){var s=line.replace(/\s/g,'');for(var k=0;k+17<=s.length;k++){var c=s.substr(k,17),v=0;if(/^WD[BCDF]/.test(c))v+=5;else if(/^[1-5JKSVWZ]/.test(c))v+=1;if(/\d{6}$/.test(c))v+=3;if(v>sc){sc=v;best=c}}if(!best&&s.length>=10&&s.length>sc){best=s.slice(0,17)}});
+    if(!best){var all=fix(text).replace(/\s/g,'');best=all.slice(0,17)}return best}
+  function ocr(img,full){$('.h2').textContent=T.reading;
+    return worker().then(function(w){var tries=[[false],[true]];var out='';
+      function run(k){if(k>=tries.length)return Promise.resolve(out);var cv=prep(img,tries[k][0],full);return w.setParameters({tessedit_pageseg_mode:full?'6':'7'}).then(function(){return w.recognize(cv)}).then(function(r){var v=pickVin(r&&r.data&&r.data.text);if(v.length>out.length||(/^WD/.test(v)&&!/^WD/.test(out)))out=v;return(out.length===17&&/^WD|^[1-5J]/.test(out))?out:run(k+1)})}
+      return run(0)})}
+  function showResult(v){V=clean(v);if(V.length!==17)$('.h2').textContent=T.fail;draw();if(V.length!==17)$('.h2').textContent=T.fail}
   function frameData(){var v=$('video'),c=$('canvas');c.width=v.videoWidth||1280;c.height=v.videoHeight||720;c.getContext('2d').drawImage(v,0,0,c.width,c.height);
     v.style.display='none';c.style.display='block';
     var k=document.createElement('canvas'),sy=Math.round(c.height*.36),sh2=Math.round(c.height*.28);k.width=c.width;k.height=sh2;k.getContext('2d').drawImage(c,0,sy,c.width,sh2,0,0,c.width,sh2);
@@ -69,8 +89,10 @@
   $('.s').onclick=function(){
     var P=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.IccOcr;
     if(P){P.scanVin().then(function(r){V=clean(r&&r.text);draw()}).catch(function(){$('.m').onclick()});return}
-    try{frameData()}catch(e){}
-    $('.m').onclick();};
+    var u='';try{u=frameData()}catch(e){}
+    if(!u){$('.m').onclick();return}
+    var im=new Image();im.onload=function(){ocr(im,false).then(function(v){showResult(v);if(!V)$('.m').onclick()}).catch(function(){$('.m').onclick()})};im.src=u;};
+  $('.gl').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;stop();$('.vc').style.display='none';var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var st=$('.vstrip');st.src=r.result;st.style.display='block';st.style.height='auto';st.style.maxHeight='30vh';st.style.objectFit='contain';ocr(im,true).then(function(v){showResult(v);if(!V)$('.m').onclick()}).catch(function(){$('.m').onclick()})};im.src=r.result};r.readAsDataURL(f);this.value=''});
   $('.go').onclick=function(){var q=document.getElementById('q'),g=document.getElementById('go');
     if(q){q.value=V;q.dispatchEvent(new Event('input',{bubbles:true}))}close();if(g)g.click();setTimeout(qfit,50);};
   function open(){V='';pos=-1;$('.vp').style.display='none';$('.vi').style.display='none';$('.vv').style.display='';$('.vstrip').style.display='none';$('.vc').style.display='';
