@@ -415,9 +415,6 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <p><b>배송대행 (배대지) 메이저 4곳</b></p>
 <p>한국으로 직접 보내 주지 않는 가게는 배대지 주소로 받아서 한국으로 넘깁니다. 부품이 크고 무거우면 배송비가 크게 뛰니, 주문 전에 무게와 부피 요금을 먼저 따져 보십시오.</p>
 <ul><li><a href="https://post.malltail.com/" target="_blank" rel="noopener">몰테일</a> - 국내 최대 배송대행. 미국, 독일, 일본, 영국 등에 물류센터가 있습니다.</li><li><a href="https://www.hoottown.com/" target="_blank" rel="noopener">훗타운 (한진)</a> - 한진이 운영하는 배송대행. 예전 이하넥스입니다.</li><li><a href="https://www.iporter.com/" target="_blank" rel="noopener">아이포터</a> - 미국, 독일, 일본, 영국 배송대행.</li><li><a href="https://www.ohmyzip.com/" target="_blank" rel="noopener">오마이집</a> - 미국 중심 배송대행.</li></ul>
-<p><b>도움 링크</b></p>
-<p >부품이 아직 나오는지, 번호가 바뀌었는지 알아볼 때 쓰는 곳입니다. 여기서 바로 주문이 되는지는 확인하지 못했습니다.</p>
-<div class="lk"><a href="https://teilesuche.mercedes-benz-classic.com/" target="_blank" rel="noopener">벤츠 클래식 부품 검색 (독일, 공식)</a><a href="https://www.mercedes-benz.com/en/vehicles/mercedes-benz-classic/classiccenter/classic-spare-parts/parts/" target="_blank" rel="noopener">벤츠 클래식 순정 부품 안내</a><a href="https://www.mercedes-benz.com/en/vehicles/mercedes-benz-classic/classiccenter/classic-spare-parts/classic-partner/" target="_blank" rel="noopener">벤츠 클래식 파트너 안내</a></div>
 </details>
 <details class="help"><summary>국내에서 가장 편하게</summary><p><b>트롤파츠에서는 클래식카 메인터넌스 (W140) 테크니컬 어드바이스를 받을 수 있습니다. 물어보고 사는 것이 가장 편한 구매입니다.</b></p>
 <ul>
@@ -427,7 +424,7 @@ div.cart{bottom:var(--barh,calc(60px + env(safe-area-inset-bottom,0px)))}
 <li>무엇부터 고쳐야 하는지, 함께 갈아야 하는 부품이 무엇인지도 물어보십시오. 부품만 파는 가게와 다른 점입니다.</li>
 <li>해외 직구의 배송 기간, 관부가세, 반품 걱정이 없습니다.</li>
 <li>이 계산기로 필요한 부품과 값을 먼저 어림해 보고, 장바구니의 "목록 복사"로 붙여 보내면 이야기가 빨라집니다.</li>
-</ul><div class="lk"><a href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">트롤파츠 바로 가기</a></div></details>
+</ul><ul><li><a href="https://smartstore.naver.com/trollparts/category/ALL?cp=1" target="_blank" rel="noopener">트롤파츠</a> - 네이버 스마트스토어</li></ul></details>
 <details class="help"><summary>리퍼비시 안내</summary>
 <p>리퍼비시는 쓰던 부품을 분해해서 닳은 곳을 새로 바꾸고 다시 맞춘 재생품입니다. 신품이 단종됐거나 값이 너무 비쌀 때 가는 길입니다. "리퍼비시이용"과 함께 쓰십시오. 맡기기 전에 내 부품 번호를 받는지 먼저 물어보십시오.</p>
 <div class="core"><b>떼어 낸 헌 부품 (코어)은 절대 버리지 마십시오</b>
@@ -1035,5 +1032,5 @@ document.addEventListener("change",function(e){var s=e.target;if(!s||s.id!=="vin
 <style id="icc-numcol">#list .row>.rn{grid-column:1!important;grid-row:1!important;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mute,#8a8f8c);font-variant-numeric:tabular-nums}#list .row>input[type=checkbox]{grid-column:8!important;grid-row:1!important;justify-self:center}#list .row>details.buy{display:none!important}</style>
 <script id="icc-numcol-js">(function(){var busy=0;function run(){if(busy)return;busy=1;try{var n=0;document.querySelectorAll("#list .row").forEach(function(r){var rn=r.querySelector(":scope>.rn");if(!rn){rn=document.createElement("span");rn.className="rn";r.insertBefore(rn,r.firstChild)}if(r.offsetParent!==null){n++;if(rn.textContent!==String(n))rn.textContent=n}})}finally{busy=0}}
 var t=0;function sch(){clearTimeout(t);t=setTimeout(run,30)}var L=null;(function w(){L=document.getElementById("list");if(!L)return setTimeout(w,100);run();new MutationObserver(function(m){if(busy)return;sch()}).observe(L,{childList:true,subtree:true,attributes:true,attributeFilter:["style","class","hidden"]})})();})();</script>
-</body>
+<style id="icc-ver">#list .iccver{display:block;text-align:center;padding:22px 0 8px;font-family:"Bodoni Moda","Didot","Bodoni 72","Playfair Display","Libre Baskerville",Georgia,"Times New Roman",serif;font-style:normal;font-weight:600;font-size:14px;letter-spacing:.02em;color:#f3ecdc;grid-column:1/-1}#list .iccver b{font-family:Georgia,serif;font-style:normal;font-size:1.05em;margin:0 .2em 0 .16em;display:inline-block;animation:iccbeat 1.4s ease-in-out infinite}#list .iccver i{font-style:normal;font-weight:400;font-size:.8em;opacity:.65;margin-left:.5em}@keyframes iccbeat{0%,40%,100%{transform:scale(1)}15%{transform:scale(1.28)}28%{transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){#list .iccver b{animation:none}}</style><script id="icc-verjs">(function(){function f(){var l=document.getElementById("list");if(!l)return;var v=l.querySelector(":scope>.iccver");if(v&&v===l.lastElementChild)return;if(v)v.remove();v=document.createElement("div");v.className="iccver";v.innerHTML="I<b style=\"color:#e5322d\">\u2665\ufe0e</b>Classic Cars<i>v1.02</i>";v.querySelector("b").style.setProperty("color","#e5322d","important");l.appendChild(v)}setInterval(f,800);document.addEventListener("DOMContentLoaded",f);f()})();</script></body>
 </html>
