@@ -79,8 +79,8 @@
   var TV={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9},WT=[8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
   function chk(c){var s=0;for(var i=0;i<17;i++){var ch=c[i];s+=(/\d/.test(ch)?+ch:TV[ch]||0)*WT[i]}var r=s%11;return c[8]===(r===10?'X':String(r))}
   function vscore(c){var v=0;if(WMI.test(c))v+=6;if(/^WD[BCDF]/.test(c))v+=3;if(/\d{5}$/.test(c))v+=3;if(/^[1-5]/.test(c)&&chk(c))v+=8;return v}
-  function strong(c){return c&&c.length===17&&((WMI.test(c)&&/\d{5}$/.test(c))||(/^[1-5]/.test(c)&&chk(c)))}
-  function cands(text){var out=[];fix(text).split(/\n/).forEach(function(line){line.split(/\s+/).forEach(function(w){if(w.length>=17&&w.length<=19)for(var k=0;k+17<=w.length;k++)out.push(w.substr(k,17))});var s=line.replace(/\s/g,'');for(var k=0;k+17<=s.length;k++)out.push(s.substr(k,17))});
+  var TOK={};function strong(c){return !!(c&&c.length===17&&((WMI.test(c)&&/\d{5}$/.test(c))||(/^[1-5]/.test(c)&&chk(c)&&/[A-HJ-NPR-TV-Y1-9]/.test(c[9])&&TOK[c])))}
+  function cands(text){var out=[];TOK={};fix(text).split(/\n/).forEach(function(line){line.split(/\s+/).forEach(function(w){if(w.length>=17&&w.length<=19)for(var k=0;k+17<=w.length;k++){out.push(w.substr(k,17));TOK[w.substr(k,17)]=1}});var s=line.replace(/\s/g,'');for(var k=0;k+17<=s.length;k++)out.push(s.substr(k,17))});
     return out.sort(function(a,b){return vscore(b)-vscore(a)})}
   function pickVin(text){var best='',sc=-1;fix(text).split(/\n/).forEach(function(line){var s=line.replace(/\s/g,'');for(var k=0;k+17<=s.length;k++){var c=s.substr(k,17),v=0;if(/^WD[BCDF]/.test(c))v+=5;else if(/^[1-5JKSVWZ]/.test(c))v+=1;if(/\d{6}$/.test(c))v+=3;if(v>sc){sc=v;best=c}}if(!best&&s.length>=10&&s.length>sc){best=s.slice(0,17)}});
     if(!best){var all=fix(text).replace(/\s/g,'');best=all.slice(0,17)}return best}
