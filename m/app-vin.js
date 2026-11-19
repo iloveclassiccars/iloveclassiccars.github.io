@@ -75,7 +75,7 @@
     for(i=0;i<n;i++){var o=g[i]>th?255:0;if(inv)o=255-o;p[i*4]=p[i*4+1]=p[i*4+2]=o;p[i*4+3]=255}x.putImageData(d,0,0);return c}
   var YV='ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
   function fix(t){return(t||'').toUpperCase().replace(/O|Q/g,'0').replace(/I/g,'1').replace(/[^A-HJ-NPR-Z0-9\n ]/g,'')}
-  var WMI=/^(WD[A-Z]|WME|W1[A-Z]|WP[01]|WB[AS]|WAU|WUA|WVW|WV[12]|WF0|ZFF|ZAR|ZFA|ZHW|SAJ|SAL|SCF|SCC|SAR|VF[1-9]|YV[1-4]|YS3|JH[MG]|JT[A-Z]|JN[1-8KR]|JA[A-Z]|JM[1Z]|JF[12]|KN[ADM]|KM[H8]|[1-5][A-Z0-9]{2})/;
+  var WMI=/^(WD[A-Z]|WME|W1[A-Z]|WP[01]|WB[AS]|WAU|WUA|WVW|WV[12]|WF0|ZFF|ZAR|ZFA|ZHW|SAJ|SAL|SCF|SCC|SAR|VF[1-9]|YV[1-4]|YS3|JH[MG]|JT[A-Z]|JN[1-8KR]|JA[A-Z]|JM[1Z]|JF[12]|KN[ADM]|KM[H8])/;
   var TV={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9},WT=[8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
   function chk(c){var s=0;for(var i=0;i<17;i++){var ch=c[i];s+=(/\d/.test(ch)?+ch:TV[ch]||0)*WT[i]}var r=s%11;return c[8]===(r===10?'X':String(r))}
   function vscore(c){var v=0;if(WMI.test(c))v+=6;if(/^WD[BCDF]/.test(c))v+=3;if(/\d{5}$/.test(c))v+=3;if(/^[1-5]/.test(c)&&chk(c))v+=8;return v}
