@@ -281,7 +281,7 @@
   /* 카메라로 찍은 차대번호를 기억해 두었다가 차 추가에 채움 */
   document.addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('#vsheet .go');if(g){var v=document.querySelector('#vsheet .vv');var t=(v&&v.textContent||'').replace(/[^A-Z0-9]/g,'');if(t)try{localStorage.setItem('icc_lastvin',t)}catch(x){}}},true);
   function mount(){var ab=document.getElementById('appb');if(!ab||document.getElementById('garb'))return!!ab;
-    var b=ab.cloneNode(false);b.id='garb';b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">My Garage</span>';b.setAttribute('aria-label','My Garage');b.title='My Garage';b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
+    var b=ab.cloneNode(false);b.id='garb';b.hidden=false;b.removeAttribute('hidden');b.removeAttribute('aria-haspopup');b.innerHTML='<svg class="gic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-7h10v7M7 16h10"/></svg><span class="gtx">My Garage</span>';b.setAttribute('aria-label','My Garage');b.title='My Garage';b.onclick=function(e){e.preventDefault();e.stopPropagation();open('home')};
     ab.parentNode.insertBefore(b,ab);document.body.appendChild(S);capH();addEventListener('resize',function(){if(!busy)capH()});return true}
   var busy=false;function capH(){var h=document.querySelector('.top h1'),tl=document.querySelector('.top .tl');if(!h||!tl)return;
     h.style.removeProperty('max-width');var hr=h.getBoundingClientRect(),tr=tl.getBoundingClientRect();
@@ -292,7 +292,7 @@
 
   /* 오와열: 위 줄(홈·EN·앱)과 아래 줄(홈·메뉴) 끝선을 맞춘다 */
   function alignBars(){var ap=document.getElementById('appb'),sm=document.querySelector('.top .lng summary');
-    if(ap&&sm){var ar=ap.getBoundingClientRect();sm.style.setProperty('box-sizing','border-box','important');sm.style.setProperty('height',ar.height+'px','important');sm.style.setProperty('display','flex','important');sm.style.setProperty('align-items','center','important');sm.style.setProperty('justify-content','center','important')}
+    if(ap&&sm&&ap.getBoundingClientRect().height){var ar=ap.getBoundingClientRect();sm.style.setProperty('box-sizing','border-box','important');sm.style.setProperty('height',ar.height+'px','important');sm.style.setProperty('display','flex','important');sm.style.setProperty('align-items','center','important');sm.style.setProperty('justify-content','center','important')}
     var cb=document.querySelector('.cbmn'),th=document.querySelector('header.top img.myhome')||document.querySelector('header.top a, header.top svg'),bh=document.querySelector('#cbar2 .cbh img.myhome')||document.querySelector('#cbar2 a, #cbar2 svg, .cbar a');
     var cbs=document.querySelector('#cbar2 .cbs');[cb,bh,cbs].forEach(function(e){if(e)e.style.removeProperty('transform')});if(cb)cb.style.removeProperty('margin-right');
     if(innerWidth>760)return;
@@ -324,7 +324,7 @@
     if(hd){hd.style.removeProperty('background-color');var hb=getComputedStyle(hd).backgroundColor;hd.style.setProperty('background-color',rgba(hb,.9),'important')}
     /* PC: 아래 막대를 위 머리줄과 같은 폭으로 (딱 맞춤) */
     var inn=bar.firstElementChild;if(!inn)return;
-    if(innerWidth>=760&&hd){var hr=hd.getBoundingClientRect(),ap=document.getElementById('appb'),pr=ap?Math.max(0,hr.right-ap.getBoundingClientRect().right):12;
+    if(innerWidth>=760&&hd){var hr=hd.getBoundingClientRect(),ap=document.getElementById('appb'),pr=(ap&&ap.getBoundingClientRect().width>0)?Math.max(0,hr.right-ap.getBoundingClientRect().right):12;
       bar.style.setProperty('background-color','transparent','important');bar.style.setProperty('box-shadow','none','important');bar.style.setProperty('-webkit-backdrop-filter','none','important');bar.style.setProperty('backdrop-filter','none','important');
       inn.style.setProperty('background-color',getComputedStyle(hd).backgroundColor,'important');inn.style.setProperty('-webkit-backdrop-filter','saturate(180%) blur(18px)','important');inn.style.setProperty('backdrop-filter','saturate(180%) blur(18px)','important');
       inn.style.setProperty('box-sizing','border-box','important');inn.style.setProperty('padding-right',pr+'px','important');var br=bar.getBoundingClientRect();inn.style.setProperty('width',hr.width+'px','important');inn.style.setProperty('max-width',hr.width+'px','important');inn.style.setProperty('margin-left',(hr.left-br.left)+'px','important');inn.style.setProperty('margin-right','0','important');inn.style.setProperty('border-radius',getComputedStyle(hd).borderRadius,'important')}
