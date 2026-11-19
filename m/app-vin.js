@@ -5,14 +5,14 @@
    - 헷갈리는 글자(8/B, 5/S, 2/Z, 6/G)는 밑줄, 눌러서 고름 */
 (function(){
   var KO=(document.documentElement.lang||'ko').indexOf('ko')===0;
-  var T=KO?{btn:'촬영',title:'차대번호 촬영',close:'닫기',hint:'차대번호 한 줄을 틀 안에 맞춰 주세요',
-    shot:'찍기',manual:'직접 입력',ok:'이 번호로 검색',check:'밑줄 글자만 확인해 주세요. 누르면 고를 수 있어요',
-    num:'숫자',let:'영문',len:function(n){return n+' / 17자리'},nocam:'카메라를 쓸 수 없어요. 직접 입력해 주세요',
-    old:'17자리가 아니어도 검색할 수 있어요 (옛 차대번호)',reading:'글자를 읽는 중이에요…',auto:'상자 안에 차대번호를 맞추면 저절로 읽어요',prep:'읽기 준비 중… 잠시만요',fail:'글자를 다 읽지 못했어요. 읽은 만큼 보여 드려요 — 고치거나 직접 입력해 주세요',gal:'사진에서 고르기',tip:'잘 안 읽히면 자동차등록증의 \'차대번호\' 줄을 찍어 보세요. 인쇄 글씨라 훨씬 잘 읽혀요'}
+  var T=KO?{btn:'촬영',title:'차대번호 촬영',close:'닫기',hint:'차대번호 한 줄을 초록 상자 안에 맞춰 주십시오',
+    shot:'찍기',manual:'직접 입력',ok:'이 번호로 검색',check:'밑줄 친 글자만 확인해 주십시오. 누르면 고를 수 있습니다',
+    num:'숫자',let:'영문',len:function(n){return n+' / 17자리'},nocam:'카메라를 쓸 수 없습니다. 사진에서 고르거나 직접 입력해 주십시오',
+    old:'17자리가 아니어도 검색할 수 있습니다 (옛 차대번호)',reading:'글자를 읽는 중입니다…',auto:'상자 안에 차대번호를 맞추면 저절로 읽습니다',prep:'읽기를 준비하고 있습니다. 잠시만 기다려 주십시오',fail:'글자를 다 읽지 못했습니다. 읽은 만큼 보여 드립니다. 고치거나 직접 입력해 주십시오',gal:'사진에서 고르기',tip:'잘 안 읽히면 자동차등록증의 \'차대번호\' 줄을 찍어 보십시오. 인쇄 글씨라 훨씬 잘 읽힙니다',help:'사용법',gt:'차대번호 찍는 법',gok:'알겠습니다',G:[['자동으로 읽기','카메라를 차대번호에 비추고 초록 상자 안에 한 줄을 맞춥니다. 1~3초 그대로 두면 저절로 읽고 \'부릉\' 소리가 납니다.'],['찍기','저절로 읽히지 않으면 [찍기]를 누릅니다. 화면 전체에서 차대번호를 찾습니다.'],['사진에서 고르기','미리 찍어 둔 사진을 고릅니다. 상자에 맞추지 않은 보통 사진도 읽습니다.'],['확인하고 검색','밑줄 친 글자(8과 B, 5와 S처럼 헷갈리는 글자)만 눌러 확인한 뒤 [이 번호로 검색]을 누릅니다.']],gh:'잘 읽히게 하려면',H:['가장 잘 읽히는 것은 자동차등록증의 \'차대번호\' 줄입니다.','차체 각인이나 명판은 밝은 곳에서, 빛이 반사되지 않게 조금 비스듬히 찍습니다.','휴대폰을 한 뼘쯤 떨어뜨리고 1초 멈춘 뒤 찍습니다. 너무 가까우면 초점이 맞지 않습니다.','처음 한 번은 읽기 준비에 몇 초 걸립니다.','사진은 휴대폰 안에서만 읽고 어디에도 저장하지 않습니다.']}
    :{btn:'Scan',title:'Scan VIN',close:'Close',hint:'Fit one line of the VIN inside the frame',
     shot:'Capture',manual:'Type it',ok:'Search this VIN',check:'Check only the underlined letters. Tap to choose',
     num:'number',let:'letter',len:function(n){return n+' / 17'},nocam:'Camera not available. Please type the VIN',
-    old:'You can search even if it is not 17 characters (older VIN)',reading:'Reading the characters…',auto:'Fit the VIN inside the box — it reads automatically',prep:'Getting ready to read…',fail:'Could not read all characters. Here is what was read — fix it or type it',gal:'From photo',tip:'If it does not read well, photograph the VIN line on the registration document — printed text reads much better'};
+    old:'You can search even if it is not 17 characters (older VIN)',reading:'Reading the characters…',auto:'Fit the VIN inside the box — it reads automatically',prep:'Getting ready to read…',fail:'Could not read all characters. Here is what was read — fix it or type it',gal:'From photo',tip:'If it does not read well, photograph the VIN line on the registration document — printed text reads much better',help:'How to',gt:'How to scan a VIN',gok:'Got it',G:[['Auto read','Point the camera at the VIN and fit one line inside the green box. Hold still for 1-3 seconds; it reads by itself and you hear a \'vroom\'.'],['Shoot','If it does not read by itself, tap [Shoot]. It searches the whole picture for the VIN.'],['From photo','Pick a photo you already took. Ordinary photos work too, no need to line up the box.'],['Check and search','Tap only the underlined characters (look-alikes such as 8/B, 5/S) to check them, then tap [Search this VIN].']],gh:'For the best reading',H:['The VIN line on the registration document reads best.','For stamped numbers or plates, shoot in good light at a slight angle to avoid glare.','Hold the phone about a hand-width away and pause for a second. Too close and it will not focus.','The very first read takes a few seconds to get ready.','The photo is read on your phone only and never stored.']};
   (function(){var L=(document.documentElement.lang||'').slice(0,2),X=window.ICC_I18N&&window.ICC_I18N[L];if(X&&X.v)for(var k in X.v)T[k]=X.v[k]})();
   var PAIR={'8':'B','B':'8','5':'S','S':'5','2':'Z','Z':'2','6':'G','G':'6'};
   function clean(s){s=(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
@@ -39,7 +39,7 @@
   '#vsheet .vb .go{background:#2AA84B;border-color:#2AA84B;font-weight:600}';
   document.head.appendChild(css);
   var sh=document.createElement('div');sh.id='vsheet';sh.innerHTML=
-   '<div class="vt"><button class="x">✕ '+T.close+'</button><span>'+T.title+'</span><span style="min-width:56px"></span></div>'+
+   '<div class="vt"><button class="x">✕ '+T.close+'</button><span>'+T.title+'</span><button class="hp" style="min-width:56px;background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:14px;padding:3px 10px;font:inherit;font-size:13px">'+T.help+'</button></div>'+'<div class="vg" style="display:none;position:absolute;left:0;right:0;top:0;bottom:0;z-index:5;background:#171B26;overflow:auto;padding:calc(env(safe-area-inset-top) + 18px) 18px 24px;font-size:15px;line-height:1.6"><b style="font-size:18px">'+T.gt+'</b><ol style="padding-left:20px;margin:10px 0 14px">'+T.G.map(function(g){return '<li style="margin-bottom:8px"><b style="color:#7ee2a0">'+g[0]+'</b><br>'+g[1]+'</li>'}).join('')+'</ol><b style="font-size:15px">'+T.gh+'</b><ul style="padding-left:20px;margin:8px 0 18px;color:#cfd3da">'+T.H.map(function(h){return '<li style="margin-bottom:5px">'+h+'</li>'}).join('')+'</ul><button class="gk" style="width:100%;padding:13px;border:0;background:#2AA84B;color:#fff;font:inherit;font-weight:600;border-radius:0">'+T.gok+'</button></div>'+
    '<div class="vc"><video playsinline muted autoplay></video><canvas style="display:none"></canvas><div class="vf"></div></div>'+
    '<div class="vh h1">'+T.hint+'</div><div class="vh h3" style="color:#d9a441;font-size:12.5px;padding-top:0">'+T.tip+'</div>'+
    '<img class="vstrip" alt=""><div class="vv"></div><input class="vi" maxlength="20" autocomplete="off" spellcheck="false">'+
@@ -47,6 +47,8 @@
    '<div class="vb"><label class="glb" style="flex:1;padding:12px 0;border:1px solid #c9ced8;text-align:center;cursor:pointer;white-space:nowrap">'+T.gal+'<input class="gl" type="file" accept="image/*" style="display:none"></label><button class="m">'+T.manual+'</button><button class="s">'+T.shot+'</button><button class="go" style="display:none">'+T.ok+'</button></div>';
   var V='',pos=-1,stream=null;
   function $(s){return sh.querySelector(s)}
+  function guide(on){$('.vg').style.display=on?'block':'none';if(!on)try{localStorage.setItem('icc_vguide','1')}catch(e){}}
+  $('.hp').onclick=function(){guide(true)};$('.gk').onclick=function(){guide(false)};
   function draw(){var h='';for(var i=0;i<V.length;i++){var c=V[i];h+='<span data-i="'+i+'"'+(PAIR[c]?' class="amb"':'')+'>'+c+'</span>'}
     $('.vv').innerHTML=h||'&nbsp;';
     var amb=/[8B5S2Z6G]/.test(V);
@@ -129,7 +131,7 @@
   $('.gl').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;stop();$('.vc').style.display='none';var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var st=$('.vstrip');st.src=r.result;st.style.display='block';st.style.height='auto';st.style.maxHeight='30vh';st.style.objectFit='contain';ocrFull(im).then(function(v){showResult(v);if(!V)$('.m').onclick()}).catch(function(){$('.m').onclick()})};im.src=r.result};r.readAsDataURL(f);this.value=''});
   $('.go').onclick=function(){var q=document.getElementById('q'),g=document.getElementById('go');
     if(q){q.value=V;q.dispatchEvent(new Event('input',{bubbles:true}))}close();if(g)g.click();setTimeout(qfit,50);};
-  function open(){worker();ax();V='';pos=-1;$('.vp').style.display='none';$('.vi').style.display='none';$('.vv').style.display='';$('.vstrip').style.display='none';$('.vc').style.display='';
+  function open(){worker();ax();var seen='';try{seen=localStorage.getItem('icc_vguide')||''}catch(e){}guide(!seen);V='';pos=-1;$('.vp').style.display='none';$('.vi').style.display='none';$('.vv').style.display='';$('.vstrip').style.display='none';$('.vc').style.display='';
     $('video').style.display='block';$('canvas').style.display='none';draw();sh.classList.add('on');
     if(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.IccOcr)return;
     if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
